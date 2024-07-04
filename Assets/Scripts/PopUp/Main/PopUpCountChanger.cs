@@ -1,5 +1,4 @@
-﻿using System;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using VContainer;
 
@@ -22,6 +21,6 @@ public class PopUpCountChanger: MonoBehaviour
 
     public void ChangeCount()
     {
-        _textMeshProUGUI.text = $"+{_gameManager.clikerModel.GetClickPrice()}";
+        _textMeshProUGUI.text = $"+{_gameManager.UpgradesModel.GetClickPrice()}";
     }
 }

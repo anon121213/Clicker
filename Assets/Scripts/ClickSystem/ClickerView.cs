@@ -12,11 +12,6 @@ public class ClickerView : MonoBehaviour, IClickerView
         _clickCountText.text = $"Money: {count}";
     }
 
-    public void UpdateClickPrice(int count)
-    {
-        _clickPrice.text = $"Click price: {count}";
-    }
-
     public void SpawnClickPopUp(Vector2 position)
     {
         _clickPopUpPool.GetObject(position);

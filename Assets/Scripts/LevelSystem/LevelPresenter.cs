@@ -16,24 +16,24 @@ public class LevelPresenter: MonoBehaviour
 
     private void Start()
     {
-        _levelView.UpdateLevel(_gameManager.clikerModel.GetClickPrice(), _gameManager.levelModel.GetClicksForNewLvL());
-        _levelView.UpdateClicksForNewLvlText(_gameManager.levelModel.GetClicksForNewLvL(), _gameManager.levelModel.GetCurrentLvL());
+        _levelView.UpdateLevel(_gameManager.UpgradesModel.GetClickPrice(), _gameManager.LevelModel.GetClicksForNewLvL());
+        _levelView.UpdateClicksForNewLvlText(_gameManager.LevelModel.GetClicksForNewLvL(), _gameManager.LevelModel.GetCurrentLvL());
     }
 
     public void OnClick()
     {
-        if (_gameManager.levelModel.GetCurrentClicks() + _gameManager.clikerModel.GetClickPrice() < _gameManager.levelModel.GetClicksForNewLvL())
+        if (_gameManager.LevelModel.GetCurrentClicks() + _gameManager.UpgradesModel.GetClickPrice() < _gameManager.LevelModel.GetClicksForNewLvL())
         {
-            _gameManager.levelModel.IncrementClicks(_gameManager.clikerModel.GetClickPrice());
-            _levelView.UpdateLevel(_gameManager.levelModel.GetCurrentClicks(), _gameManager.levelModel.GetClicksForNewLvL());
+            _gameManager.LevelModel.IncrementClicks(_gameManager.UpgradesModel.GetClickPrice());
+            _levelView.UpdateLevel(_gameManager.LevelModel.GetCurrentClicks(), _gameManager.LevelModel.GetClicksForNewLvL());
         }
         else
         {
-            _gameManager.levelModel.IncrementLvL();
-            _gameManager.levelModel.IncrementClicksForNewLvl();
-            _gameManager.levelModel.DecrimentCuddentClicks();
-            _levelView.UpdateLevel(_gameManager.clikerModel.GetClickPrice(), _gameManager.levelModel.GetClicksForNewLvL());
-            _levelView.UpdateClicksForNewLvlText(_gameManager.levelModel.GetClicksForNewLvL(), _gameManager.levelModel.GetCurrentLvL());
+            _gameManager.LevelModel.IncrementLvL();
+            _gameManager.LevelModel.IncrementClicksForNewLvl();
+            _gameManager.LevelModel.DecrimentCuddentClicks();
+            _levelView.UpdateLevel(_gameManager.UpgradesModel.GetClickPrice(), _gameManager.LevelModel.GetClicksForNewLvL());
+            _levelView.UpdateClicksForNewLvlText(_gameManager.LevelModel.GetClicksForNewLvL(), _gameManager.LevelModel.GetCurrentLvL());
         }
     }
 }
