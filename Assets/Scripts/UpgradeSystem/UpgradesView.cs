@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using TMPro;
+using UnityEngine.Serialization;
 
 public class UpgradesView: MonoBehaviour, IUpgradesView
 {
@@ -9,6 +10,8 @@ public class UpgradesView: MonoBehaviour, IUpgradesView
     [SerializeField] private TextMeshProUGUI _priceClickXpUpgradeBuffText;
     [SerializeField] private TextMeshProUGUI _priceClickUpgradePriceText;
     [SerializeField] private TextMeshProUGUI _priceClickXpUpgradePriceText;
+    [SerializeField] private TextMeshProUGUI _needLvlForUpgradeMoneyClick;
+    [SerializeField] private TextMeshProUGUI _needLvlForUpgradeXpClick;
     
     public void UpdateClickPrice(int count)
     {
@@ -30,5 +33,15 @@ public class UpgradesView: MonoBehaviour, IUpgradesView
     {
         _priceClickXpUpgradeBuffText.text = $"Click xp buff: +{buff}";
         _priceClickXpUpgradePriceText.text = $"price: {price}";
+    }
+
+    public void UpdateNeedLvlForUpgradeMoneyClick(int count)
+    {
+        _needLvlForUpgradeMoneyClick.text = $"lvl: {count}";
+    }
+
+    public void UpdateNeedLvlForUpgradeXpClick(int count)
+    {
+        _needLvlForUpgradeXpClick.text = $"lvl: {count}";
     }
 }

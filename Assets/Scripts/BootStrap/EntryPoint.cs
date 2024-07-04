@@ -32,9 +32,4 @@ public class EntryPoint : MonoBehaviour, IInitializable, IDisposable
     {
         _dataSaver.Save();
     }
-
-    private void OnApplicationQuit()
-    {
-        _dataSaver.Save();
-    }
 }

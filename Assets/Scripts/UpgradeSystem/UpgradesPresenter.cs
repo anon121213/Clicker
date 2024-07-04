@@ -27,6 +27,8 @@ public class UpgradesPresenter : MonoBehaviour
         _view.UpdateUpgradeClickMoney(_upgradesModel.UpgradePriceForUpgradeMoneyClick, _upgradesModel.UpgradeClickPrice);
         _view.UpdateUpgradeClickXp(_upgradesModel.UpgradePriceForUpgradeXpClick, _upgradesModel.UpgradeClickXpPrice);
         _view.UpdateClickXpPrice(_upgradesModel.GetClickXpPrice());
+        _view.UpdateNeedLvlForUpgradeMoneyClick(_gameManager.UpgradesModel.GetLvlForUpgradeClickPrice());
+        _view.UpdateNeedLvlForUpgradeXpClick(_gameManager.UpgradesModel.GetLvlForUpgradeXpClickPrice());
     }
 
     public void UpgradeClickPrice()
@@ -45,7 +47,8 @@ public class UpgradesPresenter : MonoBehaviour
             _view.UpdateClickPrice(_upgradesModel.GetClickPrice());
             _clickerView.UpdateClickCount(_gameManager.ClikerModel.GetMoneyCount());
             _view.UpdateUpgradeClickMoney(_upgradesModel.UpgradePriceForUpgradeMoneyClick, _upgradesModel.UpgradeClickPrice);
-
+            _view.UpdateNeedLvlForUpgradeMoneyClick(_gameManager.UpgradesModel.GetLvlForUpgradeClickPrice());
+            
             SaveDataClick();
         }
         else
@@ -70,6 +73,7 @@ public class UpgradesPresenter : MonoBehaviour
             _view.UpdateClickXpPrice(_upgradesModel.GetClickXpPrice());
             _clickerView.UpdateClickCount(_gameManager.ClikerModel.GetMoneyCount());
             _view.UpdateUpgradeClickXp(_upgradesModel.UpgradePriceForUpgradeXpClick, _upgradesModel.UpgradeClickXpPrice);
+            _view.UpdateNeedLvlForUpgradeXpClick(_gameManager.UpgradesModel.GetLvlForUpgradeXpClickPrice());
             
             SaveDataXpClick();
         }
