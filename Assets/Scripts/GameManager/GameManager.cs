@@ -15,5 +15,7 @@ public class GameManager : MonoBehaviour
         _clikerModel = new ClickerModel();
         _levelModel = new LevelModel();
         _upgradesModel = new UpgradesModel();
+
+        Application.targetFrameRate = 90;
     }
 }

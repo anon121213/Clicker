@@ -5,18 +5,25 @@ public class PlayerPrefsDataSaver : IDataSaver
     public PlayerData Load()
     {
         var playerData = new PlayerData();
-        playerData.ClickPrice = PlayerPrefs.GetInt("clickPrice");
-        playerData.ClickXpPrice = PlayerPrefs.GetInt("clickXpPrice");
-        playerData.LvlForUpgradeClickPrice = PlayerPrefs.GetInt("lvlForUpgradeClickPrice");
-        playerData.LvlForUpgradeClickXpPrice = PlayerPrefs.GetInt("lvlForUpgradeClickXpPrice");
-        playerData.Money = PlayerPrefs.GetInt("money");
-        playerData.CurrentLvl = PlayerPrefs.GetInt("currentLvl");
-        playerData.ClicksForNewLvl = PlayerPrefs.GetInt("clicksForNewLvl");
-        playerData.CurrentClicks = PlayerPrefs.GetInt("currentClicks");
-        playerData.UpgradeClickXpCount = PlayerPrefs.GetInt("upgradeXpCount");
-        playerData.UpgradeClickPriceCount = PlayerPrefs.GetInt("upgradeClickPriceCount");
-        playerData.PriceUpgradeMoneyClickPrice = PlayerPrefs.GetInt("priceUpgradeMoneyClickClickPrice");
-        playerData.PriceUpgradeXpClickPrice = PlayerPrefs.GetInt("priceUpgradeXpClickClickPrice");
+        if (PlayerPrefs.GetInt("isFirstLaunch", 1) == 1)
+        {
+            PlayerPrefs.SetInt("isFirstLaunch", 0);
+        }
+        else
+        {
+            playerData.ClickPrice = PlayerPrefs.GetInt("clickPrice");
+            playerData.ClickXpPrice = PlayerPrefs.GetInt("clickXpPrice");
+            playerData.LvlForUpgradeClickPrice = PlayerPrefs.GetInt("lvlForUpgradeClickPrice");
+            playerData.LvlForUpgradeClickXpPrice = PlayerPrefs.GetInt("lvlForUpgradeClickXpPrice");
+            playerData.Money = PlayerPrefs.GetInt("money");
+            playerData.CurrentLvl = PlayerPrefs.GetInt("currentLvl");
+            playerData.ClicksForNewLvl = PlayerPrefs.GetInt("clicksForNewLvl");
+            playerData.CurrentClicks = PlayerPrefs.GetInt("currentClicks");
+            playerData.UpgradeClickXpCount = PlayerPrefs.GetInt("upgradeXpCount");
+            playerData.UpgradeClickPriceCount = PlayerPrefs.GetInt("upgradeClickPriceCount");
+            playerData.PriceUpgradeMoneyClickPrice = PlayerPrefs.GetInt("priceUpgradeMoneyClickClickPrice");
+            playerData.PriceUpgradeXpClickPrice = PlayerPrefs.GetInt("priceUpgradeXpClickClickPrice");
+        }
         return playerData;
     }
 

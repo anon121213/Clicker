@@ -38,5 +38,6 @@ public class ClickerPresenter : MonoBehaviour
         }
 
         PlayerData.Instance.Money = _gameManager.ClikerModel.GetMoneyCount();
+        EntryPoint.Instance._dataSaver.Save();
     }
 }

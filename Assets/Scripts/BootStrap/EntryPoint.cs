@@ -1,7 +1,6 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using VContainer;
 using VContainer.Unity;
 
 public class EntryPoint : MonoBehaviour, IInitializable, IDisposable
@@ -9,7 +8,7 @@ public class EntryPoint : MonoBehaviour, IInitializable, IDisposable
     public static EntryPoint Instance { get; private set; }
 
     public PlayerData PlayerData { get; private set; }
-    private IDataSaver _dataSaver;
+    public IDataSaver _dataSaver;
 
     private void Awake()
     {
@@ -26,9 +25,15 @@ public class EntryPoint : MonoBehaviour, IInitializable, IDisposable
     public void Initialize()
     {
         PlayerData = _dataSaver.Load();
+        _dataSaver.Save();
     }
 
     public void Dispose()
+    {
+        _dataSaver.Save();
+    }
+
+    private void OnApplicationQuit()
     {
         _dataSaver.Save();
     }

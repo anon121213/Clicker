@@ -56,7 +56,7 @@ public class UpgradesPresenter : MonoBehaviour
 
     public void UpgradeClickXP()
     {
-        if (_gameManager.UpgradesModel.GetLvlForUpgradeXpClickPrice() <= _gameManager.LevelModel.GetCurrentLvL() && _gameManager.ClikerModel.GetMoneyCount() >= _gameManager.UpgradesModel.UpgradePriceForUpgradeMoneyClick)
+        if (_gameManager.UpgradesModel.GetLvlForUpgradeXpClickPrice() <= _gameManager.LevelModel.GetCurrentLvL() && _gameManager.ClikerModel.GetMoneyCount() >= _gameManager.UpgradesModel.UpgradePriceForUpgradeXpClick)
         {
             PlaySFX.instance.PlayMusic(_buySound);
             
