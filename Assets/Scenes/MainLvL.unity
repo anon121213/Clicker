@@ -646,9 +646,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4c628787d044da8b47eb1b3c0e8fdce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _upgradeXpCount: 0
-  _intrementLvlForBuyClickUpgrade: 3
-  _intrementLvlForBuyXpClickUpgrade: 3
   _errorSound: {fileID: 8300000, guid: aeba6724e1fbb4d4b8d197588310b74a, type: 3}
   _buySound: {fileID: 8300000, guid: 4d5df06b6075c5c44bc8d0f436f53a2e, type: 3}
 --- !u!114 &252029011
@@ -4775,7 +4772,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 336, y: 827}
+  m_AnchoredPosition: {x: 336, y: 824}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1577989317
@@ -4965,9 +4962,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4c628787d044da8b47eb1b3c0e8fdce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _upgradeXpCount: 1
-  _intrementLvlForBuyClickUpgrade: 3
-  _intrementLvlForBuyXpClickUpgrade: 3
   _errorSound: {fileID: 8300000, guid: aeba6724e1fbb4d4b8d197588310b74a, type: 3}
   _buySound: {fileID: 8300000, guid: 4d5df06b6075c5c44bc8d0f436f53a2e, type: 3}
 --- !u!114 &1594146550

@@ -9,8 +9,8 @@ public class UpgradesModel: MonoBehaviour
     private int _lvlForUpgradeClickXpPrice = EntryPoint.Instance.PlayerData.LvlForUpgradeClickXpPrice;
     private int _upgradeClickXpCount = EntryPoint.Instance.PlayerData.UpgradeXpCount;
     private int _upgradeClickPrice = EntryPoint.Instance.PlayerData.UpgradeClickPriceCount;
-    private int _priceUpgradeMoneyClickClickPrice = EntryPoint.Instance.PlayerData.PriceUpgradeMoneyClickClickPrice;
-    private int _priceUpgradeXpClickClickPrice = EntryPoint.Instance.PlayerData.PriceUpgradeXpClickClickPrice;
+    private int _priceUpgradeMoneyClickClickPrice = 30;
+    private int _priceUpgradeXpClickClickPrice = 30;
     
     public int UpgradeClickPrice
     {

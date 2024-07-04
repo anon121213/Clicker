@@ -3,11 +3,6 @@ using VContainer;
 
 public class UpgradesPresenter : MonoBehaviour
 {
-    [SerializeField] private int _upgradeXpCount;
-    [SerializeField] private int _intrementLvlForBuyClickUpgrade = 3;
-    [SerializeField] private int _intrementLvlForBuyXpClickUpgrade = 3;
-    
-    [Space]
     [SerializeField] private AudioClip _errorSound;
     [SerializeField] private AudioClip _buySound;
     
@@ -29,8 +24,8 @@ public class UpgradesPresenter : MonoBehaviour
         _upgradesModel = _gameManager.UpgradesModel;
         _view.UpdateClickPrice(_upgradesModel.GetClickPrice());
         _clickerView.UpdateClickCount(_gameManager.ClikerModel.GetMoneyCount());
-        _view.UpdateUpgradeClickMoney(_upgradesModel.UpgradePriceForUpgradeMoneyClick, (int)Mathf.Round(_upgradesModel.UpgradeClickPrice * 1.5f));
-        _view.UpdateUpgradeClickXp(_gameManager.UpgradesModel.UpgradePriceForUpgradeXpClick, (int)Mathf.Round(_upgradesModel.UpgradeClickXpPrice * 1.5f));
+        _view.UpdateUpgradeClickMoney(_upgradesModel.UpgradePriceForUpgradeMoneyClick, _upgradesModel.UpgradeClickPrice);
+        _view.UpdateUpgradeClickXp(_upgradesModel.UpgradePriceForUpgradeXpClick, _upgradesModel.UpgradeClickXpPrice);
         _view.UpdateClickXpPrice(_upgradesModel.GetClickXpPrice());
     }
 
@@ -49,7 +44,7 @@ public class UpgradesPresenter : MonoBehaviour
             
             _view.UpdateClickPrice(_upgradesModel.GetClickPrice());
             _clickerView.UpdateClickCount(_gameManager.ClikerModel.GetMoneyCount());
-            _view.UpdateUpgradeClickMoney(_upgradesModel.UpgradeClickPrice,  _upgradesModel.UpgradeClickPrice);
+            _view.UpdateUpgradeClickMoney(_upgradesModel.UpgradePriceForUpgradeMoneyClick, _upgradesModel.UpgradeClickPrice);
         }
         else
         {
@@ -72,7 +67,7 @@ public class UpgradesPresenter : MonoBehaviour
             
             _view.UpdateClickXpPrice(_upgradesModel.GetClickXpPrice());
             _clickerView.UpdateClickCount(_gameManager.ClikerModel.GetMoneyCount());
-            _view.UpdateUpgradeClickXp(_upgradesModel.UpgradeClickXpPrice, _upgradesModel.UpgradeClickXpPrice);
+            _view.UpdateUpgradeClickXp(_upgradesModel.UpgradePriceForUpgradeXpClick, _upgradesModel.UpgradeClickXpPrice);
         }
         else
         {
