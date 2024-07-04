@@ -25,8 +25,8 @@ public class ClickerPresenter : MonoBehaviour
 
     public void OnClick()
     {
-        _clickModel.IncrementClickCount(_upgradesModel.GetClickPrice());
-        _view.UpdateClickCount(_clickModel.GetClickCount());
+        _clickModel.IncrementMoneyCount(_upgradesModel.GetClickPrice());
+        _view.UpdateClickCount(_clickModel.GetMoneyCount());
         
         if (Input.touchCount > 0)
         {
