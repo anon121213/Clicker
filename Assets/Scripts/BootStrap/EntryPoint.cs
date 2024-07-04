@@ -1,29 +1,35 @@
 ﻿using System;
+using UnityEngine;
 using UnityEngine.SceneManagement;
+using VContainer;
 using VContainer.Unity;
 
-public class EntryPoint : IInitializable, IDisposable
+public class EntryPoint : MonoBehaviour, IInitializable, IDisposable
 {
     public static EntryPoint Instance { get; private set; }
 
     public PlayerData PlayerData { get; private set; }
-    private readonly IDataSaver dataSaver;
+    private IDataSaver _dataSaver;
+
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+        SceneManager.LoadScene(1);
+    }
 
     public EntryPoint(IDataSaver dataSaver)
     {
-        this.dataSaver = dataSaver;
+        _dataSaver = dataSaver;
         Instance = this;
     }
-
+    
     public void Initialize()
     {
-        PlayerData = dataSaver.Load();
-        
-        SceneManager.LoadScene(1);
+        PlayerData = _dataSaver.Load();
     }
 
     public void Dispose()
     {
-        dataSaver.Save(PlayerData);
+        _dataSaver.Save();
     }
 }

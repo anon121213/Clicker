@@ -13,10 +13,10 @@ public class PlayerData
     private int _currentLvl = 1;
     private int _clicksForNewLvl = 100;
     private int _currentClicks = 0;
-    private int _upgradeXpCount = 1;
+    private int _upgradeClickXpCount = 1;
     private int _upgradeClickPriceCount = 1;
-    private int _priceUpgradeMoneyClickClickPrice = 30;
-    private int _priceUpgradeXpClickClickPrice = 30;
+    private int _priceUpgradeMoneyClickPrice = 30;
+    private int _priceUpgradeXpClickPrice = 30;
 
     public int ClickPrice
     {
@@ -61,10 +61,10 @@ public class PlayerData
         set => _currentClicks = Mathf.Clamp(value, 0, Int32.MaxValue);
     }
 
-    public int UpgradeXpCount
+    public int UpgradeClickXpCount
     {
-        get => _upgradeXpCount;
-        set => _upgradeXpCount = Mathf.Clamp(value, 0, Int32.MaxValue);
+        get => _upgradeClickXpCount;
+        set => _upgradeClickXpCount = Mathf.Clamp(value, 0, Int32.MaxValue);
     }
 
     public int UpgradeClickPriceCount
@@ -73,16 +73,16 @@ public class PlayerData
         set => _upgradeClickPriceCount = Mathf.Clamp(value, 0, Int32.MaxValue);
     }
 
-    public int PriceUpgradeMoneyClickClickPrice
+    public int PriceUpgradeMoneyClickPrice
     {
-        get => _priceUpgradeMoneyClickClickPrice;
-        set => _priceUpgradeMoneyClickClickPrice = Mathf.Clamp(value, 0, Int32.MaxValue);
+        get => _priceUpgradeMoneyClickPrice;
+        set => _priceUpgradeMoneyClickPrice = Mathf.Clamp(value, 0, Int32.MaxValue);
     }
 
-    public int PriceUpgradeXpClickClickPrice
+    public int PriceUpgradeXpClickPrice
     {
-        get => _priceUpgradeXpClickClickPrice;
-        set => _priceUpgradeXpClickClickPrice = Mathf.Clamp(value, 0, Int32.MaxValue);
+        get => _priceUpgradeXpClickPrice;
+        set => _priceUpgradeXpClickPrice = Mathf.Clamp(value, 0, Int32.MaxValue);
     }
     
     public PlayerData()

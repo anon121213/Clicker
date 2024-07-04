@@ -13,27 +13,27 @@ public class PlayerPrefsDataSaver : IDataSaver
         playerData.CurrentLvl = PlayerPrefs.GetInt("currentLvl");
         playerData.ClicksForNewLvl = PlayerPrefs.GetInt("clicksForNewLvl");
         playerData.CurrentClicks = PlayerPrefs.GetInt("currentClicks");
-        playerData.UpgradeXpCount = PlayerPrefs.GetInt("upgradeXpCount");
+        playerData.UpgradeClickXpCount = PlayerPrefs.GetInt("upgradeXpCount");
         playerData.UpgradeClickPriceCount = PlayerPrefs.GetInt("upgradeClickPriceCount");
-        playerData.PriceUpgradeMoneyClickClickPrice = PlayerPrefs.GetInt("priceUpgradeMoneyClickClickPrice");
-        playerData.PriceUpgradeXpClickClickPrice = PlayerPrefs.GetInt("priceUpgradeXpClickClickPrice");
+        playerData.PriceUpgradeMoneyClickPrice = PlayerPrefs.GetInt("priceUpgradeMoneyClickClickPrice");
+        playerData.PriceUpgradeXpClickPrice = PlayerPrefs.GetInt("priceUpgradeXpClickClickPrice");
         return playerData;
     }
 
-    public void Save(PlayerData playerData)
+    public void Save()
     {
-        PlayerPrefs.SetInt("clickPrice", playerData.ClickPrice);
-        PlayerPrefs.SetInt("clickXpPrice", playerData.ClickXpPrice);
-        PlayerPrefs.SetInt("lvlForUpgradeClickPrice", playerData.LvlForUpgradeClickPrice);
-        PlayerPrefs.SetInt("lvlForUpgradeClickXpPrice", playerData.LvlForUpgradeClickXpPrice);
-        PlayerPrefs.SetInt("money", playerData.Money);
-        PlayerPrefs.SetInt("currentLvl", playerData.CurrentLvl);
-        PlayerPrefs.SetInt("clicksForNewLvl", playerData.ClicksForNewLvl);
-        PlayerPrefs.SetInt("currentClicks", playerData.CurrentClicks);
-        PlayerPrefs.SetInt("upgradeXpCount", playerData.UpgradeXpCount);
-        PlayerPrefs.SetInt("upgradeClickPriceCount", playerData.UpgradeClickPriceCount);
-        PlayerPrefs.SetInt("priceUpgradeMoneyClickClickPrice", playerData.PriceUpgradeMoneyClickClickPrice);
-        PlayerPrefs.SetInt("priceUpgradeXpClickClickPrice", playerData.PriceUpgradeXpClickClickPrice);
+        PlayerPrefs.SetInt("clickPrice", PlayerData.Instance.ClickPrice);
+        PlayerPrefs.SetInt("clickXpPrice", PlayerData.Instance.ClickXpPrice);
+        PlayerPrefs.SetInt("lvlForUpgradeClickPrice", PlayerData.Instance.LvlForUpgradeClickPrice);
+        PlayerPrefs.SetInt("lvlForUpgradeClickXpPrice", PlayerData.Instance.LvlForUpgradeClickXpPrice);
+        PlayerPrefs.SetInt("money", PlayerData.Instance.Money);
+        PlayerPrefs.SetInt("currentLvl", PlayerData.Instance.CurrentLvl);
+        PlayerPrefs.SetInt("clicksForNewLvl", PlayerData.Instance.ClicksForNewLvl);
+        PlayerPrefs.SetInt("currentClicks", PlayerData.Instance.CurrentClicks);
+        PlayerPrefs.SetInt("upgradeXpCount", PlayerData.Instance.UpgradeClickXpCount);
+        PlayerPrefs.SetInt("upgradeClickPriceCount", PlayerData.Instance.UpgradeClickPriceCount);
+        PlayerPrefs.SetInt("priceUpgradeMoneyClickClickPrice", PlayerData.Instance.PriceUpgradeMoneyClickPrice);
+        PlayerPrefs.SetInt("priceUpgradeXpClickClickPrice", PlayerData.Instance.PriceUpgradeXpClickPrice);
         PlayerPrefs.Save();
     }
 }

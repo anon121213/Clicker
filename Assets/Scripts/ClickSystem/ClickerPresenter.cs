@@ -36,5 +36,7 @@ public class ClickerPresenter : MonoBehaviour
             var clickPosition = touch.position;
             _view.SpawnClickPopUp(clickPosition);
         }
+
+        PlayerData.Instance.Money = _gameManager.ClikerModel.GetMoneyCount();
     }
 }

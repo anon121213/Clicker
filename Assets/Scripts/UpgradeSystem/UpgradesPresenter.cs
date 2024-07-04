@@ -45,6 +45,8 @@ public class UpgradesPresenter : MonoBehaviour
             _view.UpdateClickPrice(_upgradesModel.GetClickPrice());
             _clickerView.UpdateClickCount(_gameManager.ClikerModel.GetMoneyCount());
             _view.UpdateUpgradeClickMoney(_upgradesModel.UpgradePriceForUpgradeMoneyClick, _upgradesModel.UpgradeClickPrice);
+
+            SaveDataClick();
         }
         else
         {
@@ -68,10 +70,28 @@ public class UpgradesPresenter : MonoBehaviour
             _view.UpdateClickXpPrice(_upgradesModel.GetClickXpPrice());
             _clickerView.UpdateClickCount(_gameManager.ClikerModel.GetMoneyCount());
             _view.UpdateUpgradeClickXp(_upgradesModel.UpgradePriceForUpgradeXpClick, _upgradesModel.UpgradeClickXpPrice);
+            
+            SaveDataXpClick();
         }
         else
         {
             PlaySFX.instance.PlayMusic(_errorSound);
         }
+    }
+
+    private void SaveDataClick()
+    {
+        PlayerData.Instance.ClickPrice = _gameManager.UpgradesModel.GetClickPrice();
+        PlayerData.Instance.LvlForUpgradeClickPrice = _gameManager.UpgradesModel.GetLvlForUpgradeClickPrice();
+        PlayerData.Instance.UpgradeClickPriceCount = _gameManager.UpgradesModel.UpgradeClickPrice;
+        PlayerData.Instance.PriceUpgradeMoneyClickPrice = _gameManager.UpgradesModel.UpgradePriceForUpgradeMoneyClick;
+    }
+
+    private void SaveDataXpClick()
+    {
+        PlayerData.Instance.ClickXpPrice = _gameManager.UpgradesModel.GetClickXpPrice();
+        PlayerData.Instance.LvlForUpgradeClickXpPrice = _gameManager.UpgradesModel.GetLvlForUpgradeXpClickPrice();
+        PlayerData.Instance.UpgradeClickXpCount = _gameManager.UpgradesModel.UpgradeClickXpPrice;
+        PlayerData.Instance.PriceUpgradeXpClickPrice = _gameManager.UpgradesModel.UpgradePriceForUpgradeXpClick;
     }
 }
