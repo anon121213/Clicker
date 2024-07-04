@@ -9,7 +9,6 @@ public class ClickerPresenter : MonoBehaviour
     private ClickerModel _clickModel;
     private UpgradesModel _upgradesModel;
     private IClickerView _view;
-    private PlaySFX _playSfx;
     
     [Inject]
     public void Construct(IClickerView view, GameManager gameManager)
@@ -22,12 +21,11 @@ public class ClickerPresenter : MonoBehaviour
     {
         _clickModel = _gameManager.ClikerModel;
         _upgradesModel = _gameManager.UpgradesModel;
-        _playSfx = PlaySFX.instance;
     }
 
     public void OnClick()
     {
-        _playSfx.PlayMusic(_clickSound);
+        PlaySFX.instance.PlayMusic(_clickSound);
         _clickModel.IncrementMoneyCount(_upgradesModel.GetClickPrice());
         _view.UpdateClickCount(_clickModel.GetMoneyCount());
         

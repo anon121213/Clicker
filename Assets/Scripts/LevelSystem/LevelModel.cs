@@ -1,8 +1,8 @@
 ﻿public class LevelModel
 {
-     private int _currentLvl = 1;
-     private int _clicksForNewLvl = 100;
-     private int _currentClicks = 0;
+     private int _currentLvl = EntryPoint.Instance.PlayerData.CurrentLvl;
+     private int _clicksForNewLvl = EntryPoint.Instance.PlayerData.ClicksForNewLvl;
+     private int _currentClicks = EntryPoint.Instance.PlayerData.CurrentClicks;
 
      public int GetCurrentLvL()
      {

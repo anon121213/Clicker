@@ -650,6 +650,8 @@ MonoBehaviour:
   _upgradeXpCount: 0
   _intrementLvlForBuyClickUpgrade: 3
   _intrementLvlForBuyXpClickUpgrade: 3
+  _errorSound: {fileID: 8300000, guid: aeba6724e1fbb4d4b8d197588310b74a, type: 3}
+  _buySound: {fileID: 8300000, guid: 4d5df06b6075c5c44bc8d0f436f53a2e, type: 3}
 --- !u!114 &252029011
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4698,6 +4700,8 @@ MonoBehaviour:
   _upgradeXpCount: 1
   _intrementLvlForBuyClickUpgrade: 3
   _intrementLvlForBuyXpClickUpgrade: 3
+  _errorSound: {fileID: 8300000, guid: aeba6724e1fbb4d4b8d197588310b74a, type: 3}
+  _buySound: {fileID: 8300000, guid: 4d5df06b6075c5c44bc8d0f436f53a2e, type: 3}
 --- !u!114 &1594146550
 MonoBehaviour:
   m_ObjectHideFlags: 0
