@@ -246,10 +246,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6fdf3c40a624a738f748269c0cdbf9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _windows: {fileID: 2102226135}
   tabs:
-  - {fileID: 1936377488}
-  - {fileID: 2140712709}
-  - {fileID: 809959075}
+  - {fileID: 809959076}
+  - {fileID: 2140712710}
+  - {fileID: 1936377489}
   duration: 0.5
 --- !u!1 &132313512
 GameObject:
@@ -1230,8 +1231,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 53768542}
-        m_TargetAssemblyTypeName: TabSwitcher, Assembly-CSharp
-        m_MethodName: SwitchToTab
+        m_TargetAssemblyTypeName: WindowManager, Assembly-CSharp
+        m_MethodName: SelectTab
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1381,7 +1382,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 1529, y: 0}
+  m_AnchoredPosition: {x: 1080, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &863546074
@@ -2833,8 +2834,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 53768542}
-        m_TargetAssemblyTypeName: TabSwitcher, Assembly-CSharp
-        m_MethodName: SwitchToTab
+        m_TargetAssemblyTypeName: WindowManager, Assembly-CSharp
+        m_MethodName: SelectTab
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3085,8 +3086,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -1440, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -1078, y: 0}
+  m_SizeDelta: {x: 4, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1939107451
 GameObject:
@@ -3306,8 +3307,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 53768542}
-        m_TargetAssemblyTypeName: TabSwitcher, Assembly-CSharp
-        m_MethodName: SwitchToTab
+        m_TargetAssemblyTypeName: WindowManager, Assembly-CSharp
+        m_MethodName: SelectTab
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

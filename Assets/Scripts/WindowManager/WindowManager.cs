@@ -1,25 +1,21 @@
 ﻿using UnityEngine;
 using DG.Tweening;
 
-public class TabSwitcher : MonoBehaviour
+public class WindowManager : MonoBehaviour
 {
-    public GameObject[] tabs; // Ваши окна
-    public float duration = 0.5f; // Продолжительность анимации
-
-    public void SwitchToTab(int index)
+    [SerializeField] private RectTransform _windows; 
+    [SerializeField] private RectTransform[] tabs;
+    [SerializeField] private float duration = 0.5f;
+    
+    public void SelectTab(int index)
     {
-        for (int i = 0; i < tabs.Length; i++)
+        if (index < 0 || index >= tabs.Length)
         {
-            if (i == index)
-            {
-                // Анимация переключения на выбранную вкладку
-                tabs[i].transform.DOLocalMoveX(0, duration).SetEase(Ease.InOutQuad);
-            }
-            else if (tabs[i].transform.localPosition.x != 0)
-            {
-                // Анимация перемещения невыбранных вкладок в сторону
-                tabs[i].transform.DOLocalMoveX(i < index ? -Screen.width : Screen.width, duration).SetEase(Ease.InOutQuad);
-            }
+            Debug.LogError("Index out of range");
+            return;
         }
+
+        Vector2 targetPosition = tabs[index].anchoredPosition;
+        _windows.transform.DOLocalMoveX(targetPosition.x, duration);
     }
 }
