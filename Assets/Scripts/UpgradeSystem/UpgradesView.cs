@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using TMPro;
 
-public class UpgradesView: MonoBehaviour, IUpgradesVuew
+public class UpgradesView: MonoBehaviour, IUpgradesView
 {
     [SerializeField] private TextMeshProUGUI _clickPriceText;
     [SerializeField] private TextMeshProUGUI _clickXpPriceText;

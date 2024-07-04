@@ -8,18 +8,21 @@ public class UpgradesPresenter : MonoBehaviour
     [SerializeField] private int _upgradeXpCount;
     [SerializeField] private int _intrementLvlForBuyClickUpgrade = 3;
     [SerializeField] private int _intrementLvlForBuyXpClickUpgrade = 3;
+    
+    [Space]
     [SerializeField] private AudioClip _errorSound;
     [SerializeField] private AudioClip _buySound;
     
     private GameManager _gameManager;
     private UpgradesModel _upgradesModel;
-    private IUpgradesVuew _view;
-    
+    private IUpgradesView _view;
+    private IClickerView _clickerView;
 
     [Inject]
-    public void Construct(IUpgradesVuew view, GameManager gameManager)
+    public void Construct(IUpgradesView view, IClickerView clickerView, GameManager gameManager)
     {
         _view = view;
+        _clickerView = clickerView;
         _gameManager = gameManager;
     }
     
@@ -40,6 +43,7 @@ public class UpgradesPresenter : MonoBehaviour
             _gameManager.UpgradesModel.LvlForUpgradeClickPrice = _intrementLvlForBuyClickUpgrade;
             _gameManager.ClikerModel.DecrimentMoneyCount(_price);
             _view.UpdateClickPrice(_upgradesModel.GetClickPrice());
+            _clickerView.UpdateClickCount(_gameManager.ClikerModel.GetMoneyCount());
         }
         else
         {
@@ -57,6 +61,7 @@ public class UpgradesPresenter : MonoBehaviour
             _gameManager.UpgradesModel.LvlForUpgradeClickXpPrice = _intrementLvlForBuyXpClickUpgrade;
             _gameManager.ClikerModel.DecrimentMoneyCount(_price);
             _view.UpdateClickXpPrice(_upgradesModel.GetClickXpPrice());
+            _clickerView.UpdateClickCount(_gameManager.ClikerModel.GetMoneyCount());
         }
         else
         {

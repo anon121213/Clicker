@@ -13,7 +13,7 @@ public class CompositionRoot : LifetimeScope
     {
         builder.RegisterInstance<IClickerView>(_clickerView);
         builder.RegisterInstance<ILevelView>(_levelView);
-        builder.RegisterInstance<IUpgradesVuew>(_upgradesView);
+        builder.RegisterInstance<IUpgradesView>(_upgradesView);
         builder.RegisterInstance(_gameManager);
     }
 }

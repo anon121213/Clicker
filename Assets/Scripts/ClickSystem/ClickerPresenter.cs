@@ -21,6 +21,7 @@ public class ClickerPresenter : MonoBehaviour
     {
         _clickModel = _gameManager.ClikerModel;
         _upgradesModel = _gameManager.UpgradesModel;
+        _view.UpdateClickCount(_clickModel.GetMoneyCount());
     }
 
     public void OnClick()
