@@ -13,6 +13,10 @@ public class PlayerPrefsDataSaver : IDataSaver
         var currentLvl = PlayerPrefs.GetInt("currentLvl");
         var clicksForNewLvl = PlayerPrefs.GetInt("clicksForNewLvl");
         var currentClicks = PlayerPrefs.GetInt("currentClicks");
+        var upgradeXpCount = PlayerPrefs.GetInt("upgradeXpCount");
+        var upgradeClickPriceCount = PlayerPrefs.GetInt("upgradeClickPriceCount");
+        var priceUpgradeMoneyClickClickPrice = PlayerPrefs.GetInt("priceUpgradeMoneyClickClickPrice");
+        var priceUpgradeXpClickClickPrice = PlayerPrefs.GetInt("priceUpgradeXpClickClickPrice");
         return playerData;
     }
 
@@ -26,6 +30,10 @@ public class PlayerPrefsDataSaver : IDataSaver
         PlayerPrefs.SetInt("currentLvl", playerData.CurrentLvl);
         PlayerPrefs.SetInt("clicksForNewLvl", playerData.ClicksForNewLvl);
         PlayerPrefs.SetInt("currentClicks", playerData.CurrentClicks);
+        PlayerPrefs.SetInt("upgradeXpCount", playerData.UpgradeXpCount);
+        PlayerPrefs.SetInt("upgradeClickPriceCount", playerData.UpgradeClickPriceCount);
+        PlayerPrefs.SetInt("priceUpgradeMoneyClickClickPrice", playerData.PriceUpgradeMoneyClickClickPrice);
+        PlayerPrefs.SetInt("priceUpgradeXpClickClickPrice", playerData.PriceUpgradeXpClickClickPrice);
         PlayerPrefs.Save();
     }
 }

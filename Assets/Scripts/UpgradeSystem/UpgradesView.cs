@@ -5,6 +5,8 @@ public class UpgradesView: MonoBehaviour, IUpgradesView
 {
     [SerializeField] private TextMeshProUGUI _clickPriceText;
     [SerializeField] private TextMeshProUGUI _clickXpPriceText;
+    [SerializeField] private TextMeshProUGUI _priceClickUpgradeBuffText;
+    [SerializeField] private TextMeshProUGUI _priceClickXpUpgradeBuffText;
     [SerializeField] private TextMeshProUGUI _priceClickUpgradePriceText;
     [SerializeField] private TextMeshProUGUI _priceClickXpUpgradePriceText;
     
@@ -18,9 +20,15 @@ public class UpgradesView: MonoBehaviour, IUpgradesView
         _clickXpPriceText.text = $"Click xp price: {count}";
     }
 
-    public void UpdateUpgradePrice(int count)
+    public void UpdateUpgradeClickMoney(int price, int buff)
     {
-        _priceClickUpgradePriceText.text = $"Upgrade price: {count}";
-        _priceClickXpUpgradePriceText.text = $"Upgrade price: {count}";
+        _priceClickUpgradeBuffText.text = $"Click buff: +{buff}";
+        _priceClickUpgradePriceText.text = $"price: {price}";
+    }
+
+    public void UpdateUpgradeClickXp(int price, int buff)
+    {
+        _priceClickXpUpgradeBuffText.text = $"Click xp buff: +{buff}";
+        _priceClickXpUpgradePriceText.text = $"price: {price}";
     }
 }

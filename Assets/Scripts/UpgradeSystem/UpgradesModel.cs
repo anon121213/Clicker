@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class UpgradesModel: MonoBehaviour
 {
@@ -6,17 +7,43 @@ public class UpgradesModel: MonoBehaviour
     private int _clickXpPrice = EntryPoint.Instance.PlayerData.ClickXpPrice;
     private int _lvlForUpgradeClickPrice = EntryPoint.Instance.PlayerData.LvlForUpgradeClickPrice;
     private int _lvlForUpgradeClickXpPrice = EntryPoint.Instance.PlayerData.LvlForUpgradeClickXpPrice;
-
-    public int LvlForUpgradeClickXpPrice
+    private int _upgradeClickXpCount = EntryPoint.Instance.PlayerData.UpgradeXpCount;
+    private int _upgradeClickPrice = EntryPoint.Instance.PlayerData.UpgradeClickPriceCount;
+    private int _priceUpgradeMoneyClickClickPrice = EntryPoint.Instance.PlayerData.PriceUpgradeMoneyClickClickPrice;
+    private int _priceUpgradeXpClickClickPrice = EntryPoint.Instance.PlayerData.PriceUpgradeXpClickClickPrice;
+    
+    public int UpgradeClickPrice
     {
-        get => _lvlForUpgradeClickXpPrice;
-        set => _lvlForUpgradeClickXpPrice += value < 0 ? 0 : value;
+        get => _upgradeClickPrice;
+        set => _upgradeClickPrice = Mathf.Clamp(value, 0, Int32.MaxValue);
     }
-
-    public int LvlForUpgradeClickPrice
+    
+    public int UpgradeClickXpPrice
     {
-        get => _lvlForUpgradeClickPrice;
-        set => _lvlForUpgradeClickPrice += value < 0 ? 0 : value;
+        get => _upgradeClickXpCount;
+        set => _upgradeClickXpCount = Mathf.Clamp(value, 0, Int32.MaxValue);
+    }
+    
+    public int UpgradePriceForUpgradeMoneyClick
+    {
+        get => _priceUpgradeMoneyClickClickPrice;
+        set => _priceUpgradeMoneyClickClickPrice = Mathf.Clamp(value, 0, Int32.MaxValue);
+    }
+    
+    public int UpgradePriceForUpgradeXpClick
+    {
+        get => _priceUpgradeXpClickClickPrice;
+        set => _priceUpgradeXpClickClickPrice = Mathf.Clamp(value, 0, Int32.MaxValue);
+    }
+    
+    public int GetLvlForUpgradeClickPrice()
+    {
+        return _lvlForUpgradeClickPrice;
+    }
+    
+    public int GetLvlForUpgradeXpClickPrice()
+    {
+        return _lvlForUpgradeClickXpPrice;
     }
     
     public int GetClickPrice()
@@ -37,5 +64,15 @@ public class UpgradesModel: MonoBehaviour
     public void IncrementClickXpPrice(int clickXpPriceIncrementCount)
     {
         _clickXpPrice += clickXpPriceIncrementCount;
+    }
+
+    public void IncrementLvlForUpgradeClick(int count)
+    {
+        _lvlForUpgradeClickPrice += count;
+    }
+    
+    public void IncrementLvlForUpgradeXpClick(int count)
+    {
+        _lvlForUpgradeClickXpPrice += count;
     }
 }

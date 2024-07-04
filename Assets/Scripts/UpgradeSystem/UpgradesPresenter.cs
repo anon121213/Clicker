@@ -3,8 +3,6 @@ using VContainer;
 
 public class UpgradesPresenter : MonoBehaviour
 {
-    [SerializeField] private int _price;
-    [SerializeField] private int _upgradeClickPriceCount;
     [SerializeField] private int _upgradeXpCount;
     [SerializeField] private int _intrementLvlForBuyClickUpgrade = 3;
     [SerializeField] private int _intrementLvlForBuyXpClickUpgrade = 3;
@@ -30,20 +28,28 @@ public class UpgradesPresenter : MonoBehaviour
     {
         _upgradesModel = _gameManager.UpgradesModel;
         _view.UpdateClickPrice(_upgradesModel.GetClickPrice());
+        _clickerView.UpdateClickCount(_gameManager.ClikerModel.GetMoneyCount());
+        _view.UpdateUpgradeClickMoney(_upgradesModel.UpgradePriceForUpgradeMoneyClick, (int)Mathf.Round(_upgradesModel.UpgradeClickPrice * 1.5f));
+        _view.UpdateUpgradeClickXp(_gameManager.UpgradesModel.UpgradePriceForUpgradeXpClick, (int)Mathf.Round(_upgradesModel.UpgradeClickXpPrice * 1.5f));
         _view.UpdateClickXpPrice(_upgradesModel.GetClickXpPrice());
     }
 
     public void UpgradeClickPrice()
     {
-        if (_gameManager.UpgradesModel.LvlForUpgradeClickPrice <= _gameManager.LevelModel.GetCurrentLvL() && _gameManager.ClikerModel.GetMoneyCount() >= _price)
+        if (_gameManager.UpgradesModel.GetLvlForUpgradeClickPrice() <= _gameManager.LevelModel.GetCurrentLvL() && _gameManager.ClikerModel.GetMoneyCount() >= _gameManager.UpgradesModel.UpgradePriceForUpgradeMoneyClick)
         {
             PlaySFX.instance.PlayMusic(_buySound);
-            _upgradesModel.IncrementClickPrice(_upgradeClickPriceCount);
-            _upgradeClickPriceCount = (int)Mathf.Round(_upgradeClickPriceCount * 1.5f);
-            _gameManager.UpgradesModel.LvlForUpgradeClickPrice = _intrementLvlForBuyClickUpgrade;
-            _gameManager.ClikerModel.DecrimentMoneyCount(_price);
+            
+            _upgradesModel.IncrementClickPrice(_upgradesModel.UpgradeClickPrice);
+            _upgradesModel.UpgradeClickPrice = (int)Mathf.Round(_upgradesModel.UpgradeClickPrice * 1.5f);
+            
+            _gameManager.ClikerModel.DecrimentMoneyCount(_gameManager.UpgradesModel.UpgradePriceForUpgradeMoneyClick);
+            _gameManager.UpgradesModel.UpgradePriceForUpgradeMoneyClick *= 2; 
+            _gameManager.UpgradesModel.IncrementLvlForUpgradeClick(1);
+            
             _view.UpdateClickPrice(_upgradesModel.GetClickPrice());
             _clickerView.UpdateClickCount(_gameManager.ClikerModel.GetMoneyCount());
+            _view.UpdateUpgradeClickMoney(_upgradesModel.UpgradeClickPrice,  _upgradesModel.UpgradeClickPrice);
         }
         else
         {
@@ -53,15 +59,20 @@ public class UpgradesPresenter : MonoBehaviour
 
     public void UpgradeClickXP()
     {
-        if (_gameManager.UpgradesModel.LvlForUpgradeClickXpPrice <= _gameManager.LevelModel.GetCurrentLvL() && _gameManager.ClikerModel.GetMoneyCount() >= _price)
+        if (_gameManager.UpgradesModel.GetLvlForUpgradeXpClickPrice() <= _gameManager.LevelModel.GetCurrentLvL() && _gameManager.ClikerModel.GetMoneyCount() >= _gameManager.UpgradesModel.UpgradePriceForUpgradeMoneyClick)
         {
             PlaySFX.instance.PlayMusic(_buySound);
-            _upgradesModel.IncrementClickXpPrice(_upgradeXpCount);
-            _upgradeXpCount = (int)Mathf.Round(_upgradeXpCount * 1.5f);
-            _gameManager.UpgradesModel.LvlForUpgradeClickXpPrice = _intrementLvlForBuyXpClickUpgrade;
-            _gameManager.ClikerModel.DecrimentMoneyCount(_price);
+            
+            _upgradesModel.IncrementClickXpPrice(_upgradesModel.UpgradeClickXpPrice);
+            _upgradesModel.UpgradeClickXpPrice = (int)Mathf.Round(_upgradesModel.UpgradeClickXpPrice * 1.5f);
+            
+            _gameManager.ClikerModel.DecrimentMoneyCount(_gameManager.UpgradesModel.UpgradePriceForUpgradeXpClick);
+            _gameManager.UpgradesModel.UpgradePriceForUpgradeXpClick *= 2; 
+            _gameManager.UpgradesModel.IncrementLvlForUpgradeXpClick(1);
+            
             _view.UpdateClickXpPrice(_upgradesModel.GetClickXpPrice());
             _clickerView.UpdateClickCount(_gameManager.ClikerModel.GetMoneyCount());
+            _view.UpdateUpgradeClickXp(_upgradesModel.UpgradeClickXpPrice, _upgradesModel.UpgradeClickXpPrice);
         }
         else
         {
