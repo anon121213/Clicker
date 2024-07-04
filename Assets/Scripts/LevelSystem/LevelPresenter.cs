@@ -15,7 +15,7 @@ public class LevelPresenter: MonoBehaviour
 
     private void Start()
     {
-        _levelView.UpdateLevel(_gameManager.UpgradesModel.GetClickPrice(), _gameManager.LevelModel.GetClicksForNewLvL());
+        _levelView.UpdateLevel(_gameManager.LevelModel.GetCurrentClicks(), _gameManager.LevelModel.GetClicksForNewLvL());
         _levelView.UpdateClicksForNewLvlText(_gameManager.LevelModel.GetClicksForNewLvL(), _gameManager.LevelModel.GetCurrentLvL());
     }
 
