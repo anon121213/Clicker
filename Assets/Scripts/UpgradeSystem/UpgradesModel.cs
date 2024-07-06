@@ -3,14 +3,14 @@ using UnityEngine;
 
 public class UpgradesModel: MonoBehaviour
 {
-    private int _clickPrice = EntryPoint.Instance.PlayerData.ClickPrice;
-    private int _clickXpPrice = EntryPoint.Instance.PlayerData.ClickXpPrice;
-    private int _lvlForUpgradeClickPrice = EntryPoint.Instance.PlayerData.LvlForUpgradeClickPrice;
-    private int _lvlForUpgradeClickXpPrice = EntryPoint.Instance.PlayerData.LvlForUpgradeClickXpPrice;
-    private int _upgradeClickXpCount = EntryPoint.Instance.PlayerData.UpgradeClickXpCount;
-    private int _upgradeClickPrice = EntryPoint.Instance.PlayerData.UpgradeClickPriceCount;
-    private int _priceUpgradeMoneyClickClickPrice = EntryPoint.Instance.PlayerData.PriceUpgradeMoneyClickPrice;
-    private int _priceUpgradeXpClickClickPrice = EntryPoint.Instance.PlayerData.PriceUpgradeXpClickPrice;
+    private int _clickPrice = 1;
+    private int _clickXpPrice = 1;
+    private int _lvlForUpgradeClickPrice = 1;
+    private int _lvlForUpgradeClickXpPrice = 1;
+    private int _upgradeClickXpCount = 1;
+    private int _upgradeClickPrice = 1;
+    private int _priceUpgradeMoneyClickClickPrice = 30;
+    private int _priceUpgradeXpClickClickPrice = 30;
     
     public int UpgradeClickPrice
     {

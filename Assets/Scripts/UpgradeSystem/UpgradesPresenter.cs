@@ -22,6 +22,7 @@ public class UpgradesPresenter : MonoBehaviour
     private void Start()
     {
         _upgradesModel = _gameManager.UpgradesModel;
+        print(_gameManager.UpgradesModel);
         _view.UpdateClickPrice(_upgradesModel.GetClickPrice());
         _clickerView.UpdateClickCount(_gameManager.ClikerModel.GetMoneyCount());
         _view.UpdateUpgradeClickMoney(_upgradesModel.UpgradePriceForUpgradeMoneyClick, _upgradesModel.UpgradeClickPrice);
@@ -48,8 +49,6 @@ public class UpgradesPresenter : MonoBehaviour
             _clickerView.UpdateClickCount(_gameManager.ClikerModel.GetMoneyCount());
             _view.UpdateUpgradeClickMoney(_upgradesModel.UpgradePriceForUpgradeMoneyClick, _upgradesModel.UpgradeClickPrice);
             _view.UpdateNeedLvlForUpgradeMoneyClick(_gameManager.UpgradesModel.GetLvlForUpgradeClickPrice());
-            
-            SaveDataClick();
         }
         else
         {
@@ -74,28 +73,10 @@ public class UpgradesPresenter : MonoBehaviour
             _clickerView.UpdateClickCount(_gameManager.ClikerModel.GetMoneyCount());
             _view.UpdateUpgradeClickXp(_upgradesModel.UpgradePriceForUpgradeXpClick, _upgradesModel.UpgradeClickXpPrice);
             _view.UpdateNeedLvlForUpgradeXpClick(_gameManager.UpgradesModel.GetLvlForUpgradeXpClickPrice());
-            
-            SaveDataXpClick();
         }
         else
         {
             PlaySFX.instance.PlayMusic(_errorSound);
         }
-    }
-
-    private void SaveDataClick()
-    {
-        PlayerData.Instance.ClickPrice = _gameManager.UpgradesModel.GetClickPrice();
-        PlayerData.Instance.LvlForUpgradeClickPrice = _gameManager.UpgradesModel.GetLvlForUpgradeClickPrice();
-        PlayerData.Instance.UpgradeClickPriceCount = _gameManager.UpgradesModel.UpgradeClickPrice;
-        PlayerData.Instance.PriceUpgradeMoneyClickPrice = _gameManager.UpgradesModel.UpgradePriceForUpgradeMoneyClick;
-    }
-
-    private void SaveDataXpClick()
-    {
-        PlayerData.Instance.ClickXpPrice = _gameManager.UpgradesModel.GetClickXpPrice();
-        PlayerData.Instance.LvlForUpgradeClickXpPrice = _gameManager.UpgradesModel.GetLvlForUpgradeXpClickPrice();
-        PlayerData.Instance.UpgradeClickXpCount = _gameManager.UpgradesModel.UpgradeClickXpPrice;
-        PlayerData.Instance.PriceUpgradeXpClickPrice = _gameManager.UpgradesModel.UpgradePriceForUpgradeXpClick;
     }
 }

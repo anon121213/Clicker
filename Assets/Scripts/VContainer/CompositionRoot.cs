@@ -1,4 +1,5 @@
-﻿using PopUp.Pool;
+﻿using PopUp.Factory;
+using PopUp.Pool;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -16,6 +17,7 @@ public class CompositionRoot : LifetimeScope
         builder.RegisterInstance<ILevelView>(_levelView);
         builder.RegisterInstance<IUpgradesView>(_upgradesView);
         builder.RegisterInstance(_gameManager);
-        builder.Register<PopUpPool>(Lifetime.Scoped);
+        builder.Register<PopUpPool>(Lifetime.Singleton);
+        builder.Register<IPopUpFactory, PopUpFactory>(Lifetime.Singleton);
     }
 }

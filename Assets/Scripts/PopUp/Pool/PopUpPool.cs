@@ -1,22 +1,15 @@
-﻿using Unity.Mathematics;
+﻿using PopUp.Main;
 using UnityEngine;
 
 namespace PopUp.Pool
 {
-    public class PopUpPool : ClickPopUpPool<PopUpCountChanger>
+    public class PopUpPool : ObjectPool<PopUpCountChanger>
     {
         public PopUpCountChanger prefab;
-        public Vector2 position;
-        public Transform perentTransform;
 
-        public void Click()
+        public void Warmup()
         {
-            Create();
-        }
-        
-        public override PopUpCountChanger Create()
-        {
-            return Object.Instantiate(prefab, position, quaternion.identity, perentTransform);
+            prefab = Resources.Load<PopUpCountChanger>("/Prefabs/PopUp");
         }
     }
 }

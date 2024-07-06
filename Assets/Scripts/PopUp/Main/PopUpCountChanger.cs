@@ -1,26 +1,49 @@
-﻿using TMPro;
+﻿using System;
+using System.Threading;
+using Cysharp.Threading.Tasks;
+using TMPro;
 using UnityEngine;
 using VContainer;
 
-public class PopUpCountChanger: MonoBehaviour
+namespace PopUp.Main
 {
-    private GameManager _gameManager;
-    private TextMeshProUGUI _textMeshProUGUI;
-
-    private void Awake()
+    public class PopUpCountChanger: MonoBehaviour
     {
-        _textMeshProUGUI = GetComponent<TextMeshProUGUI>();
-        ChangeCount();
-    }
+        [SerializeField] private float _timer = 1.5f;
 
-    [Inject]
-    private void Inicialize(GameManager gameManager)
-    {
-        _gameManager = gameManager;
-    }
+        private GameManager _gameManager;
+        private TextMeshProUGUI _textMeshProUGUI;
+        private CancellationTokenSource _cts = new CancellationTokenSource();
 
-    public void ChangeCount()
-    {
-        //_textMeshProUGUI.text = $"+{_gameManager.UpgradesModel.GetClickPrice()}";
+        public event Action<PopUpCountChanger> OnDisabled;
+
+        [Inject]
+        private void Inject(GameManager gameManager)
+        {
+            _gameManager = gameManager;
+        }
+    
+        public void Enable()
+        {
+            _textMeshProUGUI = GetComponent<TextMeshProUGUI>();
+            ChangeCount();
+            StartTimer().AttachExternalCancellation(_cts.Token);
+        }
+
+        private void ChangeCount()
+        {
+            _textMeshProUGUI.text = $"+{_gameManager.UpgradesModel.GetClickPrice()}";
+        }
+
+        private async UniTask StartTimer()
+        {
+            await UniTask.WaitForSeconds(1.5f);
+            OnDisabled?.Invoke(this);
+        }
+
+        private void OnDestroy()
+        {
+            _cts?.Dispose();
+        }
     }
 }

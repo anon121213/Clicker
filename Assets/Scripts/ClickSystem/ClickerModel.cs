@@ -1,6 +1,6 @@
 public class ClickerModel
 {
-    private int _money = EntryPoint.Instance.PlayerData.Money;
+    private int _money = 0;
 
     public int GetMoneyCount()
     {

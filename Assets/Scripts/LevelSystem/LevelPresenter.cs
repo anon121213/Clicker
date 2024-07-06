@@ -25,10 +25,6 @@ public class LevelPresenter: MonoBehaviour
         {
             _gameManager.LevelModel.IncrementClicks(_gameManager.UpgradesModel.GetClickXpPrice());
             _levelView.UpdateLevel(_gameManager.LevelModel.GetCurrentClicks(), _gameManager.LevelModel.GetClicksForNewLvL());
-            
-            PlayerData.Instance.CurrentLvl = _gameManager.LevelModel.GetCurrentLvL();
-            PlayerData.Instance.ClicksForNewLvl = _gameManager.LevelModel.GetClicksForNewLvL();
-            PlayerData.Instance.CurrentClicks = _gameManager.LevelModel.GetCurrentClicks();
         }
         else
         {
@@ -37,10 +33,6 @@ public class LevelPresenter: MonoBehaviour
             _gameManager.LevelModel.DecrimentCuddentClicks();
             _levelView.UpdateLevel(_gameManager.UpgradesModel.GetClickXpPrice(), _gameManager.LevelModel.GetClicksForNewLvL());
             _levelView.UpdateClicksForNewLvlText(_gameManager.LevelModel.GetClicksForNewLvL(), _gameManager.LevelModel.GetCurrentLvL());
-            
-            PlayerData.Instance.CurrentLvl = _gameManager.LevelModel.GetCurrentLvL();
-            PlayerData.Instance.ClicksForNewLvl = _gameManager.LevelModel.GetClicksForNewLvL();
-            PlayerData.Instance.CurrentClicks = _gameManager.LevelModel.GetCurrentClicks();
         }
     }
 }
