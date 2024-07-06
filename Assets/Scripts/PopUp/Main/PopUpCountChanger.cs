@@ -21,6 +21,6 @@ public class PopUpCountChanger: MonoBehaviour
 
     public void ChangeCount()
     {
-        _textMeshProUGUI.text = $"+{_gameManager.UpgradesModel.GetClickPrice()}";
+        //_textMeshProUGUI.text = $"+{_gameManager.UpgradesModel.GetClickPrice()}";
     }
 }

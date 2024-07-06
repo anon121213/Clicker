@@ -3025,7 +3025,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _clickCountText: {fileID: 1939107453}
   _clickPrice: {fileID: 1127620141}
-  _clickPopUpPool: {fileID: 2009919260}
+  _prefab: {fileID: -1230023035551386101, guid: 9ff68883c9b4ebd49929a8a173aa129f, type: 3}
+  _perentTransform: {fileID: 2009919261}
 --- !u!1 &809959075
 GameObject:
   m_ObjectHideFlags: 0
@@ -6732,8 +6733,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 896250dfc6d948719d4ed561b215b042, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _prefab: {fileID: 8166624257831822975, guid: 9ff68883c9b4ebd49929a8a173aa129f, type: 3}
-  _popUpPerent: {fileID: 208263544}
 --- !u!4 &2009919261
 Transform:
   m_ObjectHideFlags: 0
