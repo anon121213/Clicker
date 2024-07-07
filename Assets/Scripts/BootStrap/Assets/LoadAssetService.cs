@@ -25,7 +25,10 @@ namespace BootStrap.Assets
 
         public async UniTask LoadAssets()
         {
-            await LoadAsset(PathConstants.HudPath);
+            await UniTask.WhenAll(
+                LoadAsset(PathConstants.HudPath),
+                LoadAsset(PathConstants.PopUpPath)
+                );
         }
 
         private async UniTask LoadAsset(string path)
