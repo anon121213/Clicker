@@ -1,21 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using BootStrap.GameFabric;
 using PopUp.Pool;
 
-namespace BootStrap
+namespace BootStrap.FSM
 {
     public class GameStateMachine
     {
         private readonly Dictionary<Type, IExitableState> _states;
         private IExitableState _activeState;
 
-        public GameStateMachine(SceneLoader sceneLoader, PopUpPool popUpPool)
+        public GameStateMachine(SceneLoader sceneLoader, PopUpPool popUpPool, IGameFabric gameFabric)
         {
             _states = new Dictionary<Type, IExitableState>
             {
                 [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader),
-                [typeof(PoolBootstrappState)] = new PoolBootstrappState(this, popUpPool),
-                [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader),
+                [typeof(PoolBootstrappState)] = new PoolBootstrappState(popUpPool),
+                [typeof(LoadLevelState)] = new LoadLevelState(sceneLoader, gameFabric),
             };
         }
         

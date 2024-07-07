@@ -1,4 +1,6 @@
 ﻿using BootStrap;
+using BootStrap.FSM;
+using BootStrap.GameFabric;
 using PopUp.Pool;
 using VContainer;
 using VContainer.Unity;
@@ -8,6 +10,8 @@ public class InitializeInjects : LifetimeScope
     protected override void Configure(IContainerBuilder builder)
     {
         builder.Register<GameStateMachine>(Lifetime.Singleton);
+        builder.Register<IGameFabric, GameFabric>(Lifetime.Singleton);
+        builder.Register<ICreateAsset, CreateAssetService>(Lifetime.Singleton);
         builder.Register<SceneLoader>(Lifetime.Singleton);
         builder.Register<PopUpPool>(Lifetime.Singleton);
     }

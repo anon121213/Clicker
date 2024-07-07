@@ -1,4 +1,6 @@
-﻿using PopUp.Pool;
+﻿using BootStrap.FSM;
+using BootStrap.GameFabric;
+using PopUp.Pool;
 
 namespace BootStrap
 {
@@ -6,9 +8,9 @@ namespace BootStrap
     {
         public readonly GameStateMachine StateMachine;
 
-        public Game(ICoroutineRunner coroutineRunner, PopUpPool popUpPool)
+        public Game(ICoroutineRunner coroutineRunner, PopUpPool popUpPool, IGameFabric gameFabric)
         {
-            StateMachine = new GameStateMachine(new SceneLoader(coroutineRunner), popUpPool);
+            StateMachine = new GameStateMachine(new SceneLoader(coroutineRunner), popUpPool, gameFabric);
         }
     }
 }

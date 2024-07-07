@@ -1,15 +1,13 @@
 ﻿using PopUp.Pool;
 
-namespace BootStrap
+namespace BootStrap.FSM
 {
     public class PoolBootstrappState: IState
     {
-        private readonly GameStateMachine _gameStateMachine;
         private readonly PopUpPool _popUpPool;
 
-        public PoolBootstrappState(GameStateMachine gameStateMachine, PopUpPool popUpPool)
+        public PoolBootstrappState(PopUpPool popUpPool)
         {
-            _gameStateMachine = gameStateMachine;
             _popUpPool = popUpPool;
         }
 
