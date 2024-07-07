@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using BootStrap.Assets;
 using BootStrap.GameFabric;
 using PopUp.Pool;
 
@@ -10,12 +11,11 @@ namespace BootStrap.FSM
         private readonly Dictionary<Type, IExitableState> _states;
         private IExitableState _activeState;
 
-        public GameStateMachine(SceneLoader sceneLoader, PopUpPool popUpPool, IGameFabric gameFabric)
+        public GameStateMachine(SceneLoader sceneLoader, PopUpPool popUpPool, IGameFabric gameFabric, ILoadAsset loadAsset)
         {
             _states = new Dictionary<Type, IExitableState>
             {
-                [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader),
-                [typeof(PoolBootstrappState)] = new PoolBootstrappState(popUpPool),
+                [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader, loadAsset),
                 [typeof(LoadLevelState)] = new LoadLevelState(sceneLoader, gameFabric),
             };
         }

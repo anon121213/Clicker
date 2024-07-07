@@ -1,29 +1,30 @@
-﻿namespace BootStrap.FSM
+﻿using BootStrap.Assets;
+
+namespace BootStrap.FSM
 {
     public class BootstrapState: IState
     {
         private const string Bootstrap = "Bootstrap";
         private readonly GameStateMachine _gameStateMachine;
         private readonly SceneLoader _sceneLoader;
-    
-        public BootstrapState(GameStateMachine stateMachine, SceneLoader sceneLoader)
+        private readonly ILoadAsset _loadAsset;
+
+        public BootstrapState(GameStateMachine stateMachine, SceneLoader sceneLoader, ILoadAsset loadAsset)
         {
             _gameStateMachine = stateMachine;
             _sceneLoader = sceneLoader;
+            _loadAsset = loadAsset;
         }
         
-        public void Enter()
+        public async void Enter()
         {
-            RegisterServices();
+            await _loadAsset.LoadAssets();
             _sceneLoader.Load(Bootstrap, EnterLoadLevel);
         }
 
         private void EnterLoadLevel() =>
             _gameStateMachine.Enter<LoadLevelState, string>("MainLvL");
 
-        private void RegisterServices()
-        {
-        }
 
         public void Exit()
         {

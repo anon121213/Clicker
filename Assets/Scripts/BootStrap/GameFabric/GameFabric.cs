@@ -1,19 +1,24 @@
-﻿using UnityEngine;
+﻿using BootStrap.Assets;
+using UnityEngine;
 
 namespace BootStrap.GameFabric
 {
     public class GameFabric : IGameFabric
     {
-        private readonly ICreateAsset _createAsset;
+        private readonly ILoadAsset _loadAsset;
 
-        public GameFabric(ICreateAsset createAsset)
+        public GameFabric(ILoadAsset loadAsset)
         {
-            _createAsset = createAsset;
+            _loadAsset = loadAsset;
         }
 
         public GameObject CreateHud()
         {
-            return _createAsset.Instantiate(PathConstants.HudPath);
+            GameObject hud = _loadAsset.GetAsset<GameObject>("Hud");
+            if (hud)
+                return Object.Instantiate(hud);
+            else
+                return null;
         }
     }
 }
