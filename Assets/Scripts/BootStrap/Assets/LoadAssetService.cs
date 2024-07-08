@@ -12,9 +12,9 @@ namespace BootStrap.Assets
 
         public TObject GetAsset<TObject>(string name) where TObject : Object
         {
-            if (_assets.ContainsKey(name))
+            if (_assets.TryGetValue(name, out Object asset))
             {
-                return _assets[name] as TObject;
+                return asset as TObject;
             }
             else
             {
