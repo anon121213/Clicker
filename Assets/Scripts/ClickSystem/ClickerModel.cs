@@ -1,22 +1,25 @@
-public class ClickerModel
+namespace ClickSystem
 {
-    private int _money = 0;
-
-    public int GetMoneyCount()
+    public class ClickerModel
     {
-        return _money;
-    }
+        private int _money = 0;
 
-    public void IncrementMoneyCount(int clickPrice)
-    {
-        _money += clickPrice;
-    }
-
-    public void DecrimentMoneyCount(int decrimentValue)
-    {
-        if (_money - decrimentValue >= 0)
+        public int GetMoneyCount()
         {
-            _money = _money - decrimentValue;
+            return _money;
+        }
+
+        public void IncrementMoneyCount(int clickPrice)
+        {
+            _money += clickPrice;
+        }
+
+        public void DecrimentMoneyCount(int decrimentValue)
+        {
+            if (_money - decrimentValue >= 0)
+            {
+                _money = _money - decrimentValue;
+            }
         }
     }
 }

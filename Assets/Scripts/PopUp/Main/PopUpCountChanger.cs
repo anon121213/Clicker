@@ -11,14 +11,14 @@ namespace PopUp.Main
     {
         [SerializeField] private float _timer = 1.5f;
 
-        private GameManager _gameManager;
+        private GameManager.GameManager _gameManager;
         private TextMeshProUGUI _textMeshProUGUI;
         private CancellationTokenSource _cts = new CancellationTokenSource();
 
         public event Action<PopUpCountChanger> OnDisabled;
 
         [Inject]
-        private void Inject(GameManager gameManager)
+        private void Inject(GameManager.GameManager gameManager)
         {
             _gameManager = gameManager;
         }

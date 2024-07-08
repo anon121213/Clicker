@@ -1,41 +1,44 @@
-﻿public class LevelModel
+﻿namespace LevelSystem
 {
-     private int _currentLvl = 1;
-     private int _clicksForNewLvl = 100;
-     private int _currentClicks = 0;
-
-     public int GetCurrentLvL()
+     public class LevelModel
      {
-          return _currentLvl;
-     }
+          private int _currentLvl = 1;
+          private int _clicksForNewLvl = 100;
+          private int _currentClicks = 0;
 
-     public int GetClicksForNewLvL()
-     {
-          return _clicksForNewLvl;
-     }
+          public int GetCurrentLvL()
+          {
+               return _currentLvl;
+          }
 
-     public int GetCurrentClicks()
-     {
-          return _currentClicks;
-     }
+          public int GetClicksForNewLvL()
+          {
+               return _clicksForNewLvl;
+          }
 
-     public void IncrementLvL()
-     {
-          _currentLvl++;
-     }
+          public int GetCurrentClicks()
+          {
+               return _currentClicks;
+          }
 
-     public void IncrementClicks(int value)
-     {
-          _currentClicks += value;
-     }
+          public void IncrementLvL()
+          {
+               _currentLvl++;
+          }
+
+          public void IncrementClicks(int value)
+          {
+               _currentClicks += value;
+          }
      
-     public void IncrementClicksForNewLvl()
-     {
-          _clicksForNewLvl *= 2;
-     }
+          public void IncrementClicksForNewLvl()
+          {
+               _clicksForNewLvl *= 2;
+          }
 
-     public void DecrimentCuddentClicks()
-     {
-          _currentClicks = 0;
+          public void DecrimentCuddentClicks()
+          {
+               _currentClicks = 0;
+          }
      }
 }

@@ -20,7 +20,7 @@ namespace BootStrap.FSM
         }
 
         private void EnterLoadLevel() =>
-            _gameStateMachine.Enter<LoadLevelState, string>("MainLvL");
+            _gameStateMachine.Enter<LoadProgressState>();
 
 
         public void Exit()

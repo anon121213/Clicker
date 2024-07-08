@@ -1,7 +1,7 @@
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-namespace BootStrap.Assets
+namespace BootStrap.Services
 {
     public interface ILoadAsset
     {

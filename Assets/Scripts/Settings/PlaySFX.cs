@@ -1,29 +1,32 @@
 ﻿using UnityEngine;
 
-public class PlaySFX: MonoBehaviour
+namespace Settings
 {
-    public static PlaySFX instance = null;
-
-    private AudioSource _audioSource;
-
-    void Awake()
+    public class PlaySFX: MonoBehaviour
     {
-        if (instance == null)
+        public static PlaySFX instance = null;
+
+        private AudioSource _audioSource;
+
+        void Awake()
         {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-            _audioSource = GetComponent<AudioSource>();
+            if (instance == null)
+            {
+                instance = this;
+                DontDestroyOnLoad(gameObject);
+                _audioSource = GetComponent<AudioSource>();
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
     
-    public void PlayMusic(AudioClip clip)
-    {
-        _audioSource.Stop();
-        _audioSource.clip = clip;
-        _audioSource.Play();
+        public void PlayMusic(AudioClip clip)
+        {
+            _audioSource.Stop();
+            _audioSource.clip = clip;
+            _audioSource.Play();
+        }
     }
 }

@@ -1,21 +1,24 @@
-﻿using UnityEngine;
-using DG.Tweening;
+﻿using DG.Tweening;
+using UnityEngine;
 
-public class WindowManager : MonoBehaviour
+namespace WindowManager
 {
-    [SerializeField] private RectTransform _windows; 
-    [SerializeField] private RectTransform[] tabs;
-    [SerializeField] private float duration = 0.5f;
-    
-    public void SelectTab(int index)
+    public class WindowManager : MonoBehaviour
     {
-        if (index < 0 || index >= tabs.Length)
+        [SerializeField] private RectTransform _windows; 
+        [SerializeField] private RectTransform[] tabs;
+        [SerializeField] private float duration = 0.5f;
+    
+        public void SelectTab(int index)
         {
-            Debug.LogError("Index out of range");
-            return;
-        }
+            if (index < 0 || index >= tabs.Length)
+            {
+                Debug.LogError("Index out of range");
+                return;
+            }
 
-        Vector2 targetPosition = tabs[index].anchoredPosition;
-        _windows.transform.DOLocalMoveX(targetPosition.x, duration);
+            Vector2 targetPosition = tabs[index].anchoredPosition;
+            _windows.transform.DOLocalMoveX(targetPosition.x, duration);
+        }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using BootStrap.Assets;
 using BootStrap.GameFabric;
+using BootStrap.Services;
 using PopUp.Pool;
 
 namespace BootStrap.FSM
@@ -11,12 +11,13 @@ namespace BootStrap.FSM
         private readonly Dictionary<Type, IExitableState> _states;
         private IExitableState _activeState;
 
-        public GameStateMachine(SceneLoader sceneLoader, PopUpPool popUpPool, IGameFabric gameFabric, ILoadAsset loadAsset)
+        public GameStateMachine(SceneLoader sceneLoader, PopUpPool popUpPool, IGameFactory gameFactory, ILoadAsset loadAsset, IPersistentProgressService progressService, ISaveLoadService saveLoadService)
         {
             _states = new Dictionary<Type, IExitableState>
             {
                 [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader),
-                [typeof(LoadLevelState)] = new LoadLevelState(sceneLoader, gameFabric),
+                [typeof(LoadProgressState)] = new LoadProgressState(this, progressService, saveLoadService),
+                [typeof(LoadLevelState)] = new LoadLevelState(sceneLoader, gameFactory, progressService),
             };
         }
         

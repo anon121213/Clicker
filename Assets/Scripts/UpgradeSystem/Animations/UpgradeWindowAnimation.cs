@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 
-public class UpgradeWindowAnimation: MonoBehaviour
+namespace UpgradeSystem.Animations
 {
+    public class UpgradeWindowAnimation: MonoBehaviour
+    {
         
+    }
 }

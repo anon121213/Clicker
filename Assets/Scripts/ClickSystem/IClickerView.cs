@@ -1,4 +1,7 @@
-public interface IClickerView
+namespace ClickSystem
 {
-    void UpdateClickCount(int count);
+    public interface IClickerView
+    {
+        void UpdateClickCount(int count);
+    }
 }

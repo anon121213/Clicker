@@ -1,21 +1,27 @@
-﻿using UnityEngine;
+﻿using ClickSystem;
+using LevelSystem;
+using UnityEngine;
+using UpgradeSystem;
 
-public class GameManager : MonoBehaviour
+namespace GameManager
 {
-    private ClickerModel _clikerModel;
-    private LevelModel _levelModel;
-    private UpgradesModel _upgradesModel;
-    
-    public ClickerModel ClikerModel => _clikerModel;
-    public LevelModel LevelModel => _levelModel;
-    public UpgradesModel UpgradesModel => _upgradesModel;
-    
-    private void Awake()
+    public class GameManager : MonoBehaviour
     {
-        _clikerModel = new ClickerModel();
-        _levelModel = new LevelModel();
-        _upgradesModel = new UpgradesModel();
+        private ClickerModel _clikerModel;
+        private LevelModel _levelModel;
+        private UpgradesModel _upgradesModel;
+    
+        public ClickerModel ClikerModel => _clikerModel;
+        public LevelModel LevelModel => _levelModel;
+        public UpgradesModel UpgradesModel => _upgradesModel;
+    
+        private void Awake()
+        {
+            _clikerModel = new ClickerModel();
+            _levelModel = new LevelModel();
+            _upgradesModel = new UpgradesModel();
 
-        Application.targetFrameRate = 90;
+            Application.targetFrameRate = 90;
+        }
     }
 }

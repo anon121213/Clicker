@@ -1,38 +1,41 @@
 ﻿using UnityEngine;
 using VContainer;
 
-public class LevelPresenter: MonoBehaviour
+namespace LevelSystem
 {
-    private ILevelView _levelView;
-    private GameManager _gameManager;
-
-    [Inject]
-    private void Initialize(ILevelView levelView, GameManager gameManager)
+    public class LevelPresenter: MonoBehaviour
     {
-        _levelView = levelView;
-        _gameManager = gameManager;
-    }
+        private ILevelView _levelView;
+        private GameManager.GameManager _gameManager;
 
-    private void Start()
-    {
-        _levelView.UpdateLevel(_gameManager.LevelModel.GetCurrentClicks(), _gameManager.LevelModel.GetClicksForNewLvL());
-        _levelView.UpdateClicksForNewLvlText(_gameManager.LevelModel.GetClicksForNewLvL(), _gameManager.LevelModel.GetCurrentLvL());
-    }
-
-    public void OnClick()
-    {
-        if (_gameManager.LevelModel.GetCurrentClicks() + _gameManager.UpgradesModel.GetClickPrice() < _gameManager.LevelModel.GetClicksForNewLvL())
+        [Inject]
+        private void Initialize(ILevelView levelView, GameManager.GameManager gameManager)
         {
-            _gameManager.LevelModel.IncrementClicks(_gameManager.UpgradesModel.GetClickXpPrice());
-            _levelView.UpdateLevel(_gameManager.LevelModel.GetCurrentClicks(), _gameManager.LevelModel.GetClicksForNewLvL());
+            _levelView = levelView;
+            _gameManager = gameManager;
         }
-        else
+
+        private void Start()
         {
-            _gameManager.LevelModel.IncrementLvL();
-            _gameManager.LevelModel.IncrementClicksForNewLvl();
-            _gameManager.LevelModel.DecrimentCuddentClicks();
-            _levelView.UpdateLevel(_gameManager.UpgradesModel.GetClickXpPrice(), _gameManager.LevelModel.GetClicksForNewLvL());
+            _levelView.UpdateLevel(_gameManager.LevelModel.GetCurrentClicks(), _gameManager.LevelModel.GetClicksForNewLvL());
             _levelView.UpdateClicksForNewLvlText(_gameManager.LevelModel.GetClicksForNewLvL(), _gameManager.LevelModel.GetCurrentLvL());
+        }
+
+        public void OnClick()
+        {
+            if (_gameManager.LevelModel.GetCurrentClicks() + _gameManager.UpgradesModel.GetClickPrice() < _gameManager.LevelModel.GetClicksForNewLvL())
+            {
+                _gameManager.LevelModel.IncrementClicks(_gameManager.UpgradesModel.GetClickXpPrice());
+                _levelView.UpdateLevel(_gameManager.LevelModel.GetCurrentClicks(), _gameManager.LevelModel.GetClicksForNewLvL());
+            }
+            else
+            {
+                _gameManager.LevelModel.IncrementLvL();
+                _gameManager.LevelModel.IncrementClicksForNewLvl();
+                _gameManager.LevelModel.DecrimentCuddentClicks();
+                _levelView.UpdateLevel(_gameManager.UpgradesModel.GetClickXpPrice(), _gameManager.LevelModel.GetClicksForNewLvL());
+                _levelView.UpdateClicksForNewLvlText(_gameManager.LevelModel.GetClicksForNewLvL(), _gameManager.LevelModel.GetCurrentLvL());
+            }
         }
     }
 }
