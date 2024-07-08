@@ -23,12 +23,9 @@ namespace BootStrap.Assets
             }
         }
 
-        public async UniTask LoadAssets()
+        public async UniTask LoadAssets(string path)
         {
-            await UniTask.WhenAll(
-                LoadAsset(PathConstants.HudPath),
-                LoadAsset(PathConstants.PopUpPath)
-                );
+            await LoadAsset(path);
         }
 
         private async UniTask LoadAsset(string path)
@@ -36,7 +33,7 @@ namespace BootStrap.Assets
             UniTaskCompletionSource<bool> utcs = new UniTaskCompletionSource<bool>();
             AsyncOperationHandle<Object> handle = Addressables.LoadAssetAsync<Object>(path);
             
-            handle.Completed += (AsyncOperationHandle<Object> op) =>
+            handle.Completed += op =>
             {
                 OnPrefabLoaded(op);
                 utcs.TrySetResult(true);

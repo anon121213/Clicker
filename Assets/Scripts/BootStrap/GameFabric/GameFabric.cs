@@ -1,4 +1,6 @@
-﻿using BootStrap.Assets;
+﻿using System.Threading.Tasks;
+using BootStrap.Assets;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace BootStrap.GameFabric
@@ -12,9 +14,12 @@ namespace BootStrap.GameFabric
             _loadAsset = loadAsset;
         }
 
-        public GameObject CreateHud()
+        public async UniTask<GameObject> CreateHud()
         {
+            await _loadAsset.LoadAssets(PathConstants.HudPath);
+            
             GameObject hud = _loadAsset.GetAsset<GameObject>("Hud");
+            
             if (hud)
                 return Object.Instantiate(hud);
             else

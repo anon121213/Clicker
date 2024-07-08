@@ -6,6 +6,6 @@ namespace BootStrap.Assets
     public interface ILoadAsset
     {
         TObject GetAsset<TObject>(string name) where TObject : Object;
-        UniTask LoadAssets();
+        UniTask LoadAssets(string path);
     }
 }

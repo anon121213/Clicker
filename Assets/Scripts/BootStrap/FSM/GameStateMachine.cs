@@ -15,7 +15,7 @@ namespace BootStrap.FSM
         {
             _states = new Dictionary<Type, IExitableState>
             {
-                [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader, loadAsset),
+                [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader),
                 [typeof(LoadLevelState)] = new LoadLevelState(sceneLoader, gameFabric),
             };
         }
