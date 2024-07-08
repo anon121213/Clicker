@@ -16,7 +16,7 @@ namespace BootStrap.GameFabric
 
         public async UniTask<GameObject> CreateHud()
         {
-            await _loadAsset.LoadAssets(PathConstants.HudPath);
+            await _loadAsset.LoadAsset(PathConstants.HudPath);
             
             GameObject hud = _loadAsset.GetAsset<GameObject>("Hud");
             

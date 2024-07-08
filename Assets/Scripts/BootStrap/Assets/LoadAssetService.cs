@@ -23,12 +23,7 @@ namespace BootStrap.Assets
             }
         }
 
-        public async UniTask LoadAssets(string path)
-        {
-            await LoadAsset(path);
-        }
-
-        private async UniTask LoadAsset(string path)
+        public async UniTask LoadAsset(string path)
         {
             UniTaskCompletionSource<bool> utcs = new UniTaskCompletionSource<bool>();
             AsyncOperationHandle<Object> handle = Addressables.LoadAssetAsync<Object>(path);
