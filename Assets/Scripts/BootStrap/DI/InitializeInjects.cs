@@ -5,7 +5,7 @@ using PopUp.Pool;
 using VContainer;
 using VContainer.Unity;
 
-namespace BootStrap
+namespace BootStrap.DI
 {
     public class InitializeInjects : LifetimeScope
     {

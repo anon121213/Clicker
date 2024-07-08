@@ -1,4 +1,4 @@
-namespace BootStrap
+namespace BootStrap.FSM
 {
     public interface IState: IExitableState
     {

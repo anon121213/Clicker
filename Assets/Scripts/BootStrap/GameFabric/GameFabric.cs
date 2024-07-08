@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using BootStrap.Assets;
+﻿using BootStrap.Assets;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
