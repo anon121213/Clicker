@@ -6,7 +6,7 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace BootStrap.Services
 {
-    public class LoadAssetService : ILoadAsset
+    public class LoadAssetServiceService : ILoadAssetService
     {
         private Dictionary<string, Object> _assets = new();
 

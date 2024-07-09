@@ -1,24 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using BootStrap.GameFabric;
-using BootStrap.Services;
-using PopUp.Pool;
 
 namespace BootStrap.FSM
 {
     public class GameStateMachine
     {
-        private readonly Dictionary<Type, IExitableState> _states;
+        private readonly Dictionary<Type, IExitableState> _states = new ();
         private IExitableState _activeState;
 
-        public GameStateMachine(SceneLoader sceneLoader, PopUpPool popUpPool, IGameFactory gameFactory, ILoadAsset loadAsset, IPersistentProgressService progressService, ISaveLoadService saveLoadService)
+        public void AddState(Type stateType, IExitableState state)
         {
-            _states = new Dictionary<Type, IExitableState>
-            {
-                [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader),
-                [typeof(LoadProgressState)] = new LoadProgressState(this, progressService, saveLoadService),
-                [typeof(LoadLevelState)] = new LoadLevelState(sceneLoader, gameFactory, progressService),
-            };
+            _states.Add(stateType, state);
         }
         
         public void Enter<TState, TPayload>(TPayload payload) where TState : class, IPayloadedState<TPayload>

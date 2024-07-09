@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace BootStrap.Services
 {
-    public interface ILoadAsset
+    public interface ILoadAssetService
     {
         TObject GetAsset<TObject>(string name) where TObject : Object;
         UniTask LoadAsset(string path);
