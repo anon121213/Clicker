@@ -8,7 +8,7 @@ namespace BootStrap.Services
     {
         private readonly IPersistentProgressService _progressService;
         private readonly IGameFactory _gameFactory;
-        private const string ProgressKey = "Progress";
+        private const string ProgresKey = "Progres";
         
         public SaveLoadService(IPersistentProgressService progressService, IGameFactory gameFactory)
         {
@@ -18,14 +18,16 @@ namespace BootStrap.Services
 
         public void SaveProgress()
         {
-            foreach (ISavedProgress progressWriter in _gameFactory.ProgressRiters)
-                progressWriter.UpdateProgress(_progressService.Progress);
-
-            PlayerPrefs.SetString(ProgressKey, _progressService.Progress.ToJson());
+            foreach (ISavedProgress progressWriter in _gameFactory.ProgressWriters)
+            {
+                progressWriter.UpdateProgress(_progressService.Progres);
+            }
+            
+            PlayerPrefs.SetString(ProgresKey, _progressService.Progres.ToJson());
         }
 
-        public PlayerProgress LoadProgress() =>
-            PlayerPrefs.GetString(ProgressKey)?
-                .ToDesserializeble<PlayerProgress>();
+        public PlayerProgres LoadProgress() =>
+            PlayerPrefs.GetString(ProgresKey)?
+                .ToDesserializeble<PlayerProgres>();
     }
 }

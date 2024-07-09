@@ -4,6 +4,6 @@ namespace BootStrap.Services
 {
     public interface IPersistentProgressService
     {
-        PlayerProgress Progress { get; set; }
+        PlayerProgres Progres { get; set; }
     }
 }

@@ -1,8 +1,9 @@
-﻿using System;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using BootStrap.GameFabric;
 using BootStrap.Services;
+using Cysharp.Threading.Tasks;
 using Data;
-using UnityEngine;
 
 namespace BootStrap.FSM
 {
@@ -11,7 +12,7 @@ namespace BootStrap.FSM
         private readonly SceneLoader _sceneLoader;
         private readonly IGameFactory _gameFactory;
         private readonly IPersistentProgressService _progressService;
-        private readonly PlayerProgress _progress;
+        private readonly PlayerProgres _progres;
 
         public LoadLevelState(SceneLoader sceneLoader, IGameFactory gameFactory, IPersistentProgressService progressService)
         {
@@ -24,19 +25,29 @@ namespace BootStrap.FSM
         {
             _gameFactory.Cleanup();
             _sceneLoader.Load(name, OnLoaded);
+        }
+
+        private async void OnLoaded()
+        {
+            await CreateObjects();
             InformProgressRiders();
         }
 
-        private void OnLoaded()
+        private async Task CreateObjects()
         {
-            _gameFactory.CreateHud();
+            List<UniTask> tasks = new List<UniTask>();
+            
+            tasks.Add(_gameFactory.CreateHud());
+            tasks.Add(_gameFactory.LoadTest());
+
+            await UniTask.WhenAll(tasks);
         }
 
         private void InformProgressRiders()
         {
             foreach (ISavedProgressReader progressReader in _gameFactory.ProgressReaders)
             {
-                progressReader.LoadProgress(_progressService.Progress);
+                progressReader.LoadProgress(_progressService.Progres);
             }
         }
 

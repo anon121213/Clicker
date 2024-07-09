@@ -2,11 +2,11 @@
 {
     public interface ISavedProgressReader
     {
-        void LoadProgress(PlayerProgress progress);
+        void LoadProgress(PlayerProgres progres);
     }
 
     public interface ISavedProgress : ISavedProgressReader
     {
-        void UpdateProgress(PlayerProgress progress);
+        void UpdateProgress(PlayerProgres progres);
     }
 }

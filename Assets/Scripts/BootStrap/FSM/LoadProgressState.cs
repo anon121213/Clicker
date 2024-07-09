@@ -27,11 +27,11 @@ namespace BootStrap.FSM
         }
 
         private void LoadProgressOrInitNew() =>
-            _progressService.Progress =
+            _progressService.Progres =
                 _saveLoadService.LoadProgress() ??
                 NewProgress();
 
-        private PlayerProgress NewProgress() => 
+        private PlayerProgres NewProgress() => 
             new();
     }
 }

@@ -12,7 +12,7 @@ namespace BootStrap.GameFabric
         private readonly ILoadAsset _loadAsset;
 
         public List<ISavedProgressReader> ProgressReaders { get; } = new List<ISavedProgressReader>();
-        public List<ISavedProgress> ProgressRiters { get; } = new List<ISavedProgress>();
+        public List<ISavedProgress> ProgressWriters { get; } = new List<ISavedProgress>();
 
         public GameFactory(ILoadAsset loadAsset) =>
             _loadAsset = loadAsset;
@@ -34,25 +34,41 @@ namespace BootStrap.GameFabric
             else
                 return null;
         }
+        
+        public async UniTask<GameObject> LoadTest()
+        {
+            await _loadAsset.LoadAsset(PathConstants.LoadTestPath);
+            
+            GameObject loadTest = _loadAsset.GetAsset<GameObject>("SaveTest");
+            
+            if (loadTest)
+            {
+                GameObject InstantiatedloadTest = Object.Instantiate(loadTest);
+
+                RegisterProgressWatchers(InstantiatedloadTest);
+                
+                return InstantiatedloadTest;
+            }
+            else
+                return null;
+        }
 
         public void Cleanup()
         {
             ProgressReaders.Clear();
-            ProgressRiters.Clear();
+            ProgressWriters.Clear();
         }
 
-        private void RegisterProgressWatchers(GameObject InstantiatedHud)
+        private void RegisterProgressWatchers(GameObject instantiatedGameObject)
         {
-            foreach (ISavedProgressReader progressReader in InstantiatedHud.GetComponentsInChildren<ISavedProgressReader>())
+            foreach (ISavedProgressReader progressReader in instantiatedGameObject.GetComponentsInChildren<ISavedProgressReader>())
                 Register(progressReader);
         }
 
         private void Register(ISavedProgressReader progressReader)
         {
             if (progressReader is ISavedProgress progressWriter)
-            {
-                ProgressReaders.Add(progressWriter);
-            }
+                ProgressWriters.Add(progressWriter);
             
             ProgressReaders.Add(progressReader);
         }

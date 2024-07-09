@@ -3,8 +3,8 @@
 namespace Data
 {
     [Serializable]
-    public class PlayerProgress
+    public class PlayerProgres
     {
-        public string Money = "1";
+        public int Money = 1;
     }
 }

@@ -2,6 +2,7 @@
 using BootStrap.FSM;
 using BootStrap.GameFabric;
 using BootStrap.Services;
+using Data;
 using PopUp.Pool;
 using VContainer;
 using VContainer.Unity;
@@ -21,6 +22,8 @@ namespace BootStrap.DI
             builder.Register<IPersistentProgressService, PersistentProgressServiceService>(Lifetime.Singleton);
 
             builder.Register<ISaveLoadService, SaveLoadService>(Lifetime.Singleton);
+
+            builder.Register<PlayerProgres>(Lifetime.Singleton);
         
             builder.Register<SceneLoader>(Lifetime.Singleton);
         
