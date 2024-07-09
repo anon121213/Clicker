@@ -1,4 +1,4 @@
-﻿namespace BootStrap.Assets
+﻿namespace BootStrap.AssetsLoader
 {
     public class PathConstants
     {

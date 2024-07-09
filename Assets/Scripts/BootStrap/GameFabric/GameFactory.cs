@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using BootStrap.Assets;
+using BootStrap.AssetsLoader;
 using BootStrap.AssetsLoader.Services;
 using BootStrap.Data;
 using BootStrap.Data.DataService;
@@ -56,7 +56,5 @@ namespace BootStrap.GameFabric
             foreach (ISavedProgressReader progressReader in instantiatedGameObject.GetComponentsInChildren<ISavedProgressReader>())
                 _progressUsersService.Register(progressReader);
         }
-
-        
     }
 }

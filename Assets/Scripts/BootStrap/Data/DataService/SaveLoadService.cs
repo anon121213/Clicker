@@ -17,9 +17,7 @@ namespace BootStrap.Data.DataService
         public void SaveProgress()
         {
             foreach (ISavedProgress progressWriter in _progressUsersService.ProgressWriters)
-            {
                 progressWriter.UpdateProgress(_progressService.Progres);
-            }
             
             PlayerPrefs.SetString(ProgresKey, _progressService.Progres.ToJson());
         }

@@ -49,9 +49,7 @@ namespace BootStrap.FSM.States
         private void InformProgressRiders()
         {
             foreach (ISavedProgressReader progressReader in _progressUsersService.ProgressReaders)
-            {
                 progressReader.LoadProgress(_progressService.Progres);
-            }
         }
 
         public void Exit()
