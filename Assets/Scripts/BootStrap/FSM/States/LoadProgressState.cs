@@ -1,7 +1,7 @@
-﻿using BootStrap.Services;
-using Data;
+﻿using BootStrap.Data;
+using BootStrap.Data.DataService;
 
-namespace BootStrap.FSM
+namespace BootStrap.FSM.States
 {
     public class LoadProgressState : IState
     {

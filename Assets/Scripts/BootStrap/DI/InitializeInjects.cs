@@ -1,5 +1,6 @@
-﻿using BootStrap.GameFabric;
-using BootStrap.Services;
+﻿using BootStrap.AssetsLoader.Services;
+using BootStrap.Data.DataService;
+using BootStrap.GameFabric;
 using VContainer;
 using VContainer.Unity;
 
@@ -21,6 +22,8 @@ namespace BootStrap.DI
             builder.Register<IPersistentProgressService, PersistentProgressServiceService>(Lifetime.Singleton);
 
             builder.Register<ISaveLoadService, SaveLoadService>(Lifetime.Singleton);
+
+            builder.Register<IProgressUsersService, ProgressUsersService>(Lifetime.Singleton);
         }
     }
 }

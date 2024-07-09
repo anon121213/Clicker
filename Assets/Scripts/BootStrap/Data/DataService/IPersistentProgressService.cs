@@ -1,6 +1,4 @@
-﻿using Data;
-
-namespace BootStrap.Services
+﻿namespace BootStrap.Data.DataService
 {
     public interface IPersistentProgressService
     {

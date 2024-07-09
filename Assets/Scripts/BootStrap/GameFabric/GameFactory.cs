@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using BootStrap.Assets;
-using BootStrap.Services;
+using BootStrap.AssetsLoader.Services;
+using BootStrap.Data;
+using BootStrap.Data.DataService;
 using Cysharp.Threading.Tasks;
-using Data;
 using UnityEngine;
 
 namespace BootStrap.GameFabric
@@ -10,12 +11,13 @@ namespace BootStrap.GameFabric
     public class GameFactory : IGameFactory
     {
         private readonly ILoadAssetService _loadAssetService;
+        private readonly IProgressUsersService _progressUsersService;
 
-        public List<ISavedProgressReader> ProgressReaders { get; } = new List<ISavedProgressReader>();
-        public List<ISavedProgress> ProgressWriters { get; } = new List<ISavedProgress>();
-
-        public GameFactory(ILoadAssetService loadAssetService) =>
+        public GameFactory(ILoadAssetService loadAssetService, IProgressUsersService progressUsersService)
+        {
             _loadAssetService = loadAssetService;
+            _progressUsersService = progressUsersService;
+        }
 
         public async UniTask<GameObject> CreateHud()
         {
@@ -49,24 +51,12 @@ namespace BootStrap.GameFabric
             return InstantiatedloadTest;
         }
 
-        public void Cleanup()
-        {
-            ProgressReaders.Clear();
-            ProgressWriters.Clear();
-        }
-
         private void RegisterProgressWatchers(GameObject instantiatedGameObject)
         {
             foreach (ISavedProgressReader progressReader in instantiatedGameObject.GetComponentsInChildren<ISavedProgressReader>())
-                Register(progressReader);
+                _progressUsersService.Register(progressReader);
         }
 
-        private void Register(ISavedProgressReader progressReader)
-        {
-            if (progressReader is ISavedProgress progressWriter)
-                ProgressWriters.Add(progressWriter);
-            
-            ProgressReaders.Add(progressReader);
-        }
+        
     }
 }

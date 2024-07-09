@@ -1,6 +1,6 @@
-﻿using BootStrap.Assets;
+﻿using BootStrap.Bootstap;
 
-namespace BootStrap.FSM
+namespace BootStrap.FSM.States
 {
     public class BootstrapState: IState
     {

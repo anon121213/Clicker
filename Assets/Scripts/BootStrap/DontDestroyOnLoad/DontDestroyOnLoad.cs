@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace BootStrap
+namespace BootStrap.DontDestroyOnLoad
 {
     public class DontDestroyOnLoad: MonoBehaviour
     {

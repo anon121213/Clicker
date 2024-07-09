@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace BootStrap
+namespace BootStrap.Bootstap
 {
     public class SceneLoader
     {

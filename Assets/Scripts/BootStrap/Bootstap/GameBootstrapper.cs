@@ -1,23 +1,26 @@
-﻿using BootStrap.FSM;
+﻿using BootStrap.Data.DataService;
+using BootStrap.FSM;
+using BootStrap.FSM.States;
 using BootStrap.GameFabric;
-using BootStrap.Services;
 using UnityEngine;
 using VContainer;
 
-namespace BootStrap
+namespace BootStrap.Bootstap
 {
     public class GameBootstrapper : MonoBehaviour
     {
         private IGameFactory _gameFactory;
         private IPersistentProgressService _progressService;
         private ISaveLoadService _saveLoadService;
+        private IProgressUsersService _progressUsersService;
 
         [Inject]
-        private void Inject(IGameFactory gameFactory, IPersistentProgressService progressService, ISaveLoadService saveLoadService)
+        private void Inject(IGameFactory gameFactory, IPersistentProgressService progressService, ISaveLoadService saveLoadService, IProgressUsersService progressUsersService)
         {
             _gameFactory = gameFactory;
             _progressService = progressService;
             _saveLoadService = saveLoadService;
+            _progressUsersService = progressUsersService;
         }
         
         private void Awake()
@@ -38,7 +41,7 @@ namespace BootStrap
         {
             gameStateMachine.AddState(typeof(BootstrapState), new BootstrapState(gameStateMachine, sceneLoader));
             gameStateMachine.AddState(typeof(LoadProgressState), new LoadProgressState(gameStateMachine, _progressService, _saveLoadService));
-            gameStateMachine.AddState(typeof(LoadLevelState), new LoadLevelState(sceneLoader, _gameFactory, _progressService));
+            gameStateMachine.AddState(typeof(LoadLevelState), new LoadLevelState(sceneLoader, _gameFactory, _progressService, _progressUsersService));
         }
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
-namespace BootStrap.Services
+namespace BootStrap.AssetsLoader.Services
 {
     public class LoadAssetServiceService : ILoadAssetService
     {
