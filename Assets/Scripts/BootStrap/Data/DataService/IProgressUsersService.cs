@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace BootStrap.Data.DataService
 {
@@ -6,7 +7,7 @@ namespace BootStrap.Data.DataService
     {
         List<ISavedProgressReader> ProgressReaders { get; }
         List<ISavedProgress> ProgressWriters { get; }
-        void Register(ISavedProgressReader progressReader);
+        void RegisterProgressWatchers(GameObject instantiatedGameObject);
         void Cleanup();
     }
 }

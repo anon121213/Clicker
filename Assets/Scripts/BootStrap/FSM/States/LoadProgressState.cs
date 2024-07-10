@@ -1,4 +1,5 @@
-﻿using BootStrap.Data;
+﻿using BootStrap.AssetsLoader;
+using BootStrap.Data;
 using BootStrap.Data.DataService;
 
 namespace BootStrap.FSM.States
@@ -19,7 +20,7 @@ namespace BootStrap.FSM.States
         public void Enter()
         {
             LoadProgressOrInitNew();
-            _gameStateMachine.Enter<LoadLevelState, string>("MainLvL");
+            _gameStateMachine.Enter<LoadLevelState, string>(PathConstants.MainScenePath);
         }
 
         public void Exit()

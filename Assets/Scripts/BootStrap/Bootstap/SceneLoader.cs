@@ -1,6 +1,8 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
-using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
+using UnityEngine.ResourceManagement.ResourceProviders;
 using UnityEngine.SceneManagement;
 
 namespace BootStrap.Bootstap
@@ -20,11 +22,11 @@ namespace BootStrap.Bootstap
                 return;
             }
             
-            AsyncOperation waitNextScene = SceneManager.LoadSceneAsync(nextScene);
+            AsyncOperationHandle<SceneInstance> waitNextScene = Addressables.LoadSceneAsync(nextScene);
             
             await waitNextScene;
 
-            if (waitNextScene.isDone)
+            if (waitNextScene.IsDone)
                 onLoaded?.Invoke();
         }
     }
