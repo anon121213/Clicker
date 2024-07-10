@@ -5,7 +5,6 @@ namespace BootStrap.AssetsLoader.Services
 {
     public interface ILoadAssetService
     {
-        TObject GetAsset<TObject>(string name) where TObject : Object;
-        UniTask LoadAsset(string path);
+        UniTask<TObject> GetAsset<TObject>(string path) where TObject : Object;
     }
 }

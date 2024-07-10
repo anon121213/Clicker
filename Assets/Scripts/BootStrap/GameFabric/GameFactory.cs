@@ -8,9 +8,6 @@ namespace BootStrap.GameFabric
 {
     public class GameFactory : IGameFactory
     {
-        private const string Hud = "Hud";
-        private const string SaveTest = "SaveTest";
-        
         private readonly ILoadAssetService _loadAssetService;
         private readonly IProgressUsersService _progressUsersService;
 
@@ -22,9 +19,7 @@ namespace BootStrap.GameFabric
 
         public async UniTask<GameObject> CreateHud()
         {
-            await _loadAssetService.LoadAsset(PathConstants.HudPath);
-            
-            GameObject hud = _loadAssetService.GetAsset<GameObject>(Hud);
+            GameObject hud = await _loadAssetService.GetAsset<GameObject>(PathConstants.HudPath);
 
             if (!hud)
                 return null;
@@ -38,9 +33,7 @@ namespace BootStrap.GameFabric
         
         public async UniTask<GameObject> LoadTest()
         {
-            await _loadAssetService.LoadAsset(PathConstants.LoadTestPath);
-            
-            GameObject loadTest = _loadAssetService.GetAsset<GameObject>(SaveTest);
+            GameObject loadTest = await _loadAssetService.GetAsset<GameObject>(PathConstants.LoadTestPath);
 
             if (!loadTest)
                 return null;

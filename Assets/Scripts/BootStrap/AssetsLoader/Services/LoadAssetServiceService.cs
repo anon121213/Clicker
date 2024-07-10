@@ -10,39 +10,39 @@ namespace BootStrap.AssetsLoader.Services
     {
         private Dictionary<string, Object> _assets = new();
 
-        public TObject GetAsset<TObject>(string name) where TObject : Object
+        public async UniTask<TObject> GetAsset<TObject>(string path) where TObject : Object
         {
-            if (_assets.TryGetValue(name, out Object asset))
+            if (_assets.TryGetValue(path, out Object asset))
             {
                 return asset as TObject;
             }
             else
             {
-                Debug.LogError("This key was not found");
-                return null;
+                await LoadAsset(path);
+                return await GetAsset<TObject>(path);
             }
         }
 
-        public async UniTask LoadAsset(string path)
+        private async UniTask LoadAsset(string path)
         {
             UniTaskCompletionSource<bool> utcs = new UniTaskCompletionSource<bool>();
             AsyncOperationHandle<Object> handle = Addressables.LoadAssetAsync<Object>(path);
             
-            handle.Completed += op =>
+            handle.Completed += oph =>
             {
-                OnPrefabLoaded(op);
+                OnPrefabLoaded(oph, path);
                 utcs.TrySetResult(true);
             };
             
             await utcs.Task;
         }
 
-        private void OnPrefabLoaded(AsyncOperationHandle<Object> handle)
+        private void OnPrefabLoaded(AsyncOperationHandle<Object> handle, string path)
         {
             if (handle.Status == AsyncOperationStatus.Succeeded)
             {
                 if (!_assets.ContainsValue(handle.Result))
-                    _assets.Add(handle.Result.name, handle.Result);
+                    _assets.Add(path, handle.Result);
             }
             else
             {
