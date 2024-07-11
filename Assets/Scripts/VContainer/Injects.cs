@@ -19,6 +19,7 @@ namespace VContainer
             RegisterPopUp(builder);
         }
 
+        //will be delite
         private void RegisterModels(IContainerBuilder builder)
         {
             builder.Register<UpgradesModel>(Lifetime.Singleton);

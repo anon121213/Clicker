@@ -18,17 +18,12 @@ MonoBehaviour:
   m_GUID: c22daea0ff0fc274eb819a21c3ff0745
   m_SerializeEntries:
   - m_GUID: b7daa50a160f8724cb78f5601099d3da
-    m_Address: Prefabs/Hud
+    m_Address: Assets/Assets/Prefabs/Hud.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 9ff68883c9b4ebd49929a8a173aa129f
-    m_Address: Assets/Resources_moved/Prefabs/PopUp.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: df66a712e60f81e418a3073f9467e12d
-    m_Address: Assets/Resources_moved/Prefabs/SaveTest.prefab
+    m_Address: Assets/Assets/Prefabs/PopUp.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

@@ -29,7 +29,6 @@ namespace ClickSystem
         
         private void Start()
         {
-            Debug.Log(_clikerView);
             _clikerView.UpdateClickCount(_clickerModel.GetMoneyCount());
             _clikerView._clickButton.onClick.AddListener(Click);
         }

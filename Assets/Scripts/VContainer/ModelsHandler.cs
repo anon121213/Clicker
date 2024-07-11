@@ -9,18 +9,10 @@ namespace VContainer
     public class ModelsHandler : MonoBehaviour, ISavedProgress
     {
         private int _money;
-        private ClickerView _clickerView;
-        private UpgradesModel _upgradesModel;
-        private IPopUpFactory _popUpFactory;
+        [Inject] private ClickerView _clickerView;
+        [Inject] private UpgradesModel _upgradesModel;
+        [Inject] private IPopUpFactory _popUpFactory;
         private ClickerModel _clickerModel;
-
-        [Inject]
-        private void Inject(ClickerView clickerView, UpgradesModel upgradesModel, IPopUpFactory popUpFactory)
-        {
-            _clickerView = clickerView;
-            _upgradesModel = upgradesModel;
-            _popUpFactory = popUpFactory;
-        }
 
         private void Start()
         {
