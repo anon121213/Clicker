@@ -8,7 +8,7 @@ using VContainer.Unity;
 
 namespace VContainer
 {
-    public class CompositionRoot : LifetimeScope
+    public class Injects : LifetimeScope
     {
         [SerializeField] private ClickerView _clickerView;
 

@@ -1240,7 +1240,6 @@ MonoBehaviour:
   autoRun: 1
   autoInjectGameObjects:
   - {fileID: 1403777758190314541}
-  - {fileID: 8536832003092737733}
   _clickerView: {fileID: 8862898559683325844}
 --- !u!114 &1043443714681537146
 MonoBehaviour:

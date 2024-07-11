@@ -6,6 +6,5 @@ namespace BootStrap.GameFabric
     public interface IGameFactory
     {
         UniTask<GameObject> CreateHud();
-        UniTask<GameObject> LoadTest();
     }
 }

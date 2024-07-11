@@ -5,8 +5,8 @@ namespace BootStrap.Data.DataService
 {
     public class ProgressUsersService : IProgressUsersService
     {
-        public List<ISavedProgressReader> ProgressReaders { get; } = new List<ISavedProgressReader>();
-        public List<ISavedProgress> ProgressWriters { get; } = new List<ISavedProgress>();
+        public List<ISavedProgressReader> ProgressReaders { get; } = new();
+        public List<ISavedProgress> ProgressWriters { get; } = new();
         
         public void Cleanup()
         {

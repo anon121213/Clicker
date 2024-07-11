@@ -5,8 +5,7 @@
         public const string MainScenePath = "Assets/Scenes/MainLvL.unity";
         public const string BootstrapScenePath = "Assets/Scenes/Bootstrap.unity";
         
-        public const string HudPath = "Prefabs/Hud";
-        public const string PopUpPath = "Assets/Resources_moved/Prefabs/PopUp.prefab";
-        public const string LoadTestPath = "Assets/Resources_moved/Prefabs/SaveTest.prefab";
+        public const string HudPath = "Assets/Assets/Prefabs/Hud.prefab";
+        public const string PopUpPath = "Assets/Assets/Prefabs/PopUp.prefab";
     }
 }

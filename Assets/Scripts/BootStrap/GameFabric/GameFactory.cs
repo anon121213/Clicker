@@ -30,19 +30,5 @@ namespace BootStrap.GameFabric
                     
             return InstantiatedHud;
         }
-        
-        public async UniTask<GameObject> LoadTest()
-        {
-            GameObject loadTest = await _loadAssetService.GetAsset<GameObject>(PathConstants.LoadTestPath);
-
-            if (!loadTest)
-                return null;
-                
-            GameObject InstantiatedloadTest = Object.Instantiate(loadTest);
-
-            _progressUsersService.RegisterProgressWatchers(InstantiatedloadTest);
-                
-            return InstantiatedloadTest;
-        }
     }
 }

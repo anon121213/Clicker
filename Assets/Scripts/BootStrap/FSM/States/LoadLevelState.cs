@@ -41,7 +41,6 @@ namespace BootStrap.FSM.States
             List<UniTask> tasks = new List<UniTask>();
             
             tasks.Add(_gameFactory.CreateHud());
-            tasks.Add(_gameFactory.LoadTest());
 
             await UniTask.WhenAll(tasks);
         }
