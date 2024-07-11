@@ -32,7 +32,7 @@ namespace VContainer
         {
             builder.Register<ClickerModel>(Lifetime.Singleton);
             builder.Register<LevelModel>(Lifetime.Singleton);
-            builder.Register<UpgradesModel>(Lifetime.Singleton);
+            builder.Register<UpgradesMoneyModel>(Lifetime.Singleton);
             builder.Register<LevelUpgradesModel>(Lifetime.Singleton);
         }
 

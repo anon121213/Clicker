@@ -12,16 +12,16 @@ namespace ClickSystem
         private readonly Transform _popUpRoot;
         private readonly ClickerModel _clickerModel;
         private readonly ClickerView _clikerView;
-        private readonly UpgradesModel _upgradesModel;
+        private readonly UpgradesMoneyModel _upgradesMoneyModel;
         private readonly IPopUpFactory _popUpFactory;
         private readonly LevelModel _levelModel;
         private readonly LevelUpgradesModel _levelUpgradesModel;
 
-        public ClickerPresenter(ClickerModel clickerModel, ClickerView clikerView, UpgradesModel upgradesModel, IPopUpFactory popUpFactory)
+        public ClickerPresenter(ClickerModel clickerModel, ClickerView clikerView, UpgradesMoneyModel upgradesMoneyModel, IPopUpFactory popUpFactory)
         {
             _clikerView = clikerView;
             _clickerModel = clickerModel;
-            _upgradesModel = upgradesModel;
+            _upgradesMoneyModel = upgradesMoneyModel;
             _popUpFactory = popUpFactory;
             _clickSound = clikerView._clickSound;
             _popUpRoot = clikerView._popUpRoot;
@@ -38,7 +38,7 @@ namespace ClickSystem
         private void Click()
         {
             PlaySFX.instance.PlayMusic(_clickSound);
-            _clickerModel.AddMoney(_upgradesModel.ClickPrice);
+            _clickerModel.AddMoney(_upgradesMoneyModel.ClickPrice);
         
             if (Input.touchCount > 0)
             {

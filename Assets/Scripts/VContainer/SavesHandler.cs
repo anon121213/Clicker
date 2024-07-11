@@ -17,7 +17,7 @@ namespace VContainer
         
         [Inject] private ClickerModel _clickerModel;
         [Inject] private LevelModel _levelModel;
-        [Inject] private UpgradesModel _upgradesModel;
+        [Inject] private UpgradesMoneyModel _upgradesMoneyModel;
         [Inject] private LevelUpgradesModel _levelUpgradesModel;
         
         private void Start()
@@ -40,14 +40,14 @@ namespace VContainer
             _levelModel.AddClicksForNewLvl(progress.ClicksForNewLvl);
             _levelModel.AddXp(progress.CurrentXp);
 
-            _upgradesModel.AddClickPrice(progress.ClickPrice);
-            _upgradesModel.AddClickXpPrice(progress.ClickXpPrice);
-            _levelUpgradesModel.AddLvlForUpgradeClickPrice(progress.LvlForUpgradeClickPrice);
+            _upgradesMoneyModel.AddClickPrice(progress.ClickPrice);
+            _levelUpgradesModel.AddClickXpPrice(progress.ClickXpPrice);
+            _upgradesMoneyModel.AddLvlForUpgradeClickPrice(progress.LvlForUpgradeClickPrice);
             _levelUpgradesModel.AddLvlForUpgradeClickXpPrice(progress.LvlForUpgradeClickXpPrice);
-            _upgradesModel.AddUpgradeClickPrice(progress.UpgradeClickPrice);
-            _upgradesModel.AddUpgradeClickXpPrice(progress.UpgradeClickXpCount);
-            _upgradesModel.AddUpgradePriceForUpgradeMoneyClick(progress.PriceUpgradeMoneyClickClickPrice);
-            _upgradesModel.AddUpgradePriceForUpgradeXpClick(progress.PriceUpgradeXpClickClickPrice);
+            _upgradesMoneyModel.AddUpgradeClickPrice(progress.UpgradeClickPrice);
+            _levelUpgradesModel.AddUpgradeClickXpPrice(progress.UpgradeClickXpCount);
+            _upgradesMoneyModel.AddUpgradePriceForUpgradeMoneyClick(progress.PriceForUpgradeMoneyClick);
+            _levelUpgradesModel.AddPriceForUpgradeXpClick(progress.PriceForUpgradeXpClick);
         }
 
         public void UpdateProgress(PlayerProgres progress)
@@ -58,14 +58,14 @@ namespace VContainer
             progress.ClicksForNewLvl = _levelModel.ClicksForNewLvL;
             progress.CurrentXp = _levelModel.CurrentXp;
             
-            progress.ClickPrice = _upgradesModel.ClickPrice;
-            progress.ClickXpPrice = _upgradesModel.ClickXpPrice;
-            progress.LvlForUpgradeClickPrice = _levelUpgradesModel.LvlForUpgradeClickPrice;
+            progress.ClickPrice = _upgradesMoneyModel.ClickPrice;
+            progress.ClickXpPrice = _levelUpgradesModel.ClickXpPrice;
+            progress.LvlForUpgradeClickPrice = _upgradesMoneyModel.LvlForUpgradeClickPrice;
             progress.LvlForUpgradeClickXpPrice = _levelUpgradesModel.LvlForUpgradeClickXpPrice;
-            progress.UpgradeClickXpCount = _upgradesModel.UpgradeClickPrice;
-            progress.UpgradeClickPrice = _upgradesModel.UpgradeClickXpPrice;
-            progress.PriceUpgradeMoneyClickClickPrice = _upgradesModel.UpgradePriceForUpgradeMoneyClick;
-            progress.PriceUpgradeXpClickClickPrice = _upgradesModel.UpgradePriceForUpgradeXpClick;
+            progress.UpgradeClickXpCount = _upgradesMoneyModel.UpgradeClickPrice;
+            progress.UpgradeClickPrice = _levelUpgradesModel.UpgradeClickXpPrice;
+            progress.PriceForUpgradeMoneyClick = _upgradesMoneyModel.PriceForUpgradeMoneyClick;
+            progress.PriceForUpgradeXpClick = _levelUpgradesModel.PriceForUpgradeXpClick;
         }
 
         private void OnDisable()

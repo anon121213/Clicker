@@ -6,14 +6,16 @@ namespace LevelSystem
     {
         private LevelView _levelView;
         private LevelModel _levelModel;
-        private UpgradesModel _upgradesModel;
+        private UpgradesMoneyModel _upgradesMoneyModel;
+        private readonly LevelUpgradesModel _levelUpgradesModel;
 
-        public LevelPresenter(LevelView levelView, LevelModel levelModel, UpgradesModel upgradesModel)
+        public LevelPresenter(LevelView levelView, LevelModel levelModel, UpgradesMoneyModel upgradesMoneyModel, LevelUpgradesModel levelUpgradesModel)
         {
             _levelView = levelView;
             _levelModel = levelModel;
-            _upgradesModel = upgradesModel;
-            
+            _upgradesMoneyModel = upgradesMoneyModel;
+            _levelUpgradesModel = levelUpgradesModel;
+
             Start();
         }
 
@@ -28,13 +30,13 @@ namespace LevelSystem
 
         private void OnClick()
         {
-            if (_levelModel.CurrentXp + _upgradesModel.ClickPrice < _levelModel.ClicksForNewLvL)
+            if (_levelModel.CurrentXp + _upgradesMoneyModel.ClickPrice < _levelModel.ClicksForNewLvL)
             {
-                _levelModel.AddXp(_upgradesModel.ClickXpPrice);
+                _levelModel.AddXp(_levelUpgradesModel.ClickXpPrice);
             }
             else
             {
-                _levelModel.AddLvL(_upgradesModel.ClickPrice);
+                _levelModel.AddLvL(_upgradesMoneyModel.ClickPrice);
                 _levelModel.AddClicksForNewLvl(_levelModel.ClicksForNewLvL);
                 _levelModel.RemoveCurrentClicks();
             }

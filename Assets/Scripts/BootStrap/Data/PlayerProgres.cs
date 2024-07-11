@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine.Serialization;
 
 namespace BootStrap.Data
 {
@@ -15,7 +16,7 @@ namespace BootStrap.Data
         public int LvlForUpgradeClickXpPrice = 1;
         public int UpgradeClickXpCount = 1;
         public int UpgradeClickPrice = 1;
-        public int PriceUpgradeMoneyClickClickPrice = 30;
-        public int PriceUpgradeXpClickClickPrice = 30;
+        public int PriceForUpgradeMoneyClick = 30;
+        public int PriceForUpgradeXpClick = 30;
     }
 }

@@ -10,7 +10,7 @@ namespace ModelsFactory
     {
         [Inject] private ClickerView _clickerView;
         [Inject] private ClickerModel _clickerModel;
-        [Inject] private UpgradesModel _upgradesModel;
+        [Inject] private UpgradesMoneyModel _upgradesMoneyModel;
         [Inject] private IPopUpFactory _popUpFactory;
         [Inject] private LevelView _levelView;
         [Inject] private LevelModel _levelModel;
@@ -19,17 +19,17 @@ namespace ModelsFactory
         
         public ClickerPresenter CreateClickPresentor()
         {
-            return new ClickerPresenter(_clickerModel, _clickerView, _upgradesModel, _popUpFactory);
+            return new ClickerPresenter(_clickerModel, _clickerView, _upgradesMoneyModel, _popUpFactory);
         }
 
         public LevelPresenter CreateLevelPresentor()
         {
-            return new LevelPresenter(_levelView, _levelModel, _upgradesModel);
+            return new LevelPresenter(_levelView, _levelModel, _upgradesMoneyModel, _levelUpgradesModel);
         }
 
         public UpgradesPresenter CreateUpgradesPresentor()
         {
-            return new UpgradesPresenter(_upgradesView, _clickerView, _upgradesModel,
+            return new UpgradesPresenter(_upgradesView, _clickerView, _upgradesMoneyModel,
                 _clickerModel, _levelUpgradesModel, _levelModel);
         }
     }
