@@ -1,5 +1,4 @@
 ﻿using System;
-using UnityEngine.Serialization;
 
 namespace BootStrap.Data
 {
@@ -9,7 +8,7 @@ namespace BootStrap.Data
         public int Money = 0;
         public int CurrentLvl = 1;
         public int ClicksForNewLvl = 100;
-        public int CurrentClicks = 0;
+        public int CurrentXp = 0;
         public int ClickPrice = 1;
         public int ClickXpPrice = 1;
         public int LvlForUpgradeClickPrice = 1;

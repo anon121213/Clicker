@@ -1,52 +1,47 @@
-﻿using UpgradeSystem;
+﻿using System;
+using UnityEngine;
 
 namespace LevelSystem
 {
      public class LevelModel
      {
-          public int ClicksForNewLvl;
+          private int _clicksForNewLvl;
+          private int _currentLvl;
+          private int _currentXp;
+
+          public event Action OnValueChanged;
           
-          private int CurrentLvl;
-          private int CurrentClicks;
+          public int CurrentLvL =>
+               _currentLvl;
 
-          public LevelModel(LevelView levelView, UpgradesModel upgradesModel)
-          {
-               new LevelPresenter(levelView, this, upgradesModel);
-          }
-          
-          public int GetCurrentLvL()
-          {
-               return CurrentLvl;
-          }
+          public int ClicksForNewLvL =>
+               _clicksForNewLvl;
 
-          public int GetClicksForNewLvL()
+          public int CurrentXp =>
+               _currentXp;
+
+          public void AddLvL(int value)
           {
-               return ClicksForNewLvl;
+               _currentLvl = Mathf.Clamp(_currentLvl + value, 0, Int32.MaxValue);
+               OnValueChanged?.Invoke();
           }
 
-          public int GetCurrentClicks()
+          public void AddXp(int value)
           {
-               return CurrentClicks;
+               _currentXp = Mathf.Clamp(_currentXp + value, 0, Int32.MaxValue);
+               OnValueChanged?.Invoke();
           }
 
-          public void IncrementLvL(int value)
+          public void AddClicksForNewLvl(int value)
           {
-               CurrentLvl += value;
+               _clicksForNewLvl = Mathf.Clamp(_clicksForNewLvl + value, 0, Int32.MaxValue);
+               OnValueChanged?.Invoke();
           }
 
-          public void IncrementClicks(int value)
+          public void RemoveCurrentClicks()
           {
-               CurrentClicks += value;
-          }
-     
-          public void IncrementClicksForNewLvl()
-          {
-               ClicksForNewLvl *= 2;
-          }
-
-          public void DecrimentCuddentClicks()
-          {
-               CurrentClicks = 0;
+               _currentXp = 0;
+               OnValueChanged?.Invoke();
           }
      }
 }

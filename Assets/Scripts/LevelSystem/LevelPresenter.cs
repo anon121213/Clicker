@@ -1,5 +1,4 @@
-﻿using UnityEngine;
-using UpgradeSystem;
+﻿using UpgradeSystem;
 
 namespace LevelSystem
 {
@@ -14,31 +13,42 @@ namespace LevelSystem
             _levelView = levelView;
             _levelModel = levelModel;
             _upgradesModel = upgradesModel;
+            
             Start();
         }
 
         private void Start()
         {
+            _levelModel.OnValueChanged += UpdateUi;
             _levelView._clickButton.onClick.AddListener(OnClick);
-            _levelView.UpdateLevel(_levelModel.GetCurrentClicks(), _levelModel.GetClicksForNewLvL());
-            _levelView.UpdateClicksForNewLvlText(_levelModel.GetClicksForNewLvL(),_levelModel.GetCurrentLvL());
+                
+            _levelView.UpdateLevel(_levelModel.CurrentXp, _levelModel.ClicksForNewLvL);
+            _levelView.UpdateClicksForNewLvlText(_levelModel.ClicksForNewLvL,_levelModel.CurrentLvL);
         }
 
         private void OnClick()
         {
-            if (_levelModel.GetCurrentClicks() + _upgradesModel.GetClickPrice() < _levelModel.GetClicksForNewLvL())
+            if (_levelModel.CurrentXp + _upgradesModel.ClickPrice < _levelModel.ClicksForNewLvL)
             {
-                _levelModel.IncrementClicks(_upgradesModel.GetClickXpPrice());
-                _levelView.UpdateLevel(_levelModel.GetCurrentClicks(), _levelModel.GetClicksForNewLvL());
+                _levelModel.AddXp(_upgradesModel.ClickXpPrice);
             }
             else
             {
-                _levelModel.IncrementLvL(1);
-                _levelModel.IncrementClicksForNewLvl();
-                _levelModel.DecrimentCuddentClicks();
-                _levelView.UpdateLevel(_upgradesModel.GetClickXpPrice(), _levelModel.GetClicksForNewLvL());
-                _levelView.UpdateClicksForNewLvlText(_levelModel.GetClicksForNewLvL(), _levelModel.GetCurrentLvL());
+                _levelModel.AddLvL(_upgradesModel.ClickPrice);
+                _levelModel.AddClicksForNewLvl(_levelModel.ClicksForNewLvL);
+                _levelModel.RemoveCurrentClicks();
             }
+        }
+
+        private void UpdateUi()
+        {
+            _levelView.UpdateLevel(_levelModel.CurrentXp, _levelModel.ClicksForNewLvL);
+            _levelView.UpdateClicksForNewLvlText(_levelModel.ClicksForNewLvL, _levelModel.CurrentLvL);
+        }
+
+        public void Disable()
+        {
+            _levelModel.OnValueChanged -= UpdateUi;
         }
     }
 }

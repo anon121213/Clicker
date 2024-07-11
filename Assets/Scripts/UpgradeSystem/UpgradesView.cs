@@ -6,8 +6,8 @@ namespace UpgradeSystem
 {
     public class UpgradesView: MonoBehaviour
     {
-        public Button _upgradeClickPriceButton;
-        public Button _upgradeXpPriceButton;
+        public Button UpgradeClickPriceButton;
+        public Button UpgradeXpPriceButton;
         
         [SerializeField] private TextMeshProUGUI _clickPriceText;
         [SerializeField] private TextMeshProUGUI _clickXpPriceText;

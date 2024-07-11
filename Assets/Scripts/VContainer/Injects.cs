@@ -13,6 +13,7 @@ namespace VContainer
     {
         [SerializeField] private ClickerView _clickerView;
         [SerializeField] private LevelView _levelView;
+        [SerializeField] private UpgradesView _upgradesView;
 
         protected override void Configure(IContainerBuilder builder)
         {
@@ -24,21 +25,21 @@ namespace VContainer
 
         private void RegisterFactory(IContainerBuilder builder)
         {
-            builder.Register<IModelsFactory, ModelsFactory.ModelsFactory>(Lifetime.Singleton);
+            builder.Register<IPresentorsFactory, PresentorsFactory>(Lifetime.Singleton);
         }
         
-        //will be delite
         private void RegisterModels(IContainerBuilder builder)
         {
             builder.Register<ClickerModel>(Lifetime.Singleton);
             builder.Register<LevelModel>(Lifetime.Singleton);
             builder.Register<UpgradesModel>(Lifetime.Singleton);
+            builder.Register<LevelUpgradesModel>(Lifetime.Singleton);
         }
 
         private void RegisterViews(IContainerBuilder builder)
         {
             builder.RegisterInstance<LevelView>(_levelView);
-            builder.Register<UpgradesView>(Lifetime.Singleton);
+            builder.RegisterInstance<UpgradesView>(_upgradesView);
             builder.RegisterInstance<ClickerView>(_clickerView);
         }
 

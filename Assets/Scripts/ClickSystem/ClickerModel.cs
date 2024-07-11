@@ -1,33 +1,27 @@
-using PopUp.Factory;
-using UpgradeSystem;
+using System;
+using UnityEngine;
 
 namespace ClickSystem
 {
     public class ClickerModel
     {
-        private int Money;
-     
-        public ClickerModel(ClickerView clickerView, UpgradesModel upgradesModel, IPopUpFactory popUpFactory)
-        {
-            new ClickerPresenter(this, clickerView, upgradesModel, popUpFactory);
-        }
+        private int _money;
+
+        public event Action OnValueChanged;
         
-        public int GetMoneyCount()
+        public int Money =>
+            _money;
+
+        public void AddMoney(int count)
         {
-            return Money;
+            _money += count;
+            OnValueChanged?.Invoke();
         }
 
-        public void IncrementMoneyCount(int clickPrice)
+        public void RemoveMoney(int cout)
         {
-            Money += clickPrice;
-        }
-
-        public void DecrimentMoneyCount(int decrimentValue)
-        {
-            if (Money - decrimentValue >= 0)
-            {
-                Money = Money - decrimentValue;
-            }
+            _money = Mathf.Clamp(_money - cout, 0, Int32.MaxValue);
+            OnValueChanged?.Invoke();
         }
     }
 }

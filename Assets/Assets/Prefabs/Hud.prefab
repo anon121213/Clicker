@@ -50,6 +50,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 257177452250457b8e2ec988c438c048, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UpgradeClickPriceButton: {fileID: 2776043158024044485}
+  UpgradeXpPriceButton: {fileID: 4289883890380671308}
   _clickPriceText: {fileID: 8710801657837694350}
   _clickXpPriceText: {fileID: 6725331755912897770}
   _priceClickUpgradeBuffText: {fileID: 7327261076470714743}
@@ -1242,6 +1244,7 @@ MonoBehaviour:
   - {fileID: 1403777758190314541}
   _clickerView: {fileID: 8862898559683325844}
   _levelView: {fileID: 488471863456641393}
+  _upgradesView: {fileID: 1872026830588063279}
 --- !u!114 &1043443714681537146
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4138,7 +4141,7 @@ GameObject:
   - component: {fileID: 3506682757019793672}
   - component: {fileID: 2776043158024044485}
   m_Layer: 5
-  m_Name: UpgradeButton
+  m_Name: UpgradeClickPriceButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6176,7 +6179,7 @@ GameObject:
   - component: {fileID: 9019324787652243308}
   - component: {fileID: 4289883890380671308}
   m_Layer: 5
-  m_Name: UpgradeButton
+  m_Name: UpgradeClickPriceForLvlButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
