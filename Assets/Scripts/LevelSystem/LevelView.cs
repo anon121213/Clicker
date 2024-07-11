@@ -4,8 +4,10 @@ using UnityEngine.UI;
 
 namespace LevelSystem
 {
-    public class LevelView: MonoBehaviour, ILevelView
+    public class LevelView: MonoBehaviour
     {
+        public Button _clickButton;
+        
         [SerializeField] private Image _lvlBar;
         [SerializeField] private TextMeshProUGUI _clicksForNewLvlText;
         [SerializeField] private TextMeshProUGUI _clicksCountText;

@@ -1,7 +1,7 @@
-﻿/*using ClickSystem;
+﻿using ClickSystem;
+using LevelSystem;
 using Settings;
 using UnityEngine;
-using VContainer;
 
 namespace UpgradeSystem
 {
@@ -9,50 +9,51 @@ namespace UpgradeSystem
     {
         [SerializeField] private AudioClip _errorSound;
         [SerializeField] private AudioClip _buySound;
-    
-        private GameManager.GameManager _gameManager;
-        private UpgradesModel _upgradesModel;
-        private IUpgradesView _view;
-        private IClickerView _clickerView;
+        
+        private readonly UpgradesModel _upgradesModel;
+        private readonly UpgradesView _upgradeUpgradesView;
+        private readonly ClickerView _clickerView;
+        private readonly ClickerModel _clikerModel;
+        private readonly LevelModel _levelModel;
 
-        [Inject]
-        public void Construct(IUpgradesView view, IClickerView clickerView, GameManager.GameManager gameManager)
+        public UpgradesPresenter(UpgradesView upgradesView, ClickerView clickerView, UpgradesModel upgradesModel,
+            ClickerModel clickerModel, LevelModel levelModel)
         {
-            _view = view;
+            _upgradeUpgradesView = upgradesView;
             _clickerView = clickerView;
-            _gameManager = gameManager;
+            _upgradesModel = upgradesModel;
+            _clikerModel = clickerModel;
+            _levelModel = levelModel;
         }
     
         private void Start()
         {
-            _upgradesModel = _gameManager.UpgradesModel;
-            print(_gameManager.UpgradesModel);
-            _view.UpdateClickPrice(_upgradesModel.GetClickPrice());
-            _clickerView.UpdateClickCount(_gameManager.ClikerModel.GetMoneyCount());
-            _view.UpdateUpgradeClickMoney(_upgradesModel.UpgradePriceForUpgradeMoneyClick, _upgradesModel.UpgradeClickPrice);
-            _view.UpdateUpgradeClickXp(_upgradesModel.UpgradePriceForUpgradeXpClick, _upgradesModel.UpgradeClickXpPrice);
-            _view.UpdateClickXpPrice(_upgradesModel.GetClickXpPrice());
-            _view.UpdateNeedLvlForUpgradeMoneyClick(_gameManager.UpgradesModel.GetLvlForUpgradeClickPrice());
-            _view.UpdateNeedLvlForUpgradeXpClick(_gameManager.UpgradesModel.GetLvlForUpgradeXpClickPrice());
+            _upgradeUpgradesView.UpdateClickPrice(_upgradesModel.GetClickPrice());
+            _clickerView.UpdateClickCount(_clikerModel.GetMoneyCount());
+            _upgradeUpgradesView.UpdateUpgradeClickMoney(_upgradesModel.UpgradePriceForUpgradeMoneyClick, _upgradesModel.UpgradeClickPrice);
+            _upgradeUpgradesView.UpdateUpgradeClickXp(_upgradesModel.UpgradePriceForUpgradeXpClick, _upgradesModel.UpgradeClickXpPrice);
+            _upgradeUpgradesView.UpdateClickXpPrice(_upgradesModel.GetClickXpPrice());
+            _upgradeUpgradesView.UpdateNeedLvlForUpgradeMoneyClick(_upgradesModel.GetLvlForUpgradeClickPrice());
+            _upgradeUpgradesView.UpdateNeedLvlForUpgradeXpClick(_upgradesModel.GetLvlForUpgradeXpClickPrice());
         }
 
-        public void UpgradeClickPrice()
+        private void UpgradeClickPrice()
         {
-            if (_gameManager.UpgradesModel.GetLvlForUpgradeClickPrice() <= _gameManager.LevelModel.GetCurrentLvL() && _gameManager.ClikerModel.GetMoneyCount() >= _gameManager.UpgradesModel.UpgradePriceForUpgradeMoneyClick)
+            if (_upgradesModel.GetLvlForUpgradeClickPrice() <= _levelModel.GetCurrentLvL() && _clikerModel.GetMoneyCount() >= _upgradesModel.UpgradePriceForUpgradeMoneyClick)
             {
                 PlaySFX.instance.PlayMusic(_buySound);
             
                 _upgradesModel.IncrementClickPrice(_upgradesModel.UpgradeClickPrice);
                 _upgradesModel.UpgradeClickPrice = (int)Mathf.Round(_upgradesModel.UpgradeClickPrice * 1.5f);
             
-                _gameManager.ClikerModel.DecrimentMoneyCount(_gameManager.UpgradesModel.UpgradePriceForUpgradeMoneyClick);
-                _gameManager.UpgradesModel.UpgradePriceForUpgradeMoneyClick *= 2; 
-                _gameManager.UpgradesModel.IncrementLvlForUpgradeClick(1);
+                _clikerModel.DecrimentMoneyCount(_upgradesModel.UpgradePriceForUpgradeMoneyClick);
+                _upgradesModel.UpgradePriceForUpgradeMoneyClick *= 2; 
+                _upgradesModel.IncrementLvlForUpgradeClick(1);
             
-                _view.UpdateClickPrice(_upgradesModel.GetClickPrice());
-                _clickerView.UpdateClickCount(_gameManager.ClikerModel.GetMoneyCount());
-                _view.UpdateUpgradeClickMoney(_upgradesModel.UpgradePriceForUpgradeMoneyClick, _upgradesModel.UpgradeClickPrice);
-                _view.UpdateNeedLvlForUpgradeMoneyClick(_gameManager.UpgradesModel.GetLvlForUpgradeClickPrice());
+                _upgradeUpgradesView.UpdateClickPrice(_upgradesModel.GetClickPrice());
+                _clickerView.UpdateClickCount(_clikerModel.GetMoneyCount());
+                _upgradeUpgradesView.UpdateUpgradeClickMoney(_upgradesModel.UpgradePriceForUpgradeMoneyClick, _upgradesModel.UpgradeClickPrice);
+                _upgradeUpgradesView.UpdateNeedLvlForUpgradeMoneyClick(_upgradesModel.GetLvlForUpgradeClickPrice());
             }
             else
             {
@@ -60,23 +61,23 @@ namespace UpgradeSystem
             }
         }
 
-        public void UpgradeClickXP()
+        private void UpgradeClickXP()
         {
-            if (_gameManager.UpgradesModel.GetLvlForUpgradeXpClickPrice() <= _gameManager.LevelModel.GetCurrentLvL() && _gameManager.ClikerModel.GetMoneyCount() >= _gameManager.UpgradesModel.UpgradePriceForUpgradeXpClick)
+            if (_upgradesModel.GetLvlForUpgradeXpClickPrice() <= _levelModel.GetCurrentLvL() && _clikerModel.GetMoneyCount() >= _upgradesModel.UpgradePriceForUpgradeXpClick)
             {
                 PlaySFX.instance.PlayMusic(_buySound);
             
                 _upgradesModel.IncrementClickXpPrice(_upgradesModel.UpgradeClickXpPrice);
                 _upgradesModel.UpgradeClickXpPrice = (int)Mathf.Round(_upgradesModel.UpgradeClickXpPrice * 1.5f);
             
-                _gameManager.ClikerModel.DecrimentMoneyCount(_gameManager.UpgradesModel.UpgradePriceForUpgradeXpClick);
-                _gameManager.UpgradesModel.UpgradePriceForUpgradeXpClick *= 2; 
-                _gameManager.UpgradesModel.IncrementLvlForUpgradeXpClick(1);
+                _clikerModel.DecrimentMoneyCount(_upgradesModel.UpgradePriceForUpgradeXpClick);
+                _upgradesModel.UpgradePriceForUpgradeXpClick *= 2; 
+                _upgradesModel.IncrementLvlForUpgradeXpClick(1);
             
-                _view.UpdateClickXpPrice(_upgradesModel.GetClickXpPrice());
-                _clickerView.UpdateClickCount(_gameManager.ClikerModel.GetMoneyCount());
-                _view.UpdateUpgradeClickXp(_upgradesModel.UpgradePriceForUpgradeXpClick, _upgradesModel.UpgradeClickXpPrice);
-                _view.UpdateNeedLvlForUpgradeXpClick(_gameManager.UpgradesModel.GetLvlForUpgradeXpClickPrice());
+                _upgradeUpgradesView.UpdateClickXpPrice(_upgradesModel.GetClickXpPrice());
+                _clickerView.UpdateClickCount(_clikerModel.GetMoneyCount());
+                _upgradeUpgradesView.UpdateUpgradeClickXp(_upgradesModel.UpgradePriceForUpgradeXpClick, _upgradesModel.UpgradeClickXpPrice);
+                _upgradeUpgradesView.UpdateNeedLvlForUpgradeXpClick(_upgradesModel.GetLvlForUpgradeXpClickPrice());
             }
             else
             {
@@ -84,4 +85,4 @@ namespace UpgradeSystem
             }
         }
     }
-}*/
+}

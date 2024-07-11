@@ -1,43 +1,44 @@
-﻿/*
-using UnityEngine;
-using VContainer;
+﻿using UnityEngine;
+using UpgradeSystem;
 
 namespace LevelSystem
 {
-    public class LevelPresenter: MonoBehaviour
+    public class LevelPresenter
     {
-        private ILevelView _levelView;
-        private GameManager _gameManager;
+        private LevelView _levelView;
+        private LevelModel _levelModel;
+        private UpgradesModel _upgradesModel;
 
-        [Inject]
-        private void Initialize(ILevelView levelView, GameManager.GameManager gameManager)
+        public LevelPresenter(LevelView levelView, LevelModel levelModel, UpgradesModel upgradesModel)
         {
             _levelView = levelView;
-            _gameManager = gameManager;
+            _levelModel = levelModel;
+            _upgradesModel = upgradesModel;
+            Start();
         }
 
         private void Start()
         {
-            _levelView.UpdateLevel(_gameManager.LevelModel.GetCurrentClicks(), _gameManager.LevelModel.GetClicksForNewLvL());
-            _levelView.UpdateClicksForNewLvlText(_gameManager.LevelModel.GetClicksForNewLvL(), _gameManager.LevelModel.GetCurrentLvL());
+            _levelView._clickButton.onClick.AddListener(OnClick);
+            _levelView.UpdateLevel(_levelModel.GetCurrentClicks(), _levelModel.GetClicksForNewLvL());
+            _levelView.UpdateClicksForNewLvlText(_levelModel.GetClicksForNewLvL(),_levelModel.GetCurrentLvL());
         }
 
-        public void OnClick()
+        private void OnClick()
         {
-            if (_gameManager.LevelModel.GetCurrentClicks() + _gameManager.UpgradesModel.GetClickPrice() < _gameManager.LevelModel.GetClicksForNewLvL())
+            if (_levelModel.GetCurrentClicks() + _upgradesModel.GetClickPrice() < _levelModel.GetClicksForNewLvL())
             {
-                _gameManager.LevelModel.IncrementClicks(_gameManager.UpgradesModel.GetClickXpPrice());
-                _levelView.UpdateLevel(_gameManager.LevelModel.GetCurrentClicks(), _gameManager.LevelModel.GetClicksForNewLvL());
+                _levelModel.IncrementClicks(_upgradesModel.GetClickXpPrice());
+                _levelView.UpdateLevel(_levelModel.GetCurrentClicks(), _levelModel.GetClicksForNewLvL());
             }
             else
             {
-                _gameManager.LevelModel.IncrementLvL();
-                _gameManager.LevelModel.IncrementClicksForNewLvl();
-                _gameManager.LevelModel.DecrimentCuddentClicks();
-                _levelView.UpdateLevel(_gameManager.UpgradesModel.GetClickXpPrice(), _gameManager.LevelModel.GetClicksForNewLvL());
-                _levelView.UpdateClicksForNewLvlText(_gameManager.LevelModel.GetClicksForNewLvL(), _gameManager.LevelModel.GetCurrentLvL());
+                _levelModel.IncrementLvL(1);
+                _levelModel.IncrementClicksForNewLvl();
+                _levelModel.DecrimentCuddentClicks();
+                _levelView.UpdateLevel(_upgradesModel.GetClickXpPrice(), _levelModel.GetClicksForNewLvL());
+                _levelView.UpdateClicksForNewLvlText(_levelModel.GetClicksForNewLvL(), _levelModel.GetCurrentLvL());
             }
         }
     }
 }
-*/

@@ -1,44 +1,52 @@
-﻿namespace LevelSystem
+﻿using UpgradeSystem;
+
+namespace LevelSystem
 {
      public class LevelModel
      {
-          private int _currentLvl = 1;
-          private int _clicksForNewLvl = 100;
-          private int _currentClicks = 0;
+          public int ClicksForNewLvl;
+          
+          private int CurrentLvl;
+          private int CurrentClicks;
 
+          public LevelModel(LevelView levelView, UpgradesModel upgradesModel)
+          {
+               new LevelPresenter(levelView, this, upgradesModel);
+          }
+          
           public int GetCurrentLvL()
           {
-               return _currentLvl;
+               return CurrentLvl;
           }
 
           public int GetClicksForNewLvL()
           {
-               return _clicksForNewLvl;
+               return ClicksForNewLvl;
           }
 
           public int GetCurrentClicks()
           {
-               return _currentClicks;
+               return CurrentClicks;
           }
 
-          public void IncrementLvL()
+          public void IncrementLvL(int value)
           {
-               _currentLvl++;
+               CurrentLvl += value;
           }
 
           public void IncrementClicks(int value)
           {
-               _currentClicks += value;
+               CurrentClicks += value;
           }
      
           public void IncrementClicksForNewLvl()
           {
-               _clicksForNewLvl *= 2;
+               ClicksForNewLvl *= 2;
           }
 
           public void DecrimentCuddentClicks()
           {
-               _currentClicks = 0;
+               CurrentClicks = 0;
           }
      }
 }

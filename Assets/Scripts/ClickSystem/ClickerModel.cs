@@ -5,12 +5,10 @@ namespace ClickSystem
 {
     public class ClickerModel
     {
-        public int Money;
+        private int Money;
      
-        public ClickerModel(ClickerView clickerView, UpgradesModel upgradesModel, IPopUpFactory popUpFactory, int money)
+        public ClickerModel(ClickerView clickerView, UpgradesModel upgradesModel, IPopUpFactory popUpFactory)
         {
-            Money = money;
-            
             new ClickerPresenter(this, clickerView, upgradesModel, popUpFactory);
         }
         

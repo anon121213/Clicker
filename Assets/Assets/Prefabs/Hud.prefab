@@ -1241,6 +1241,7 @@ MonoBehaviour:
   autoInjectGameObjects:
   - {fileID: 1403777758190314541}
   _clickerView: {fileID: 8862898559683325844}
+  _levelView: {fileID: 488471863456641393}
 --- !u!114 &1043443714681537146
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2214,6 +2215,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc5b29156df545a090f397d60230586d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _clickButton: {fileID: 4274288133199732704}
   _lvlBar: {fileID: 9207922111259147454}
   _clicksForNewLvlText: {fileID: 2866102266411021852}
   _clicksCountText: {fileID: 2862325887829778662}
