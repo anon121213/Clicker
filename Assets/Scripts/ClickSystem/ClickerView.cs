@@ -1,27 +1,19 @@
-﻿using PopUp.Pool;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
-using VContainer;
+using UnityEngine.UI;
 
 namespace ClickSystem
 {
-    public class ClickerView : MonoBehaviour, IClickerView 
+    public class ClickerView : MonoBehaviour
     {
-        [SerializeField] private TextMeshProUGUI _clickCountText;
+        [SerializeField] private TextMeshProUGUI _Money;
         [SerializeField] private TextMeshProUGUI _clickPrice;
-        [SerializeField] private Transform _perentTransform;
-    
-        private PopUpPool _popUpPool;
-    
-        [Inject]
-        private void Inject(PopUpPool popUpPool)
-        {
-            _popUpPool = popUpPool;
-        }
-    
-        public void UpdateClickCount(int count)
-        {
-            _clickCountText.text = $"Money: {count}";
-        }
+        
+        public AudioClip _clickSound;
+        public Transform _popUpRoot;
+        public Button _clickButton;
+
+        public void UpdateClickCount(int count) =>
+            _Money.text = $"Money: {count}";
     }
 }

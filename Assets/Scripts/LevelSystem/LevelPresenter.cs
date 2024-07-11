@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿/*
+using UnityEngine;
 using VContainer;
 
 namespace LevelSystem
@@ -6,7 +7,7 @@ namespace LevelSystem
     public class LevelPresenter: MonoBehaviour
     {
         private ILevelView _levelView;
-        private GameManager.GameManager _gameManager;
+        private GameManager _gameManager;
 
         [Inject]
         private void Initialize(ILevelView levelView, GameManager.GameManager gameManager)
@@ -39,3 +40,4 @@ namespace LevelSystem
         }
     }
 }
+*/

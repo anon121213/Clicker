@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace UpgradeSystem
 {
-    public class UpgradesModel: MonoBehaviour
+    public class UpgradesModel
     {
         private int _clickPrice = 1;
         private int _clickXpPrice = 1;

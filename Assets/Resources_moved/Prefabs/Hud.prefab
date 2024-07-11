@@ -1130,6 +1130,8 @@ GameObject:
   - component: {fileID: 2896842639964919919}
   - component: {fileID: 8544878841542733143}
   - component: {fileID: 3159576835434853456}
+  - component: {fileID: 1791983004694391585}
+  - component: {fileID: 1043443714681537146}
   m_Layer: 5
   m_Name: Hud
   m_TagString: Untagged
@@ -1221,6 +1223,37 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &1791983004694391585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1403777758190314541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6015884b177444fb1567dd4e9cfd96c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentReference:
+    TypeName: 
+  autoRun: 1
+  autoInjectGameObjects:
+  - {fileID: 1403777758190314541}
+  - {fileID: 8536832003092737733}
+  _clickerView: {fileID: 8862898559683325844}
+--- !u!114 &1043443714681537146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1403777758190314541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f5d0b1d08ef4f5687496262d003bac8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1477720224254829028
 GameObject:
   m_ObjectHideFlags: 0
@@ -2143,7 +2176,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6529729126428855622}
-  - component: {fileID: 2043817887178815327}
   - component: {fileID: 488471863456641393}
   m_Layer: 5
   m_Name: LevelSystem
@@ -2171,18 +2203,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -49.364624}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2043817887178815327
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3412310058138311597}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1390a8cc747b4519be3bf50097d47f1d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &488471863456641393
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2661,7 +2681,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1634885061701500169}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ClickerPresenter, Assembly-CSharp
         m_MethodName: OnClick
         m_Mode: 1
@@ -2673,7 +2693,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 2043817887178815327}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: LevelPresenter, Assembly-CSharp
         m_MethodName: OnClick
         m_Mode: 1
@@ -4116,7 +4136,6 @@ GameObject:
   - component: {fileID: 403475554777331999}
   - component: {fileID: 3506682757019793672}
   - component: {fileID: 2776043158024044485}
-  - component: {fileID: 3030169274061422614}
   m_Layer: 5
   m_Name: UpgradeButton
   m_TagString: Untagged
@@ -4226,7 +4245,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3030169274061422614}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UpgradesPresenter, Assembly-CSharp
         m_MethodName: UpgradeClickPrice
         m_Mode: 1
@@ -4238,20 +4257,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &3030169274061422614
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6086172790356327238}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4c628787d044da8b47eb1b3c0e8fdce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _errorSound: {fileID: 8300000, guid: aeba6724e1fbb4d4b8d197588310b74a, type: 3}
-  _buySound: {fileID: 8300000, guid: 4d5df06b6075c5c44bc8d0f436f53a2e, type: 3}
 --- !u!1 &6326818841800033553
 GameObject:
   m_ObjectHideFlags: 0
@@ -5830,7 +5835,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3750684770664531572}
   - component: {fileID: 8862898559683325844}
-  - component: {fileID: 1634885061701500169}
   m_Layer: 5
   m_Name: ClickSystem
   m_TagString: Untagged
@@ -5870,23 +5874,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e4c1225069c4688a2e318ca251029f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _clickCountText: {fileID: 4722992581408451886}
+  _Money: {fileID: 4722992581408451886}
   _clickPrice: {fileID: 8710801657837694350}
-  _perentTransform: {fileID: 0}
---- !u!114 &1634885061701500169
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8536832003092737733}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9aace121eeb084d44b7a67493898543e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   _clickSound: {fileID: 8300000, guid: 2e829eebeee2692498534aeb6524c623, type: 3}
   _popUpRoot: {fileID: 8415953347913551465}
+  _clickButton: {fileID: 4274288133199732704}
 --- !u!1 &8568614479829914774
 GameObject:
   m_ObjectHideFlags: 0
@@ -6182,7 +6174,6 @@ GameObject:
   - component: {fileID: 3725928848373904827}
   - component: {fileID: 9019324787652243308}
   - component: {fileID: 4289883890380671308}
-  - component: {fileID: 4675231341497879837}
   m_Layer: 5
   m_Name: UpgradeButton
   m_TagString: Untagged
@@ -6292,7 +6283,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4675231341497879837}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UpgradesPresenter, Assembly-CSharp
         m_MethodName: UpgradeClickXP
         m_Mode: 1
@@ -6304,20 +6295,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &4675231341497879837
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9085340169720668246}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4c628787d044da8b47eb1b3c0e8fdce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _errorSound: {fileID: 8300000, guid: aeba6724e1fbb4d4b8d197588310b74a, type: 3}
-  _buySound: {fileID: 8300000, guid: 4d5df06b6075c5c44bc8d0f436f53a2e, type: 3}
 --- !u!1 &9177305167708740266
 GameObject:
   m_ObjectHideFlags: 0

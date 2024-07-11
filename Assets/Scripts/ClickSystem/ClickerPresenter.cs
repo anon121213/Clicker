@@ -4,42 +4,41 @@ using Settings;
 using Unity.Mathematics;
 using UnityEngine;
 using UpgradeSystem;
-using VContainer;
 
 namespace ClickSystem
 {
-    public class ClickerPresenter : MonoBehaviour
+    public class ClickerPresenter
     {
-        [SerializeField] private AudioClip _clickSound;
-        [SerializeField] private Transform _popUpRoot;
-    
-        private GameManager.GameManager _gameManager;
-        private ClickerModel _clickModel;
-        private UpgradesModel _upgradesModel;
-        private IClickerView _view;
-        private IPopUpFactory _popUpFactoryImplementation;
-        private IPopUpFactory _popUpFactory;
+        private readonly AudioClip _clickSound;
+        private readonly Transform _popUpRoot;
+        private readonly ClickerModel _clickerModel;
+        private readonly ClickerView _clikerView;
+        private readonly UpgradesModel _upgradesModel;
+        private readonly IPopUpFactory _popUpFactory;
 
-        [Inject]
-        public void Construct(IClickerView view, GameManager.GameManager gameManager, IPopUpFactory popUpFactory)
+        public ClickerPresenter(ClickerModel clickerModel, ClickerView clikerView, UpgradesModel upgradesModel, IPopUpFactory popUpFactory)
         {
-            _view = view;
-            _gameManager = gameManager;
+            _clikerView = clikerView;
+            _clickerModel = clickerModel;
+            _upgradesModel = upgradesModel;
             _popUpFactory = popUpFactory;
+            _clickSound = clikerView._clickSound;
+            _popUpRoot = clikerView._popUpRoot;
+            Start();
         }
-    
+        
         private void Start()
         {
-            _clickModel = _gameManager.ClikerModel;
-            _upgradesModel = _gameManager.UpgradesModel;
-            _view.UpdateClickCount(_clickModel.GetMoneyCount());
+            Debug.Log(_clikerView);
+            _clikerView.UpdateClickCount(_clickerModel.GetMoneyCount());
+            _clikerView._clickButton.onClick.AddListener(Click);
         }
-
-        public void OnClick()
+        
+        private void Click()
         {
             PlaySFX.instance.PlayMusic(_clickSound);
-            _clickModel.IncrementMoneyCount(_upgradesModel.GetClickPrice());
-            _view.UpdateClickCount(_clickModel.GetMoneyCount());
+            _clickerModel.IncrementMoneyCount(_upgradesModel.GetClickPrice());
+            _clikerView.UpdateClickCount(_clickerModel.GetMoneyCount());
         
             if (Input.touchCount > 0)
             {
@@ -48,11 +47,6 @@ namespace ClickSystem
                 PopUpCountChanger popUp = _popUpFactory.Create(clickPosition, _popUpRoot, quaternion.identity);
                 popUp.Enable();
             }
-        }
-
-        public void Create(Vector2 position, Transform root, Quaternion rotation)
-        {
-            _popUpFactoryImplementation.Create(position, root, rotation);
         }
     }
 }

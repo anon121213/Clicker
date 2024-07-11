@@ -5,9 +5,9 @@ public class LoadTest : MonoBehaviour, ISavedProgress
 {
     public PlayerProgres _progress;
     
-    public void LoadProgress(PlayerProgres progres)
+    public void LoadProgress(PlayerProgres progress)
     {
-        Debug.Log(progres.Money);
+        Debug.Log(progress.Money);
     }
 
     public void UpdateProgress(PlayerProgres progres)

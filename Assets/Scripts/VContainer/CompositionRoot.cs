@@ -10,17 +10,30 @@ namespace VContainer
 {
     public class CompositionRoot : LifetimeScope
     {
-        [SerializeField] private GameManager.GameManager _gameManager;
         [SerializeField] private ClickerView _clickerView;
-        [SerializeField] private LevelView _levelView;
-        [SerializeField] private UpgradesView _upgradesView;
-    
+
         protected override void Configure(IContainerBuilder builder)
         {
-            builder.RegisterInstance<IClickerView>(_clickerView);
-            builder.RegisterInstance<ILevelView>(_levelView);
-            builder.RegisterInstance<IUpgradesView>(_upgradesView);
-            builder.RegisterInstance(_gameManager);
+            RegisterModels(builder);
+            RegisterViews(builder);
+            RegisterPopUp(builder);
+        }
+
+        private void RegisterModels(IContainerBuilder builder)
+        {
+            builder.Register<UpgradesModel>(Lifetime.Singleton);
+            builder.Register<ClickerModel>(Lifetime.Singleton);
+        }
+
+        private void RegisterViews(IContainerBuilder builder)
+        {
+            builder.Register<LevelView>(Lifetime.Singleton);
+            builder.Register<UpgradesView>(Lifetime.Singleton);
+            builder.RegisterInstance<ClickerView>(_clickerView);
+        }
+
+        private void RegisterPopUp(IContainerBuilder builder)
+        {
             builder.Register<PopUpPool>(Lifetime.Singleton);
             builder.Register<IPopUpFactory, PopUpFactory>(Lifetime.Singleton);
         }

@@ -1,4 +1,4 @@
-﻿using ClickSystem;
+﻿/*using ClickSystem;
 using Settings;
 using UnityEngine;
 using VContainer;
@@ -84,4 +84,4 @@ namespace UpgradeSystem
             }
         }
     }
-}
+}*/

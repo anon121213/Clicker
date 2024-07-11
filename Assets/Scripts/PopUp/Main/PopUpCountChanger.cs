@@ -10,18 +10,11 @@ namespace PopUp.Main
     public class PopUpCountChanger: MonoBehaviour
     {
         [SerializeField] private float _timer = 1.5f;
-
-        private GameManager.GameManager _gameManager;
+        
         private TextMeshProUGUI _textMeshProUGUI;
         private CancellationTokenSource _cts = new CancellationTokenSource();
 
         public event Action<PopUpCountChanger> OnDisabled;
-
-        [Inject]
-        private void Inject(GameManager.GameManager gameManager)
-        {
-            _gameManager = gameManager;
-        }
     
         public void Enable()
         {
@@ -32,7 +25,7 @@ namespace PopUp.Main
 
         private void ChangeCount()
         {
-            _textMeshProUGUI.text = $"+{_gameManager.UpgradesModel.GetClickPrice()}";
+            _textMeshProUGUI.text = $"+";
         }
 
         private async UniTask StartTimer()

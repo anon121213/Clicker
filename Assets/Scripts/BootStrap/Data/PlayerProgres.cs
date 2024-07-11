@@ -5,6 +5,6 @@ namespace BootStrap.Data
     [Serializable]
     public class PlayerProgres
     {
-        public int Money = 1;
+        public int Money = 0;
     }
 }
