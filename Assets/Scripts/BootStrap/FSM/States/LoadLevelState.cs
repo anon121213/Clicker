@@ -5,7 +5,6 @@ using BootStrap.Data;
 using BootStrap.Data.DataService;
 using BootStrap.GameFabric;
 using Cysharp.Threading.Tasks;
-using UnityEngine;
 
 namespace BootStrap.FSM.States
 {
@@ -15,7 +14,7 @@ namespace BootStrap.FSM.States
         private readonly IGameFactory _gameFactory;
         private readonly IPersistentProgressService _progressService;
         private readonly IProgressUsersService _progressUsersService;
-        private readonly PlayerProgres _progres;
+        private readonly PlayerProgress _progress;
 
         public LoadLevelState(SceneLoader sceneLoader, IGameFactory gameFactory, IPersistentProgressService progressService, IProgressUsersService progressUsersService)
         {
@@ -54,7 +53,7 @@ namespace BootStrap.FSM.States
         private void InformProgressRiders()
         {
             foreach (ISavedProgressReader progressReader in _progressUsersService.ProgressReaders)
-                progressReader.LoadProgress(_progressService.Progres);
+                progressReader.LoadProgress(_progressService.Progress);
         }
 
         public void Exit()

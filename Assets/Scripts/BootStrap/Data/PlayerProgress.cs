@@ -1,10 +1,9 @@
 ﻿using System;
-using UnityEngine.Serialization;
 
 namespace BootStrap.Data
 {
     [Serializable]
-    public class PlayerProgres
+    public class PlayerProgress
     {
         public int Money = 0;
         public int CurrentLvl = 1;

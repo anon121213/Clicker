@@ -1,10 +1,10 @@
-﻿using BootStrap.Data;
-using ClickSystem;
+﻿using ClickSystem;
 using LevelSystem;
 using UnityEngine;
 using UpgradeSystem;
+using VContainer;
 
-namespace VContainer
+namespace BootStrap.Data
 {
     public class SavesHandler : MonoBehaviour, ISavedProgress
     {
@@ -13,7 +13,7 @@ namespace VContainer
         [Inject] private UpgradesMoneyModel _upgradesMoneyModel;
         [Inject] private LevelUpgradesModel _levelUpgradesModel;
         
-        public void LoadProgress(PlayerProgres progress)
+        public void LoadProgress(PlayerProgress progress)
         {
             _clickerModel.AddMoney(progress.Money);
             
@@ -31,7 +31,7 @@ namespace VContainer
             _levelUpgradesModel.AddPriceForUpgradeXpClick(progress.PriceForUpgradeXpClick);
         }
 
-        public void UpdateProgress(PlayerProgres progress)
+        public void UpdateProgress(PlayerProgress progress)
         {
             progress.Money = _clickerModel.Money;
             
@@ -47,13 +47,6 @@ namespace VContainer
             progress.UpgradeClickPrice = _levelUpgradesModel.UpgradeClickXpPrice;
             progress.PriceForUpgradeMoneyClick = _upgradesMoneyModel.PriceForUpgradeMoneyClick;
             progress.PriceForUpgradeXpClick = _levelUpgradesModel.PriceForUpgradeXpClick;
-        }
-
-        private void OnDisable()
-        {
-            /*_clickerPresenter.Disable();
-            _levelPresenter.Disable();
-            _upgradesPresentor.Disable();*/
         }
     }
 }

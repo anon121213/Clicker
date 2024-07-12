@@ -3,6 +3,6 @@
     public interface ISaveLoadService
     {
         void SaveProgress();
-        PlayerProgres LoadProgress();
+        PlayerProgress LoadProgress();
     }
 }

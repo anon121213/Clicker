@@ -17,13 +17,13 @@ namespace BootStrap.Data.DataService
         public void SaveProgress()
         {
             foreach (ISavedProgress progressWriter in _progressUsersService.ProgressWriters)
-                progressWriter.UpdateProgress(_progressService.Progres);
+                progressWriter.UpdateProgress(_progressService.Progress);
             
-            PlayerPrefs.SetString(ProgresKey, _progressService.Progres.ToJson());
+            PlayerPrefs.SetString(ProgresKey, _progressService.Progress.ToJson());
         }
 
-        public PlayerProgres LoadProgress() =>
+        public PlayerProgress LoadProgress() =>
             PlayerPrefs.GetString(ProgresKey)?
-                .ToDesserializeble<PlayerProgres>();
+                .ToDesserializeble<PlayerProgress>();
     }
 }

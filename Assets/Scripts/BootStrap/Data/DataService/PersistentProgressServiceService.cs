@@ -2,6 +2,6 @@
 {
     public class PersistentProgressServiceService: IPersistentProgressService
     {
-        public PlayerProgres Progres { get; set; }
+        public PlayerProgress Progress { get; set; }
     }
 }
