@@ -1,4 +1,5 @@
-﻿using UpgradeSystem;
+﻿using ClickSystem;
+using UpgradeSystem;
 
 namespace LevelSystem
 {
@@ -8,13 +9,15 @@ namespace LevelSystem
         private LevelModel _levelModel;
         private UpgradesMoneyModel _upgradesMoneyModel;
         private readonly LevelUpgradesModel _levelUpgradesModel;
+        private readonly ClickerPresenter _clickerPresenter;
 
-        public LevelPresenter(LevelView levelView, LevelModel levelModel, UpgradesMoneyModel upgradesMoneyModel, LevelUpgradesModel levelUpgradesModel)
+        public LevelPresenter(LevelView levelView, LevelModel levelModel, UpgradesMoneyModel upgradesMoneyModel, LevelUpgradesModel levelUpgradesModel, ClickerPresenter clickerPresenter)
         {
             _levelView = levelView;
             _levelModel = levelModel;
             _upgradesMoneyModel = upgradesMoneyModel;
             _levelUpgradesModel = levelUpgradesModel;
+            _clickerPresenter = clickerPresenter;
 
             Start();
         }
@@ -22,7 +25,7 @@ namespace LevelSystem
         private void Start()
         {
             _levelModel.OnValueChanged += UpdateUi;
-            _levelView._clickButton.onClick.AddListener(OnClick);
+            _clickerPresenter.ClickButton.onClick.AddListener(OnClick);
                 
             _levelView.UpdateLevel(_levelModel.CurrentXp, _levelModel.ClicksForNewLvL);
             _levelView.UpdateClicksForNewLvlText(_levelModel.ClicksForNewLvL,_levelModel.CurrentLvL);

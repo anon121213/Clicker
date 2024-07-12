@@ -6,7 +6,9 @@ using BootStrap.FSM.States;
 using BootStrap.GameFabric;
 using ClickSystem;
 using LevelSystem;
-using UnityEngine;
+using ModelsFactory;
+using PopUp.Factory;
+using PopUp.Pool;
 using UpgradeSystem;
 using VContainer;
 using VContainer.Unity;
@@ -15,14 +17,13 @@ namespace BootStrap.DI
 {
     public class InitializeInjects : LifetimeScope
     {
-        [SerializeField] private ClickerView _clickerView;
-        [SerializeField] private LevelView _levelView;
-        [SerializeField] private UpgradesView _upgradesView;
-        
         protected override void Configure(IContainerBuilder builder)
         {
             RegisterStates(builder);
             RegisterServices(builder);
+            RegisterModels(builder);
+            RegisterPopUp(builder);
+            RegisterFactory(builder);
         }
 
         private void RegisterServices(IContainerBuilder builder)
@@ -49,6 +50,25 @@ namespace BootStrap.DI
             builder.Register<LoadLevelState>(Lifetime.Singleton);
             
             builder.Register<LoadProgressState>(Lifetime.Singleton);
+        }
+        
+        private void RegisterFactory(IContainerBuilder builder)
+        {
+            builder.Register<IPresentorsFactory, PresentorsFactory>(Lifetime.Singleton);
+        }
+        
+        private void RegisterModels(IContainerBuilder builder)
+        {
+            builder.Register<ClickerModel>(Lifetime.Singleton);
+            builder.Register<LevelModel>(Lifetime.Singleton);
+            builder.Register<UpgradesMoneyModel>(Lifetime.Singleton);
+            builder.Register<LevelUpgradesModel>(Lifetime.Singleton);
+        }
+
+        private void RegisterPopUp(IContainerBuilder builder)
+        {
+            builder.Register<PopUpPool>(Lifetime.Singleton);
+            builder.Register<IPopUpFactory, PopUpFactory>(Lifetime.Singleton);
         }
     }
 }

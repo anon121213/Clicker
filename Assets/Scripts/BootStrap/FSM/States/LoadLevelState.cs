@@ -38,9 +38,13 @@ namespace BootStrap.FSM.States
 
         private async Task CreateObjects()
         {
-            List<UniTask> tasks = new List<UniTask>();
-            
-            tasks.Add(_gameFactory.CreateHud());
+            List<UniTask> tasks = new List<UniTask>
+            {
+                _gameFactory.CreateHud(),
+                _gameFactory.CreateClickSystem(),
+                _gameFactory.CreateUpgradeSystem(),
+                _gameFactory.CreateLevelSystem()
+            };
 
             await UniTask.WhenAll(tasks);
         }

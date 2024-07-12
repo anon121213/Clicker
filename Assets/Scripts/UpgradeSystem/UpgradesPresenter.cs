@@ -28,7 +28,7 @@ namespace UpgradeSystem
             _levelModel = levelModel;
             Start();
         }
-    
+
         private void Start()
         {
             _upgradesMoneyModel.OnValueChanged += UpdateUi;

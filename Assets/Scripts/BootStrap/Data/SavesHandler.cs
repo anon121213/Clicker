@@ -1,7 +1,6 @@
 ﻿using BootStrap.Data;
 using ClickSystem;
 using LevelSystem;
-using ModelsFactory;
 using UnityEngine;
 using UpgradeSystem;
 
@@ -9,29 +8,11 @@ namespace VContainer
 {
     public class SavesHandler : MonoBehaviour, ISavedProgress
     {
-        [Inject] private IPresentorsFactory _presentorsFactory;
-
-        private ClickerPresenter _clickerPresenter;
-        private LevelPresenter _levelPresenter;
-        private UpgradesPresenter _upgradesPresentor;
-        
         [Inject] private ClickerModel _clickerModel;
         [Inject] private LevelModel _levelModel;
         [Inject] private UpgradesMoneyModel _upgradesMoneyModel;
         [Inject] private LevelUpgradesModel _levelUpgradesModel;
         
-        private void Start()
-        {
-            CreatePresentors();
-        }
-
-        private void CreatePresentors()
-        {
-            _clickerPresenter = _presentorsFactory.CreateClickPresentor();
-            _levelPresenter = _presentorsFactory.CreateLevelPresentor();
-            _upgradesPresentor = _presentorsFactory.CreateUpgradesPresentor();
-        }
-
         public void LoadProgress(PlayerProgres progress)
         {
             _clickerModel.AddMoney(progress.Money);
@@ -70,9 +51,9 @@ namespace VContainer
 
         private void OnDisable()
         {
-            _clickerPresenter.Disable();
+            /*_clickerPresenter.Disable();
             _levelPresenter.Disable();
-            _upgradesPresentor.Disable();
+            _upgradesPresentor.Disable();*/
         }
     }
 }

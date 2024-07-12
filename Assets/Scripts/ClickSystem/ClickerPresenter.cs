@@ -2,20 +2,25 @@ using LevelSystem;
 using PopUp.Factory;
 using Settings;
 using UnityEngine;
+using UnityEngine.UI;
 using UpgradeSystem;
 
 namespace ClickSystem
 {
     public class ClickerPresenter
     {
+        private readonly LevelUpgradesModel _levelUpgradesModel;
+        private readonly UpgradesMoneyModel _upgradesMoneyModel;
+        private readonly ClickerModel _clickerModel;
+        private readonly LevelModel _levelModel;
+        
+        private readonly ClickerView _clikerView;
+        
         private readonly AudioClip _clickSound;
         private readonly Transform _popUpRoot;
-        private readonly ClickerModel _clickerModel;
-        private readonly ClickerView _clikerView;
-        private readonly UpgradesMoneyModel _upgradesMoneyModel;
         private readonly IPopUpFactory _popUpFactory;
-        private readonly LevelModel _levelModel;
-        private readonly LevelUpgradesModel _levelUpgradesModel;
+
+        public Button ClickButton;
 
         public ClickerPresenter(ClickerModel clickerModel, ClickerView clikerView, UpgradesMoneyModel upgradesMoneyModel, IPopUpFactory popUpFactory)
         {
@@ -31,7 +36,8 @@ namespace ClickSystem
         private void Start()
         {
             _clikerView.UpdateClickCount(_clickerModel.Money);
-            _clikerView._clickButton.onClick.AddListener(Click);
+            ClickButton = _clikerView._clickButton;
+            ClickButton.onClick.AddListener(Click);
             _clickerModel.OnValueChanged += UpdateUi;
         }
         
@@ -49,14 +55,10 @@ namespace ClickSystem
             }
         }
 
-        private void UpdateUi()
-        {
+        private void UpdateUi() =>
             _clikerView.UpdateClickCount(_clickerModel.Money);
-        }
-        
-        public void Disable()
-        {
+
+        public void Disable() =>
             _clickerModel.OnValueChanged -= UpdateUi;
-        }
     }
 }

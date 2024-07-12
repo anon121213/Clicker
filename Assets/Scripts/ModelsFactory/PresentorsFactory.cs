@@ -16,15 +16,17 @@ namespace ModelsFactory
         [Inject] private LevelModel _levelModel;
         [Inject] private UpgradesView _upgradesView;
         [Inject] private LevelUpgradesModel _levelUpgradesModel;
+
+        private ClickerPresenter _clickerPresenter;
         
         public ClickerPresenter CreateClickPresentor()
         {
-            return new ClickerPresenter(_clickerModel, _clickerView, _upgradesMoneyModel, _popUpFactory);
+            return _clickerPresenter = new ClickerPresenter(_clickerModel, _clickerView, _upgradesMoneyModel, _popUpFactory);
         }
 
         public LevelPresenter CreateLevelPresentor()
         {
-            return new LevelPresenter(_levelView, _levelModel, _upgradesMoneyModel, _levelUpgradesModel);
+            return new LevelPresenter(_levelView, _levelModel, _upgradesMoneyModel, _levelUpgradesModel, _clickerPresenter);
         }
 
         public UpgradesPresenter CreateUpgradesPresentor()

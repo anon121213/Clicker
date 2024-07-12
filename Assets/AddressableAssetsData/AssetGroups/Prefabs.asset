@@ -27,6 +27,21 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 469c6c7122719dc4387e75cdc046a5c4
+    m_Address: Assets/Assets/Prefabs/ClickSystem.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a0deddf0d25e6a14982a723e7e56b0d4
+    m_Address: Assets/Assets/Prefabs/LevelSystem.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ac5348fea18d84c45b2af3da174d1989
+    m_Address: Assets/Assets/Prefabs/Upgrades.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: a067ebd2620a9214dafdb98dbd0a294e, type: 2}
   m_SchemaSet:

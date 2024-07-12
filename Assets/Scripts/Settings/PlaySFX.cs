@@ -13,7 +13,6 @@ namespace Settings
             if (instance == null)
             {
                 instance = this;
-                DontDestroyOnLoad(gameObject);
                 _audioSource = GetComponent<AudioSource>();
             }
             else
