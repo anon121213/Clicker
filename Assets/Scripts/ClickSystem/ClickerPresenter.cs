@@ -22,14 +22,14 @@ namespace ClickSystem
 
         public Button ClickButton;
 
-        public ClickerPresenter(ClickerModel clickerModel, ClickerView clikerView, UpgradesMoneyModel upgradesMoneyModel, IPopUpFactory popUpFactory)
+        public ClickerPresenter(ClickerModel clickerModel, ClickerView clickerView, UpgradesMoneyModel upgradesMoneyModel, IPopUpFactory popUpFactory)
         {
-            _clikerView = clikerView;
+            _clikerView = clickerView;
             _clickerModel = clickerModel;
             _upgradesMoneyModel = upgradesMoneyModel;
             _popUpFactory = popUpFactory;
-            _clickSound = clikerView._clickSound;
-            _popUpRoot = clikerView._popUpRoot;
+            _clickSound = clickerView._clickSound;
+            _popUpRoot = clickerView._popUpRoot;
             Start();
         }
         

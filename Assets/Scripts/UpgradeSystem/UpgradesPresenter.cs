@@ -36,14 +36,8 @@ namespace UpgradeSystem
             
             _upgradeView.UpgradeClickPriceButton.onClick.AddListener(UpgradeClickPrice);
             _upgradeView.UpgradeXpPriceButton.onClick.AddListener(UpgradeClickXp);
-            
-            _clickerView.UpdateClickCount(_clikerModel.Money);
-            _upgradeView.UpdateClickPrice(_upgradesMoneyModel.ClickPrice);
-            _upgradeView.UpdateUpgradeClickMoney(_upgradesMoneyModel.PriceForUpgradeMoneyClick, _upgradesMoneyModel.UpgradeClickPrice);
-            _upgradeView.UpdateUpgradeClickXp(_levelUpgradesModel.PriceForUpgradeXpClick, _levelUpgradesModel.UpgradeClickXpPrice);
-            _upgradeView.UpdateClickXpPrice(_levelUpgradesModel.ClickXpPrice);
-            _upgradeView.UpdateNeedLvlForUpgradeMoneyClick(_upgradesMoneyModel.LvlForUpgradeClickPrice);
-            _upgradeView.UpdateNeedLvlForUpgradeXpClick(_levelUpgradesModel.LvlForUpgradeClickXpPrice);
+
+            UpdateUi();
         }
 
         private void UpgradeClickPrice()

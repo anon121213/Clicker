@@ -57,23 +57,23 @@ namespace BootStrap.GameFabric
         {
             GameObject hud = await _loadAssetService.GetAsset<GameObject>(PathConstants.HudPath);
            
-            GameObject instantiatedHud = _resolver.Instantiate(hud);
-
-            _progressUsersService.RegisterProgressWatchers(instantiatedHud);
-                    
-            return instantiatedHud;
+            _hud = _resolver.Instantiate(hud);
+            
+            _progressUsersService.RegisterProgressWatchers(_hud);
+            
+            return _hud;
         }
 
         public async UniTask<GameObject> CreateClickSystem()
         {
             GameObject clickSystem = await _loadAssetService.GetAsset<GameObject>(PathConstants.ClickSystemPath);
             
-            GameObject instantiatedClickSystem = _resolver.Instantiate(clickSystem);
+            GameObject instantiatedClickSystem = _resolver.Instantiate(clickSystem, _hud.transform.Find(PathConstants.CLickSystemRootPath));
 
             _progressUsersService.RegisterProgressWatchers(instantiatedClickSystem);
 
             _clickerView = instantiatedClickSystem.GetComponent<ClickerView>();
-            
+
             _clikerPresentor = new ClickerPresenter(_clickerModel, _clickerView, _upgradesMoneyModel, _popUpFactory);
             
             return instantiatedClickSystem;
@@ -82,8 +82,8 @@ namespace BootStrap.GameFabric
         public async UniTask<GameObject> CreateUpgradeSystem()
         {
             GameObject upgradeSystem = await _loadAssetService.GetAsset<GameObject>(PathConstants.UpgradeSystemPath);
-           
-            GameObject instantiatedUpgradeSystem = _resolver.Instantiate(upgradeSystem);
+            
+            GameObject instantiatedUpgradeSystem = _resolver.Instantiate(upgradeSystem, _hud.transform.Find(PathConstants.UpgradeSystemRootPath));
 
             _progressUsersService.RegisterProgressWatchers(instantiatedUpgradeSystem);
 
@@ -99,7 +99,7 @@ namespace BootStrap.GameFabric
         {
             GameObject levelSystem = await _loadAssetService.GetAsset<GameObject>(PathConstants.LevelSystemPath);
            
-            GameObject instantiatedLevelSystem = _resolver.Instantiate(levelSystem);
+            GameObject instantiatedLevelSystem = _resolver.Instantiate(levelSystem, _hud.transform.Find(PathConstants.LevelSystemRootPath));
 
             _progressUsersService.RegisterProgressWatchers(instantiatedLevelSystem);
 

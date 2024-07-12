@@ -5,6 +5,7 @@ using BootStrap.Data;
 using BootStrap.Data.DataService;
 using BootStrap.GameFabric;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 
 namespace BootStrap.FSM.States
 {
@@ -38,10 +39,11 @@ namespace BootStrap.FSM.States
 
         private async Task CreateObjects()
         {
+            await _gameFactory.CreateHud();
+            await _gameFactory.CreateClickSystem();
+            
             List<UniTask> tasks = new List<UniTask>
             {
-                _gameFactory.CreateHud(),
-                _gameFactory.CreateClickSystem(),
                 _gameFactory.CreateUpgradeSystem(),
                 _gameFactory.CreateLevelSystem()
             };

@@ -6,7 +6,6 @@ using BootStrap.FSM.States;
 using BootStrap.GameFabric;
 using ClickSystem;
 using LevelSystem;
-using ModelsFactory;
 using PopUp.Factory;
 using PopUp.Pool;
 using UpgradeSystem;
@@ -23,7 +22,6 @@ namespace BootStrap.DI
             RegisterServices(builder);
             RegisterModels(builder);
             RegisterPopUp(builder);
-            RegisterFactory(builder);
         }
 
         private void RegisterServices(IContainerBuilder builder)
@@ -50,11 +48,6 @@ namespace BootStrap.DI
             builder.Register<LoadLevelState>(Lifetime.Singleton);
             
             builder.Register<LoadProgressState>(Lifetime.Singleton);
-        }
-        
-        private void RegisterFactory(IContainerBuilder builder)
-        {
-            builder.Register<IPresentorsFactory, PresentorsFactory>(Lifetime.Singleton);
         }
         
         private void RegisterModels(IContainerBuilder builder)
