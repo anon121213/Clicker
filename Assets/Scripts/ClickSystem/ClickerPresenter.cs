@@ -35,10 +35,12 @@ namespace ClickSystem
         
         private void Start()
         {
-            _clikerView.UpdateClickCount(_clickerModel.Money);
+            _clickerModel.OnValueChanged += UpdateUi;
+            
             ClickButton = _clikerView._clickButton;
             ClickButton.onClick.AddListener(Click);
-            _clickerModel.OnValueChanged += UpdateUi;
+            
+            UpdateUi();
         }
         
         private void Click()
@@ -48,8 +50,8 @@ namespace ClickSystem
         
             if (Input.touchCount > 0)
             {
-                var touch = Input.GetTouch(0);
-                var clickPosition = touch.position;
+                Touch touch = Input.GetTouch(0);
+                Vector2 clickPosition = touch.position;
                 /*PopUpCountChanger popUp = _popUpFactory.Create(clickPosition, _popUpRoot, quaternion.identity);
                 popUp.Enable();*/
             }

@@ -26,9 +26,8 @@ namespace LevelSystem
         {
             _levelModel.OnValueChanged += UpdateUi;
             _clickerPresenter.ClickButton.onClick.AddListener(OnClick);
-                
-            _levelView.UpdateLevel(_levelModel.CurrentXp, _levelModel.ClicksForNewLvL);
-            _levelView.UpdateClicksForNewLvlText(_levelModel.ClicksForNewLvL,_levelModel.CurrentLvL);
+
+            UpdateUi();
         }
 
         private void OnClick()
