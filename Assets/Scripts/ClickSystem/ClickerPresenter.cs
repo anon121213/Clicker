@@ -1,6 +1,9 @@
 using LevelSystem;
 using PopUp.Factory;
+using PopUp.Main;
 using Settings;
+using TMPro;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
 using UpgradeSystem;
@@ -43,7 +46,7 @@ namespace ClickSystem
             UpdateUi();
         }
         
-        private void Click()
+        private async void Click()
         {
             PlaySFX.instance.PlayMusic(_clickSound);
             _clickerModel.AddMoney(_upgradesMoneyModel.ClickPrice);
@@ -52,9 +55,18 @@ namespace ClickSystem
             {
                 Touch touch = Input.GetTouch(0);
                 Vector2 clickPosition = touch.position;
-                /*PopUpCountChanger popUp = _popUpFactory.Create(clickPosition, _popUpRoot, quaternion.identity);
-                popUp.Enable();*/
+                PopUpCountChanger popUp = await _popUpFactory.Create(clickPosition, _popUpRoot, quaternion.identity);
+                SetToDefault(popUp, clickPosition);
+                popUp.Enable(_upgradesMoneyModel.ClickPrice);
             }
+        }
+
+        private void SetToDefault(PopUpCountChanger popUp, Vector2 clickPosition)
+        {
+            popUp.transform.position = clickPosition;
+            Color color = popUp.GetComponent<TextMeshProUGUI>().color;
+            color.a = 1;
+            popUp.GetComponent<TextMeshProUGUI>().color = color;
         }
 
         private void UpdateUi() =>

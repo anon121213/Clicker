@@ -1,15 +1,20 @@
-﻿using PopUp.Main;
+﻿using BootStrap.AssetsLoader;
+using BootStrap.AssetsLoader.Services;
+using Cysharp.Threading.Tasks;
+using PopUp.Main;
 using UnityEngine;
+using VContainer;
 
 namespace PopUp.Pool
 {
     public class PopUpPool : ObjectPool<PopUpCountChanger>
     {
-        public PopUpCountChanger prefab;
-
-        public void Warmup()
+        [Inject] private ILoadAssetService _loadAssetService;
+        
+        public async UniTask Warmup()
         {
-            prefab = Resources.Load<PopUpCountChanger>("/Prefabs/PopUp");
+            GameObject prefab = await _loadAssetService.GetAsset<GameObject>(PathConstants.PopUpPath);
+            Prefab = prefab.GetComponent<PopUpCountChanger>();
         }
     }
 }

@@ -16,16 +16,16 @@ namespace PopUp.Main
 
         public event Action<PopUpCountChanger> OnDisabled;
     
-        public void Enable()
+        public void Enable(int PopUpCount)
         {
             _textMeshProUGUI = GetComponent<TextMeshProUGUI>();
-            ChangeCount();
+            ChangeCount(PopUpCount);
             StartTimer().AttachExternalCancellation(_cts.Token);
         }
 
-        private void ChangeCount()
+        private void ChangeCount(int count)
         {
-            _textMeshProUGUI.text = $"+";
+            _textMeshProUGUI.text = $"+{count}";
         }
 
         private async UniTask StartTimer()

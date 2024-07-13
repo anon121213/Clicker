@@ -1,4 +1,6 @@
-﻿using PopUp.Main;
+﻿using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
+using PopUp.Main;
 using PopUp.Pool;
 using UnityEngine;
 using VContainer;
@@ -15,11 +17,14 @@ namespace PopUp.Factory
             _pool = pool;
             _objectResolver = objectResolver;
         }
-
-        public PopUpCountChanger Create(Vector2 position, Transform root, Quaternion rotation)
+        
+        public async Task<PopUpCountChanger> Create(Vector2 position, Transform root, Quaternion rotation)
         {
+            await _pool.Warmup();
+        
             PopUpCountChanger gameObject = _pool.GetObjectFromPool(position, root, rotation);
             _objectResolver.Inject(gameObject);
+        
             gameObject.OnDisabled += ReturnToPool;
             return gameObject;
         }
