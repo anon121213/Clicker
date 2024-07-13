@@ -1,31 +1,30 @@
-﻿using ClickSystem;
+﻿using BootStrap.Data;
+using ClickSystem;
 using LevelSystem;
-using Settings;
 using UnityEngine;
 
 namespace UpgradeSystem
 {
-    public class UpgradesPresenter
+    public class UpgradesPresenter: IPresentor
     {
-        [SerializeField] private AudioClip _errorSound;
-        [SerializeField] private AudioClip _buySound;
+        private readonly IUpgradesMoneyModel _upgradesMoneyModel;
+        private readonly IClickerModel _clickerModel;
+        private readonly ILevelUpgradesModel _levelUpgradesModel;
+        private readonly ILevelModel _levelModel;
         
-        private readonly UpgradesMoneyModel _upgradesMoneyModel;
         private readonly UpgradesView _upgradeView;
         private readonly ClickerView _clickerView;
-        private readonly ClickerModel _clikerModel;
-        private readonly LevelUpgradesModel _levelUpgradesModel;
-        private readonly LevelModel _levelModel;
 
-        public UpgradesPresenter(UpgradesView upgradesView, ClickerView clickerView, UpgradesMoneyModel upgradesMoneyModel,
-            ClickerModel clickerModel, LevelUpgradesModel levelUpgradesModel, LevelModel levelModel)
+        public UpgradesPresenter(UpgradesView upgradesView, ClickerView clickerView, IUpgradesMoneyModel upgradesMoneyModel,
+            IClickerModel clickerModel, ILevelUpgradesModel levelUpgradesModel, ILevelModel levelModel)
         {
             _upgradeView = upgradesView;
             _clickerView = clickerView;
             _upgradesMoneyModel = upgradesMoneyModel;
-            _clikerModel = clickerModel;
+            _clickerModel = clickerModel;
             _levelUpgradesModel = levelUpgradesModel;
             _levelModel = levelModel;
+            
             Start();
         }
 
@@ -42,45 +41,31 @@ namespace UpgradeSystem
 
         private void UpgradeClickPrice()
         {
-            if (_upgradesMoneyModel.LvlForUpgradeClickPrice <= _levelModel.CurrentLvL && _clikerModel.Money >= _upgradesMoneyModel.PriceForUpgradeMoneyClick)
+            if (_upgradesMoneyModel.TryAddLvlForUpgradeClickPrice(_upgradesMoneyModel.LvlForUpgradeClickPrice, _levelModel.CurrentLvL, 1) 
+                && _clickerModel.TryRemoveMoney(_upgradesMoneyModel.PriceForUpgradeMoneyClick))
             {
-                PlaySFX.instance.PlayMusic(_buySound);
-            
                 _upgradesMoneyModel.AddClickPrice(_upgradesMoneyModel.UpgradeClickPrice);
                 _upgradesMoneyModel.AddUpgradeClickPrice((int)Mathf.Round(_upgradesMoneyModel.UpgradeClickPrice * 1.5f));
-            
-                _clikerModel.RemoveMoney(_upgradesMoneyModel.PriceForUpgradeMoneyClick);
+                
                 _upgradesMoneyModel.AddUpgradePriceForUpgradeMoneyClick(_upgradesMoneyModel.PriceForUpgradeMoneyClick);
-                _upgradesMoneyModel.AddLvlForUpgradeClickPrice(1);
-            }
-            else
-            {
-                PlaySFX.instance.PlayMusic(_errorSound);
             }
         }
 
         private void UpgradeClickXp()
         {
-            if (_levelUpgradesModel.LvlForUpgradeClickXpPrice <= _levelModel.CurrentLvL && _clikerModel.Money >= _levelUpgradesModel.PriceForUpgradeXpClick)
+            if (_levelUpgradesModel.TryAddLvlForUpgradeClickPrice(_levelUpgradesModel.LvlForUpgradeClickXpPrice, _levelModel.CurrentLvL, 1)
+                && _clickerModel.TryRemoveMoney(_levelUpgradesModel.PriceForUpgradeXpClick))
             {
-                PlaySFX.instance.PlayMusic(_buySound);
-            
                 _levelUpgradesModel.AddClickXpPrice( _levelUpgradesModel.UpgradeClickXpPrice);
                 _levelUpgradesModel.AddUpgradeClickXpPrice((int)Mathf.Round( _levelUpgradesModel.UpgradeClickXpPrice * 1.5f));
-            
-                _clikerModel.RemoveMoney(_levelUpgradesModel.PriceForUpgradeXpClick);
+                
                 _levelUpgradesModel.AddPriceForUpgradeXpClick( _levelUpgradesModel.PriceForUpgradeXpClick); 
-                _levelUpgradesModel.AddLvlForUpgradeClickXpPrice(1);
-            }
-            else
-            {
-                PlaySFX.instance.PlayMusic(_errorSound);
             }
         }
 
         private void UpdateUi()
         {
-            _clickerView.UpdateClickCount(_clikerModel.Money);
+            _clickerView.UpdateClickCount(_clickerModel.Money);
             _upgradeView.UpdateClickPrice(_upgradesMoneyModel.ClickPrice);
             _upgradeView.UpdateUpgradeClickMoney(_upgradesMoneyModel.PriceForUpgradeMoneyClick, _upgradesMoneyModel.UpgradeClickPrice);
             _upgradeView.UpdateUpgradeClickXp( _levelUpgradesModel.PriceForUpgradeXpClick,  _levelUpgradesModel.UpgradeClickXpPrice);

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace UpgradeSystem
 {
-    public class UpgradesMoneyModel
+    public class UpgradesMoneyModel : IUpgradesMoneyModel
     {
         private int _clickPrice;
         private int _lvlForUpgradeClickPrice;
@@ -24,6 +24,19 @@ namespace UpgradeSystem
         public int LvlForUpgradeClickPrice =>
             _lvlForUpgradeClickPrice;
 
+        public bool TryAddLvlForUpgradeClickPrice(int lvlForUpgradeClickPrice, int currentLevel, int count)
+        {
+            if (lvlForUpgradeClickPrice <= currentLevel)
+            {
+                _lvlForUpgradeClickPrice = Mathf.Clamp(_lvlForUpgradeClickPrice + count, 0, Int32.MaxValue);
+                OnValueChanged?.Invoke();
+
+                return true;
+            }
+
+            return false;
+        }
+        
         public void AddLvlForUpgradeClickPrice(int count)
         {
             _lvlForUpgradeClickPrice = Mathf.Clamp(_lvlForUpgradeClickPrice + count, 0, Int32.MaxValue);
@@ -38,7 +51,6 @@ namespace UpgradeSystem
             _upgradeClickPrice = Mathf.Clamp(_upgradeClickPrice + count, 0, Int32.MaxValue);
             OnValueChanged?.Invoke();
         }
-
 
         public int PriceForUpgradeMoneyClick =>
             _pricePriceForUpgradeMoneyClickClickPrice;

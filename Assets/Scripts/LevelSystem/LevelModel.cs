@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace LevelSystem
 {
-     public class LevelModel
+     public class LevelModel : ILevelModel
      {
           private int _clicksForNewLvl;
           private int _currentLvl;
@@ -38,6 +38,19 @@ namespace LevelSystem
                OnValueChanged?.Invoke();
           }
 
+          public bool TryUpgradeLevel(int currentXp, int clickPrice, int clicksForNewLvl, int ClickXpPrice)
+          {
+               if (currentXp + clickPrice >= clicksForNewLvl)
+               {
+                    RemoveCurrentClicks();
+                    AddLvL(clickPrice);
+                    AddClicksForNewLvl(clicksForNewLvl);
+                    return true;
+               }
+               AddXp(ClickXpPrice);
+               return false;
+          }
+          
           public void RemoveCurrentClicks()
           {
                _currentXp = 0;

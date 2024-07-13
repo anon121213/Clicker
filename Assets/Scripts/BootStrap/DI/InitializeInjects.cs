@@ -1,5 +1,6 @@
 ﻿using BootStrap.AssetsLoader.Services;
 using BootStrap.Bootstap;
+using BootStrap.Data;
 using BootStrap.Data.DataService;
 using BootStrap.FSM;
 using BootStrap.FSM.States;
@@ -35,6 +36,8 @@ namespace BootStrap.DI
             builder.Register<ISaveLoadService, SaveLoadService>(Lifetime.Singleton);
 
             builder.Register<IProgressUsersService, ProgressUsersService>(Lifetime.Singleton);
+
+            builder.Register<IDisposeService, DisposeService>(Lifetime.Singleton);
         }
 
         private void RegisterStates(IContainerBuilder builder)
@@ -52,15 +55,19 @@ namespace BootStrap.DI
         
         private void RegisterModels(IContainerBuilder builder)
         {
-            builder.Register<ClickerModel>(Lifetime.Singleton);
-            builder.Register<LevelModel>(Lifetime.Singleton);
-            builder.Register<UpgradesMoneyModel>(Lifetime.Singleton);
-            builder.Register<LevelUpgradesModel>(Lifetime.Singleton);
+            builder.Register<IClickerModel, ClickerModel>(Lifetime.Singleton);
+            
+            builder.Register<ILevelModel, LevelModel>(Lifetime.Singleton);
+            
+            builder.Register<IUpgradesMoneyModel, UpgradesMoneyModel>(Lifetime.Singleton);
+            
+            builder.Register<ILevelUpgradesModel, LevelUpgradesModel>(Lifetime.Singleton);
         }
 
         private void RegisterPopUp(IContainerBuilder builder)
         {
             builder.Register<PopUpPool>(Lifetime.Singleton);
+            
             builder.Register<IPopUpFactory, PopUpFactory>(Lifetime.Singleton);
         }
     }

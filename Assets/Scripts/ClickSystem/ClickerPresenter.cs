@@ -1,7 +1,7 @@
-using LevelSystem;
+using System;
+using BootStrap.Data;
 using PopUp.Factory;
 using PopUp.Main;
-using Settings;
 using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
@@ -10,29 +10,26 @@ using UpgradeSystem;
 
 namespace ClickSystem
 {
-    public class ClickerPresenter
+    public class ClickerPresenter: IPresentor
     {
-        private readonly LevelUpgradesModel _levelUpgradesModel;
-        private readonly UpgradesMoneyModel _upgradesMoneyModel;
-        private readonly ClickerModel _clickerModel;
-        private readonly LevelModel _levelModel;
+        private readonly IUpgradesMoneyModel _upgradesMoneyModel;
+        private readonly IClickerModel _clickerModel;
         
         private readonly ClickerView _clikerView;
         
-        private readonly AudioClip _clickSound;
         private readonly Transform _popUpRoot;
         private readonly IPopUpFactory _popUpFactory;
 
         public Button ClickButton;
 
-        public ClickerPresenter(ClickerModel clickerModel, ClickerView clickerView, UpgradesMoneyModel upgradesMoneyModel, IPopUpFactory popUpFactory)
+        public ClickerPresenter(IClickerModel clickerModel, ClickerView clickerView, IUpgradesMoneyModel upgradesMoneyModel, IPopUpFactory popUpFactory)
         {
             _clikerView = clickerView;
             _clickerModel = clickerModel;
             _upgradesMoneyModel = upgradesMoneyModel;
             _popUpFactory = popUpFactory;
-            _clickSound = clickerView._clickSound;
             _popUpRoot = clickerView._popUpRoot;
+            
             Start();
         }
         
@@ -48,7 +45,6 @@ namespace ClickSystem
         
         private async void Click()
         {
-            PlaySFX.instance.PlayMusic(_clickSound);
             _clickerModel.AddMoney(_upgradesMoneyModel.ClickPrice);
         
             if (Input.touchCount > 0)
@@ -71,8 +67,11 @@ namespace ClickSystem
 
         private void UpdateUi() =>
             _clikerView.UpdateClickCount(_clickerModel.Money);
-
-        public void Disable() =>
+        
+        public void Disable()
+        {
+            Debug.Log("a");
             _clickerModel.OnValueChanged -= UpdateUi;
+        }
     }
 }

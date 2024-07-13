@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ClickSystem
 {
-    public class ClickerModel
+    public class ClickerModel : IClickerModel
     {
         private int _money;
 
@@ -18,6 +18,18 @@ namespace ClickSystem
             OnValueChanged?.Invoke();
         }
 
+        public bool TryRemoveMoney(int cout)
+        {
+            if (cout <= _money)
+            {
+                _money = Mathf.Clamp(_money - cout, 0, Int32.MaxValue);
+                OnValueChanged?.Invoke();
+                return true;
+            }
+
+            return false;
+        }
+        
         public void RemoveMoney(int cout)
         {
             _money = Mathf.Clamp(_money - cout, 0, Int32.MaxValue);

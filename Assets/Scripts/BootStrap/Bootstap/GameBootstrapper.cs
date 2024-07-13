@@ -15,7 +15,8 @@ namespace BootStrap.Bootstap
         private GameStateMachine _gameStateMachine;
 
         [Inject]
-        private void Inject(BootstrapState bootstrapState, LoadProgressState loadProgressState, LoadLevelState loadLevelState, ISaveLoadService saveLoadService, GameStateMachine gameStateMachine)
+        private void Inject(BootstrapState bootstrapState, LoadProgressState loadProgressState,
+            LoadLevelState loadLevelState, ISaveLoadService saveLoadService, GameStateMachine gameStateMachine)
         {
             _bootstrapState = bootstrapState;
             _loadProgressState = loadProgressState;

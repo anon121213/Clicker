@@ -8,10 +8,10 @@ namespace BootStrap.Data
 {
     public class SavesHandler : MonoBehaviour, ISavedProgress
     {
-        [Inject] private ClickerModel _clickerModel;
-        [Inject] private LevelModel _levelModel;
-        [Inject] private UpgradesMoneyModel _upgradesMoneyModel;
-        [Inject] private LevelUpgradesModel _levelUpgradesModel;
+        [Inject] private IClickerModel _clickerModel;
+        [Inject] private ILevelModel _levelModel;
+        [Inject] private IUpgradesMoneyModel _upgradesMoneyModel;
+        [Inject] private ILevelUpgradesModel _levelUpgradesModel;
         
         public void LoadProgress(PlayerProgress progress)
         {

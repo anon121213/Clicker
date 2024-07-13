@@ -505,6 +505,7 @@ GameObject:
   - component: {fileID: 8544878841542733143}
   - component: {fileID: 3159576835434853456}
   - component: {fileID: 1043443714681537146}
+  - component: {fileID: 4554745772340892665}
   m_Layer: 5
   m_Name: Hud
   m_TagString: Untagged
@@ -607,6 +608,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f5d0b1d08ef4f5687496262d003bac8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4554745772340892665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1403777758190314541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a17456f5f2b5c924cbaf1ad6552c6cd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ClickSystemRoot: {fileID: 3385232687432343870}
+  UpgradeSystemRoot: {fileID: 337767631645836552}
+  LevelSystemRoot: {fileID: 8464705744876048052}
 --- !u!1 &1477720224254829028
 GameObject:
   m_ObjectHideFlags: 0

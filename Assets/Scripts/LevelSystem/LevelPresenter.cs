@@ -1,17 +1,21 @@
-﻿using ClickSystem;
+﻿using BootStrap.Data;
+using ClickSystem;
+using UnityEngine;
 using UpgradeSystem;
 
 namespace LevelSystem
 {
-    public class LevelPresenter
+    public class LevelPresenter: IPresentor
     {
-        private LevelView _levelView;
-        private LevelModel _levelModel;
-        private UpgradesMoneyModel _upgradesMoneyModel;
-        private readonly LevelUpgradesModel _levelUpgradesModel;
+        private readonly IUpgradesMoneyModel _upgradesMoneyModel;
+        private readonly ILevelUpgradesModel _levelUpgradesModel;
+        private readonly ILevelModel _levelModel;
+        
+        private readonly LevelView _levelView;
+        
         private readonly ClickerPresenter _clickerPresenter;
 
-        public LevelPresenter(LevelView levelView, LevelModel levelModel, UpgradesMoneyModel upgradesMoneyModel, LevelUpgradesModel levelUpgradesModel, ClickerPresenter clickerPresenter)
+        public LevelPresenter(LevelView levelView, ILevelModel levelModel, IUpgradesMoneyModel upgradesMoneyModel, ILevelUpgradesModel levelUpgradesModel, ClickerPresenter clickerPresenter)
         {
             _levelView = levelView;
             _levelModel = levelModel;
@@ -32,16 +36,8 @@ namespace LevelSystem
 
         private void OnClick()
         {
-            if (_levelModel.CurrentXp + _upgradesMoneyModel.ClickPrice < _levelModel.ClicksForNewLvL)
-            {
-                _levelModel.AddXp(_levelUpgradesModel.ClickXpPrice);
-            }
-            else
-            {
-                _levelModel.AddLvL(_upgradesMoneyModel.ClickPrice);
-                _levelModel.AddClicksForNewLvl(_levelModel.ClicksForNewLvL);
-                _levelModel.RemoveCurrentClicks();
-            }
+            _levelModel.TryUpgradeLevel(_levelModel.CurrentXp, _upgradesMoneyModel.ClickPrice,
+                _levelModel.ClicksForNewLvL, _levelUpgradesModel.ClickXpPrice);
         }
 
         private void UpdateUi()
@@ -52,6 +48,7 @@ namespace LevelSystem
 
         public void Disable()
         {
+            Debug.Log("a");
             _levelModel.OnValueChanged -= UpdateUi;
         }
     }

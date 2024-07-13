@@ -24,10 +24,10 @@ namespace BootStrap.FSM.States
             _progressUsersService = progressUsersService;
         }
 
-        public void Enter(string name)
+        public async void Enter(string name)
         {
             _progressUsersService.Cleanup();
-            _sceneLoader.Load(name, OnLoaded);
+            await _sceneLoader.Load(name, OnLoaded);
         }
 
         private async void OnLoaded()
