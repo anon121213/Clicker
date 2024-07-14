@@ -4,7 +4,7 @@ using UnityEngine;
 using UpgradeSystem;
 using VContainer;
 
-namespace BootStrap.Data
+namespace BootStrap.Data.SavesServices
 {
     public class SavesHandler : MonoBehaviour, ISavedProgress
     {

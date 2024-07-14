@@ -570,6 +570,7 @@ MonoBehaviour:
   autoRun: 1
   autoInjectGameObjects:
   - {fileID: 1942295133}
+  _assets: {fileID: 11400000, guid: d90bef3aec97ff946b8f13d8e715045e, type: 2}
 --- !u!114 &1942295139
 MonoBehaviour:
   m_ObjectHideFlags: 0

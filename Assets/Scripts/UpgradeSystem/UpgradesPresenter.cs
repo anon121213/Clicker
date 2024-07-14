@@ -1,7 +1,9 @@
-﻿using BootStrap.Data;
-using ClickSystem;
+﻿using ClickSystem;
+using Hud;
 using LevelSystem;
 using UnityEngine;
+using UpgradeSystem.Services;
+using UpgradeSystem.Services.Xp;
 
 namespace UpgradeSystem
 {
@@ -11,12 +13,16 @@ namespace UpgradeSystem
         private readonly IClickerModel _clickerModel;
         private readonly ILevelUpgradesModel _levelUpgradesModel;
         private readonly ILevelModel _levelModel;
-        
+        private readonly IUpgradeClickPriceService _upgradeClickPriceService;
+        private readonly IUpgradeClickXpService _upgradeClickXpService;
+
         private readonly UpgradesView _upgradeView;
         private readonly ClickerView _clickerView;
 
-        public UpgradesPresenter(UpgradesView upgradesView, ClickerView clickerView, IUpgradesMoneyModel upgradesMoneyModel,
-            IClickerModel clickerModel, ILevelUpgradesModel levelUpgradesModel, ILevelModel levelModel)
+        public UpgradesPresenter(UpgradesView upgradesView, ClickerView clickerView,
+            IUpgradesMoneyModel upgradesMoneyModel, IClickerModel clickerModel,
+            ILevelUpgradesModel levelUpgradesModel, ILevelModel levelModel,
+            IUpgradeClickPriceService upgradeClickPriceService, IUpgradeClickXpService upgradeClickXpService)
         {
             _upgradeView = upgradesView;
             _clickerView = clickerView;
@@ -24,7 +30,9 @@ namespace UpgradeSystem
             _clickerModel = clickerModel;
             _levelUpgradesModel = levelUpgradesModel;
             _levelModel = levelModel;
-            
+            _upgradeClickPriceService = upgradeClickPriceService;
+            _upgradeClickXpService = upgradeClickXpService;
+
             Start();
         }
 
@@ -41,26 +49,12 @@ namespace UpgradeSystem
 
         private void UpgradeClickPrice()
         {
-            if (_upgradesMoneyModel.TryAddLvlForUpgradeClickPrice(_upgradesMoneyModel.LvlForUpgradeClickPrice, _levelModel.CurrentLvL, 1) 
-                && _clickerModel.TryRemoveMoney(_upgradesMoneyModel.PriceForUpgradeMoneyClick))
-            {
-                _upgradesMoneyModel.AddClickPrice(_upgradesMoneyModel.UpgradeClickPrice);
-                _upgradesMoneyModel.AddUpgradeClickPrice((int)Mathf.Round(_upgradesMoneyModel.UpgradeClickPrice * 1.5f));
-                
-                _upgradesMoneyModel.AddUpgradePriceForUpgradeMoneyClick(_upgradesMoneyModel.PriceForUpgradeMoneyClick);
-            }
+            _upgradeClickPriceService.TryUpgrade();
         }
 
         private void UpgradeClickXp()
         {
-            if (_levelUpgradesModel.TryAddLvlForUpgradeClickPrice(_levelUpgradesModel.LvlForUpgradeClickXpPrice, _levelModel.CurrentLvL, 1)
-                && _clickerModel.TryRemoveMoney(_levelUpgradesModel.PriceForUpgradeXpClick))
-            {
-                _levelUpgradesModel.AddClickXpPrice( _levelUpgradesModel.UpgradeClickXpPrice);
-                _levelUpgradesModel.AddUpgradeClickXpPrice((int)Mathf.Round( _levelUpgradesModel.UpgradeClickXpPrice * 1.5f));
-                
-                _levelUpgradesModel.AddPriceForUpgradeXpClick( _levelUpgradesModel.PriceForUpgradeXpClick); 
-            }
+            _upgradeClickXpService.TryUpgrade();
         }
 
         private void UpdateUi()

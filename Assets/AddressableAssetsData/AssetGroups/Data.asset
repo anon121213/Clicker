@@ -10,20 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
-  m_Name: Scenes
+  m_Name: Data
   m_EditorClassIdentifier: 
-  m_GroupName: Scenes
+  m_GroupName: Data
   m_Data:
     m_SerializedData: []
-  m_GUID: cd9260ee0b42d7c41b5d92ca7746a685
+  m_GUID: 8d99668520ed8e34cb1fb11e75b1534e
   m_SerializeEntries:
-  - m_GUID: 80f6ad858f5210543b2fe431b939fa02
-    m_Address: Assets/Scenes/Bootstrap.unity
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 2cda990e2423bbf4892e6590ba056729
-    m_Address: Assets/Scenes/MainLvL.unity
+  - m_GUID: d90bef3aec97ff946b8f13d8e715045e
+    m_Address: Assets/Data/AssetsReferences.asset
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -31,5 +26,5 @@ MonoBehaviour:
   m_Settings: {fileID: 11400000, guid: a067ebd2620a9214dafdb98dbd0a294e, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: 556ce92e6700e654f98a6d5d09eaed77, type: 2}
-    - {fileID: 11400000, guid: 4769d8ed3a945ba4da3dde4c28d5d784, type: 2}
+    - {fileID: 11400000, guid: ffd13725150805a4192899c14d25d0f9, type: 2}
+    - {fileID: 11400000, guid: 2e0a510219813ed48acc33c49ba6a45e, type: 2}

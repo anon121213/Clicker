@@ -11,7 +11,7 @@ namespace LevelSystem
         void AddLvL(int value);
         void AddXp(int value);
         void AddClicksForNewLvl(int value);
-        bool TryUpgradeLevel(int currentXp, int clickPrice, int clicksForNewLvl, int ClickXpPrice);
+        void TryUpgradeLevel(int currentXp, int clickPrice, int clicksForNewLvl, int ClickXpPrice);
         void RemoveCurrentClicks();
     }
 }

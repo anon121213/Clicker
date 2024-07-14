@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace BootStrap.Data
+namespace BootStrap.Data.Esxtentions
 {
     public static class DataExtentions
     {

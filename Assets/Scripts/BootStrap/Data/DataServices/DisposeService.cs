@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using Hud;
 
-namespace BootStrap.Data
+namespace BootStrap.Data.DataServices
 {
     public class DisposeService: IDisposable, IDisposeService
     {

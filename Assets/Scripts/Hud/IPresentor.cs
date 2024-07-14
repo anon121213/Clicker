@@ -1,4 +1,4 @@
-﻿namespace BootStrap.Data
+﻿namespace Hud
 {
     public interface IPresentor
     {

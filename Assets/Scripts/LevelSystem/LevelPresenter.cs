@@ -1,6 +1,5 @@
-﻿using BootStrap.Data;
-using ClickSystem;
-using UnityEngine;
+﻿using ClickSystem;
+using Hud;
 using UpgradeSystem;
 
 namespace LevelSystem
@@ -48,7 +47,6 @@ namespace LevelSystem
 
         public void Disable()
         {
-            Debug.Log("a");
             _levelModel.OnValueChanged -= UpdateUi;
         }
     }

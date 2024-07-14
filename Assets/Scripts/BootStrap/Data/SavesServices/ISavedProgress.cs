@@ -1,4 +1,4 @@
-﻿namespace BootStrap.Data
+﻿namespace BootStrap.Data.SavesServices
 {
     public interface ISavedProgressReader
     {

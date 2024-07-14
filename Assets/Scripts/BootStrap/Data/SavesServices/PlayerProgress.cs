@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BootStrap.Data
+namespace BootStrap.Data.SavesServices
 {
     [Serializable]
     public class PlayerProgress

@@ -1,14 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using BootStrap.Bootstap;
-using BootStrap.Data;
-using BootStrap.Data.DataService;
+using BootStrap.Data.DataServices;
+using BootStrap.Data.SavesServices;
 using BootStrap.GameFabric;
 using Cysharp.Threading.Tasks;
+using UnityEngine.AddressableAssets;
 
 namespace BootStrap.FSM.States
 {
-    public class LoadLevelState: IPayloadedState<string>
+    public class LoadLevelState: IPayloadedState<AssetReference>
     {
         private readonly SceneLoader _sceneLoader;
         private readonly IGameFactory _gameFactory;
@@ -24,10 +25,10 @@ namespace BootStrap.FSM.States
             _progressUsersService = progressUsersService;
         }
 
-        public async void Enter(string name)
+        public async void Enter(AssetReference nextScene)
         {
             _progressUsersService.Cleanup();
-            await _sceneLoader.Load(name, OnLoaded);
+            await _sceneLoader.Load(nextScene, OnLoaded);
         }
 
         private async void OnLoaded()

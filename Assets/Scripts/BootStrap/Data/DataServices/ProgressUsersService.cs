@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
+using BootStrap.Data.SavesServices;
 using UnityEngine;
 
-namespace BootStrap.Data.DataService
+namespace BootStrap.Data.DataServices
 {
     public class ProgressUsersService : IProgressUsersService
     {

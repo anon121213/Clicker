@@ -1,4 +1,6 @@
-﻿namespace BootStrap.Data
+﻿using Hud;
+
+namespace BootStrap.Data.DataServices
 {
     public interface IDisposeService
     {

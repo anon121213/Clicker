@@ -1,15 +1,16 @@
-﻿using System;
-using BootStrap.AssetsLoader;
-using BootStrap.AssetsLoader.Services;
-using BootStrap.Data;
-using BootStrap.Data.DataService;
+﻿using BootStrap.AssetsLoader.Services;
+using BootStrap.Data.DataServices;
+using BootStrap.Data.References;
 using ClickSystem;
 using Cysharp.Threading.Tasks;
 using Hud;
 using LevelSystem;
 using PopUp.Factory;
+using PopUp.Main;
 using UnityEngine;
 using UpgradeSystem;
+using UpgradeSystem.Services;
+using UpgradeSystem.Services.Xp;
 using VContainer;
 using VContainer.Unity;
 
@@ -17,7 +18,6 @@ namespace BootStrap.GameFabric
 {
     public class GameFactory : IGameFactory
     {
-        private readonly ILoadAssetService _loadAssetService;
         private readonly IProgressUsersService _progressUsersService;
         private readonly IObjectResolver _resolver;
         
@@ -34,34 +34,41 @@ namespace BootStrap.GameFabric
         private UpgradesPresenter _upgradesPresenter;
         private LevelPresenter _levelPresentor;
         
-        private IPopUpFactory _popUpFactory;
         private GameObject _hud;
         private IDisposeService _disposebleService;
 
-        [Inject]
-        private void Inject(IClickerModel clickerModel, IUpgradesMoneyModel upgradesMoneyModel,
-            IPopUpFactory popUpFactory, ILevelModel levelModel, ILevelUpgradesModel levelUpgradesModel, IDisposeService disposeService)
+        private AssetsReferences _assets;
+        private readonly IClickService _clickService;
+        private readonly IPopUpCreateService _popUpCreateService;
+        private readonly IUpgradeClickPriceService _upgradeClickPriceService;
+        private IUpgradeClickXpService _upgradeClickXpService;
+
+        public GameFactory(ILoadAssetService loadAssetService, IProgressUsersService progressUsersService,
+            IObjectResolver resolver, AssetsReferences assets, IClickService clickService,
+            IPopUpCreateService popUpCreateService, IUpgradeClickPriceService upgradeClickPriceService,
+            IClickerModel clickerModel, IUpgradesMoneyModel upgradesMoneyModel,
+            ILevelModel levelModel, ILevelUpgradesModel levelUpgradesModel, 
+            IDisposeService disposeService, IUpgradeClickXpService upgradeClickXpService)
         {
             _clickerModel = clickerModel;
             _upgradesMoneyModel = upgradesMoneyModel;
-            _popUpFactory = popUpFactory;
             _levelModel = levelModel;
             _levelUpgradesModel = levelUpgradesModel;
             _disposebleService = disposeService;
-        }
-
-        public GameFactory(ILoadAssetService loadAssetService, IProgressUsersService progressUsersService, IObjectResolver resolver)
-        {
-            _loadAssetService = loadAssetService;
+            _upgradeClickXpService = upgradeClickXpService;
             _progressUsersService = progressUsersService;
             _resolver = resolver;
+            _assets = assets;
+            _clickService = clickService;
+            _popUpCreateService = popUpCreateService;
+            _upgradeClickPriceService = upgradeClickPriceService;
         }
 
         public async UniTask<GameObject> CreateHud()
         {
-            GameObject hud = await _loadAssetService.GetAsset<GameObject>(PathConstants.HudPath);
-           
-            _hud = _resolver.Instantiate(hud);
+            GameObject prefab = await _assets.Hud.LoadAssetAsync<GameObject>();
+            
+            _hud = _resolver.Instantiate(prefab);
             
             _progressUsersService.RegisterProgressWatchers(_hud);
             
@@ -70,7 +77,7 @@ namespace BootStrap.GameFabric
 
         public async UniTask<GameObject> CreateClickSystem()
         {
-            GameObject clickSystem = await _loadAssetService.GetAsset<GameObject>(PathConstants.ClickSystemPath);
+            GameObject clickSystem = await _assets.ClickSystem.LoadAssetAsync<GameObject>();
             
             GameObject instantiatedClickSystem = _resolver.Instantiate(clickSystem, _hud.GetComponent<HudView>().ClickSystemRoot);
 
@@ -78,7 +85,7 @@ namespace BootStrap.GameFabric
 
             _clickerView = instantiatedClickSystem.GetComponent<ClickerView>();
 
-            _clikerPresentor = new ClickerPresenter(_clickerModel, _clickerView, _upgradesMoneyModel, _popUpFactory);
+            _clikerPresentor = new ClickerPresenter(_clickerModel, _clickerView, _upgradesMoneyModel, _clickService, _popUpCreateService);
             
             _disposebleService.AddDisposableObject(_clikerPresentor);
             
@@ -87,7 +94,7 @@ namespace BootStrap.GameFabric
         
         public async UniTask<GameObject> CreateUpgradeSystem()
         {
-            GameObject upgradeSystem = await _loadAssetService.GetAsset<GameObject>(PathConstants.UpgradeSystemPath);
+            GameObject upgradeSystem = await _assets.UpgradeSystem.LoadAssetAsync<GameObject>();
             
             GameObject instantiatedUpgradeSystem = _resolver.Instantiate(upgradeSystem, _hud.GetComponent<HudView>().UpgradeSystemRoot);
 
@@ -95,8 +102,8 @@ namespace BootStrap.GameFabric
 
             _upgradesView = instantiatedUpgradeSystem.GetComponent<UpgradesView>();
 
-            _upgradesPresenter = new UpgradesPresenter(_upgradesView, _clickerView, _upgradesMoneyModel, _clickerModel, _levelUpgradesModel,
-                _levelModel);
+            _upgradesPresenter = new UpgradesPresenter(_upgradesView, _clickerView, _upgradesMoneyModel,
+                _clickerModel, _levelUpgradesModel, _levelModel, _upgradeClickPriceService, _upgradeClickXpService);
             
             _disposebleService.AddDisposableObject(_upgradesPresenter);
             
@@ -105,8 +112,8 @@ namespace BootStrap.GameFabric
         
         public async UniTask<GameObject> CreateLevelSystem()
         {
-            GameObject levelSystem = await _loadAssetService.GetAsset<GameObject>(PathConstants.LevelSystemPath);
-           
+            GameObject levelSystem = await _assets.LevelSystem.LoadAssetAsync<GameObject>();
+            
             GameObject instantiatedLevelSystem = _resolver.Instantiate(levelSystem, _hud.GetComponent<HudView>().LevelSystemRoot);
 
             _progressUsersService.RegisterProgressWatchers(instantiatedLevelSystem);

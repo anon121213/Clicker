@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 776d5b9c428d42ef9dcc6efa818f80b0, type: 3}
+  m_Name: AssetsReferences
+  m_EditorClassIdentifier: 
+  MainScene:
+    m_AssetGUID: 2cda990e2423bbf4892e6590ba056729
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  Hud:
+    m_AssetGUID: b7daa50a160f8724cb78f5601099d3da
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  ClickSystem:
+    m_AssetGUID: 469c6c7122719dc4387e75cdc046a5c4
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 1
+  UpgradeSystem:
+    m_AssetGUID: 655e580a40b35ab40b5846876a418c70
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  LevelSystem:
+    m_AssetGUID: a0deddf0d25e6a14982a723e7e56b0d4
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  PopUp:
+    m_AssetGUID: 9ff68883c9b4ebd49929a8a173aa129f
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0

@@ -38,17 +38,15 @@ namespace LevelSystem
                OnValueChanged?.Invoke();
           }
 
-          public bool TryUpgradeLevel(int currentXp, int clickPrice, int clicksForNewLvl, int ClickXpPrice)
+          public void TryUpgradeLevel(int currentXp, int clickPrice, int clicksForNewLvl, int clickXpPrice)
           {
                if (currentXp + clickPrice >= clicksForNewLvl)
                {
                     RemoveCurrentClicks();
                     AddLvL(clickPrice);
                     AddClicksForNewLvl(clicksForNewLvl);
-                    return true;
                }
-               AddXp(ClickXpPrice);
-               return false;
+               AddXp(clickXpPrice);
           }
           
           public void RemoveCurrentClicks()
