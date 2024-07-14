@@ -2,6 +2,7 @@
 using LevelSystem;
 using UnityEngine;
 using UpgradeSystem;
+using UpgradeSystem.Models;
 using VContainer;
 
 namespace BootStrap.Data.SavesServices

@@ -9,6 +9,7 @@ using PopUp.Factory;
 using PopUp.Main;
 using UnityEngine;
 using UpgradeSystem;
+using UpgradeSystem.Models;
 using UpgradeSystem.Services;
 using UpgradeSystem.Services.Xp;
 using VContainer;

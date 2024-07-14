@@ -1,6 +1,7 @@
 ﻿using ClickSystem;
 using Hud;
 using UpgradeSystem;
+using UpgradeSystem.Models;
 
 namespace LevelSystem
 {

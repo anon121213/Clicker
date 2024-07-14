@@ -1,4 +1,5 @@
 ﻿using UpgradeSystem;
+using UpgradeSystem.Models;
 
 namespace ClickSystem
 {

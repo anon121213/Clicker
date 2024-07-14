@@ -3,6 +3,7 @@ using PopUp.Main;
 using UnityEngine;
 using UnityEngine.UI;
 using UpgradeSystem;
+using UpgradeSystem.Models;
 
 namespace ClickSystem
 {

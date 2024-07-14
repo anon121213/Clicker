@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace UpgradeSystem
+namespace UpgradeSystem.Models
 {
     public class LevelUpgradesModel : ILevelUpgradesModel
     {

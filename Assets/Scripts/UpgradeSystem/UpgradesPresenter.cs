@@ -2,6 +2,7 @@
 using Hud;
 using LevelSystem;
 using UnityEngine;
+using UpgradeSystem.Models;
 using UpgradeSystem.Services;
 using UpgradeSystem.Services.Xp;
 
@@ -12,7 +13,6 @@ namespace UpgradeSystem
         private readonly IUpgradesMoneyModel _upgradesMoneyModel;
         private readonly IClickerModel _clickerModel;
         private readonly ILevelUpgradesModel _levelUpgradesModel;
-        private readonly ILevelModel _levelModel;
         private readonly IUpgradeClickPriceService _upgradeClickPriceService;
         private readonly IUpgradeClickXpService _upgradeClickXpService;
 
@@ -29,7 +29,6 @@ namespace UpgradeSystem
             _upgradesMoneyModel = upgradesMoneyModel;
             _clickerModel = clickerModel;
             _levelUpgradesModel = levelUpgradesModel;
-            _levelModel = levelModel;
             _upgradeClickPriceService = upgradeClickPriceService;
             _upgradeClickXpService = upgradeClickXpService;
 

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace UpgradeSystem
+namespace UpgradeSystem.Models
 {
     public interface ILevelUpgradesModel
     {

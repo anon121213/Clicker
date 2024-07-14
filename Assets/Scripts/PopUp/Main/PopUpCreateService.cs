@@ -3,6 +3,7 @@ using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
 using UpgradeSystem;
+using UpgradeSystem.Models;
 
 namespace PopUp.Main
 {

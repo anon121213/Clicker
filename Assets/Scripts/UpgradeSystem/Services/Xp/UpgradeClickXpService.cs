@@ -1,6 +1,7 @@
 ﻿using ClickSystem;
 using LevelSystem;
 using UnityEngine;
+using UpgradeSystem.Models;
 
 namespace UpgradeSystem.Services.Xp
 {

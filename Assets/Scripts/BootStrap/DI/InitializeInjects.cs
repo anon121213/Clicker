@@ -12,6 +12,7 @@ using PopUp.Main;
 using PopUp.Pool;
 using UnityEngine;
 using UpgradeSystem;
+using UpgradeSystem.Models;
 using UpgradeSystem.Services;
 using UpgradeSystem.Services.Xp;
 using VContainer;
