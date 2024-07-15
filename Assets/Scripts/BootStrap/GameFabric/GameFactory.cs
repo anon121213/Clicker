@@ -1,6 +1,7 @@
 ﻿using BootStrap.AssetsLoader.Services;
 using BootStrap.Data.DataServices;
-using BootStrap.Data.References;
+using BootStrap.Data.SavesServices;
+using BootStrap.Data.StaticData;
 using ClickSystem;
 using Cysharp.Threading.Tasks;
 using Hud;
@@ -11,6 +12,7 @@ using UnityEngine;
 using UpgradeSystem;
 using UpgradeSystem.Models;
 using UpgradeSystem.Services;
+using UpgradeSystem.Services.Money;
 using UpgradeSystem.Services.Xp;
 using VContainer;
 using VContainer.Unity;
@@ -45,7 +47,7 @@ namespace BootStrap.GameFabric
         private IUpgradeClickXpService _upgradeClickXpService;
 
         public GameFactory(ILoadAssetService loadAssetService, IProgressUsersService progressUsersService,
-            IObjectResolver resolver, AssetsReferences assets, IClickService clickService,
+            IObjectResolver resolver, IStaticDataProvider dataProvider, IClickService clickService,
             IPopUpCreateService popUpCreateService, IUpgradeClickPriceService upgradeClickPriceService,
             IClickerModel clickerModel, IUpgradesMoneyModel upgradesMoneyModel,
             ILevelModel levelModel, ILevelUpgradesModel levelUpgradesModel, 
@@ -59,7 +61,7 @@ namespace BootStrap.GameFabric
             _upgradeClickXpService = upgradeClickXpService;
             _progressUsersService = progressUsersService;
             _resolver = resolver;
-            _assets = assets;
+            _assets = dataProvider.AssetsReferences;
             _clickService = clickService;
             _popUpCreateService = popUpCreateService;
             _upgradeClickPriceService = upgradeClickPriceService;

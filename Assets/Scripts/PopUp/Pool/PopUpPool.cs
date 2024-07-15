@@ -1,4 +1,5 @@
-﻿using BootStrap.Data.References;
+﻿using BootStrap.Data.SavesServices;
+using BootStrap.Data.StaticData;
 using Cysharp.Threading.Tasks;
 using PopUp.Main;
 using UnityEngine;
@@ -8,14 +9,14 @@ namespace PopUp.Pool
 {
     public class PopUpPool : ObjectPool<PopUpCountChanger>
     {
-        [Inject] private AssetsReferences _assets;
+        [Inject] private IStaticDataProvider _dataProvider;
 
         private GameObject _popUp;
         
         public async UniTask Warmup()
         {
             if (!_popUp)
-                _popUp = await _assets.PopUp.LoadAssetAsync<GameObject>();
+                _popUp = await _dataProvider.AssetsReferences.PopUp.LoadAssetAsync<GameObject>();
             
             Prefab = _popUp.GetComponent<PopUpCountChanger>();
         }

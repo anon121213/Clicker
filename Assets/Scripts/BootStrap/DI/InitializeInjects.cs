@@ -1,7 +1,7 @@
 ﻿using BootStrap.AssetsLoader.Services;
 using BootStrap.Bootstap;
 using BootStrap.Data.DataServices;
-using BootStrap.Data.References;
+using BootStrap.Data.StaticData;
 using BootStrap.FSM;
 using BootStrap.FSM.States;
 using BootStrap.GameFabric;
@@ -11,9 +11,8 @@ using PopUp.Factory;
 using PopUp.Main;
 using PopUp.Pool;
 using UnityEngine;
-using UpgradeSystem;
 using UpgradeSystem.Models;
-using UpgradeSystem.Services;
+using UpgradeSystem.Services.Money;
 using UpgradeSystem.Services.Xp;
 using VContainer;
 using VContainer.Unity;
@@ -22,7 +21,7 @@ namespace BootStrap.DI
 {
     public class InitializeInjects : LifetimeScope
     {
-        [SerializeField] private AssetsReferences _assets;
+        [SerializeField] private AllData _allData;
         
         protected override void Configure(IContainerBuilder builder)
         {
@@ -34,7 +33,7 @@ namespace BootStrap.DI
 
         private void RegisterServices(IContainerBuilder builder)
         {
-            builder.Register<IGameFactory, GameFactory>(Lifetime.Singleton).WithParameter(_assets);
+            builder.Register<IGameFactory, GameFactory>(Lifetime.Singleton);
             
             builder.Register<ILoadAssetService, LoadAssetServiceService>(Lifetime.Singleton);
 
@@ -53,6 +52,10 @@ namespace BootStrap.DI
             builder.Register<IUpgradeClickPriceService, UpgradeClickPriceService>(Lifetime.Singleton);
 
             builder.Register<IUpgradeClickXpService, UpgradeClickXpService>(Lifetime.Singleton);
+
+            builder.Register<IStaticDataProvider, StaticDataProvider>(Lifetime.Singleton).WithParameter(_allData);
+
+            builder.Register<ILoadDefaultProgress, LoadDefaultProgress>(Lifetime.Singleton);
         }
 
         private void RegisterStates(IContainerBuilder builder)
@@ -65,7 +68,7 @@ namespace BootStrap.DI
 
             builder.Register<LoadLevelState>(Lifetime.Singleton);
 
-            builder.Register<LoadProgressState>(Lifetime.Singleton).WithParameter(_assets);
+            builder.Register<LoadProgressState>(Lifetime.Singleton);
         }
 
         private void RegisterModels(IContainerBuilder builder)
@@ -81,7 +84,7 @@ namespace BootStrap.DI
 
         private void RegisterPopUp(IContainerBuilder builder)
         {
-            builder.Register<PopUpPool>(Lifetime.Singleton).WithParameter(_assets);
+            builder.Register<PopUpPool>(Lifetime.Singleton);
             
             builder.Register<IPopUpFactory, PopUpFactory>(Lifetime.Singleton);
         }

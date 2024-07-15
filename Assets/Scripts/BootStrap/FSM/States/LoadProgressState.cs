@@ -1,7 +1,6 @@
 ﻿using BootStrap.AssetsLoader.Services;
 using BootStrap.Data.DataServices;
-using BootStrap.Data.References;
-using BootStrap.Data.SavesServices;
+using BootStrap.Data.StaticData;
 using UnityEngine.AddressableAssets;
 using VContainer;
 
@@ -14,16 +13,18 @@ namespace BootStrap.FSM.States
         private readonly GameStateMachine _gameStateMachine;
         private readonly IPersistentProgressService _progressService;
         private readonly ISaveLoadService _saveLoadService;
-        
+        private readonly ILoadDefaultProgress _loadDefaultProgress;
+
         private AssetsReferences _assets;
 
         public LoadProgressState(GameStateMachine gameStateMachine, IPersistentProgressService progressService,
-            ISaveLoadService saveLoadService, AssetsReferences assets)
+            ISaveLoadService saveLoadService, IStaticDataProvider dataProvider, ILoadDefaultProgress loadDefaultProgress)
         {
             _gameStateMachine = gameStateMachine;
             _progressService = progressService;
             _saveLoadService = saveLoadService;
-            _assets = assets;
+            _loadDefaultProgress = loadDefaultProgress;
+            _assets = dataProvider.AssetsReferences;
         }
 
         public void Enter()
@@ -42,7 +43,11 @@ namespace BootStrap.FSM.States
                 _saveLoadService.LoadProgress() ??
                 NewProgress();
 
-        private PlayerProgress NewProgress() => 
-            new();
+        private PlayerProgress NewProgress()
+        {
+            PlayerProgress progress = new();
+            _loadDefaultProgress.SetDefaultSettings(progress);
+            return progress;
+        }
     }
 }

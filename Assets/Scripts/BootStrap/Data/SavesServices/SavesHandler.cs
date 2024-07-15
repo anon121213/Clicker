@@ -1,7 +1,7 @@
-﻿using ClickSystem;
+﻿using BootStrap.Data.StaticData;
+using ClickSystem;
 using LevelSystem;
 using UnityEngine;
-using UpgradeSystem;
 using UpgradeSystem.Models;
 using VContainer;
 

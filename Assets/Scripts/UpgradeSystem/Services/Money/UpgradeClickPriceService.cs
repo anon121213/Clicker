@@ -3,7 +3,7 @@ using LevelSystem;
 using UnityEngine;
 using UpgradeSystem.Models;
 
-namespace UpgradeSystem.Services
+namespace UpgradeSystem.Services.Money
 {
     public class UpgradeClickPriceService : IUpgradeClickPriceService
     {

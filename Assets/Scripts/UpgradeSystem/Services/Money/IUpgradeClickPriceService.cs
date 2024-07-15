@@ -1,4 +1,4 @@
-﻿namespace UpgradeSystem.Services
+﻿namespace UpgradeSystem.Services.Money
 {
     public interface IUpgradeClickPriceService
     {

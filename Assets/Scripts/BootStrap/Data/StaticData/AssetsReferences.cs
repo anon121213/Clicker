@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-namespace BootStrap.Data.References
+namespace BootStrap.Data.StaticData
 {
     
     [CreateAssetMenu(fileName = "AssetsReferences", menuName = "ScriptableObject/AssetsReferences")]

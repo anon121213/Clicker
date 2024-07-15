@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using BootStrap.Bootstap;
 using BootStrap.Data.DataServices;
 using BootStrap.Data.SavesServices;
+using BootStrap.Data.StaticData;
 using BootStrap.GameFabric;
 using Cysharp.Threading.Tasks;
 using UnityEngine.AddressableAssets;

@@ -1,5 +1,6 @@
 ﻿using BootStrap.Data.Esxtentions;
 using BootStrap.Data.SavesServices;
+using BootStrap.Data.StaticData;
 using UnityEngine;
 
 namespace BootStrap.Data.DataServices
@@ -8,7 +9,7 @@ namespace BootStrap.Data.DataServices
     {
         private readonly IPersistentProgressService _progressService;
         private readonly IProgressUsersService _progressUsersService;
-        private const string ProgresKey = "Progres";
+        private const string ProgressKey = "Progress";
         
         public SaveLoadService(IPersistentProgressService progressService, IProgressUsersService progressUsersService)
         {
@@ -21,11 +22,10 @@ namespace BootStrap.Data.DataServices
             foreach (ISavedProgress progressWriter in _progressUsersService.ProgressWriters)
                 progressWriter.UpdateProgress(_progressService.Progress);
             
-            PlayerPrefs.SetString(ProgresKey, _progressService.Progress.ToJson());
+            PlayerPrefs.SetString(ProgressKey, _progressService.Progress.ToJson());
         }
 
         public PlayerProgress LoadProgress() =>
-            PlayerPrefs.GetString(ProgresKey)?
-                .ToDesserializeble<PlayerProgress>();
+            PlayerPrefs.GetString(ProgressKey)?.ToDesserializeble<PlayerProgress>();
     }
 }
