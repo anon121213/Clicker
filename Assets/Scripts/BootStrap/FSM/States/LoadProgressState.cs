@@ -1,6 +1,7 @@
 ﻿using BootStrap.AssetsLoader.Services;
 using BootStrap.Data.DataServices;
 using BootStrap.Data.StaticData;
+using Cysharp.Threading.Tasks;
 using UnityEngine.AddressableAssets;
 using VContainer;
 
@@ -38,12 +39,12 @@ namespace BootStrap.FSM.States
         {
         }
 
-        private void LoadProgressOrInitNew() =>
-            _progressService.Progress =
-                _saveLoadService.LoadProgress() ??
-                NewProgress();
+        private async void LoadProgressOrInitNew()
+        {
+             _progressService.Progress = _saveLoadService.LoadProgress() ?? await NewProgress();
+        }
 
-        private PlayerProgress NewProgress()
+        private async UniTask<PlayerProgress>  NewProgress()
         {
             PlayerProgress progress = new();
             _loadDefaultProgress.SetDefaultSettings(progress);
