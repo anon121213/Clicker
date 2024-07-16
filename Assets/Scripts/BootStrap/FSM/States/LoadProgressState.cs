@@ -39,10 +39,10 @@ namespace BootStrap.FSM.States
         {
         }
 
-        private async void LoadProgressOrInitNew()
-        {
-             _progressService.Progress = _saveLoadService.LoadProgress() ?? await NewProgress();
-        }
+        private async void LoadProgressOrInitNew() =>
+            _progressService.Progress = 
+                _saveLoadService.LoadProgress() 
+                ?? await NewProgress();
 
         private async UniTask<PlayerProgress>  NewProgress()
         {

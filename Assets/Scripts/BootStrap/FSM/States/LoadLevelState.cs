@@ -6,7 +6,9 @@ using BootStrap.Data.SavesServices;
 using BootStrap.Data.StaticData;
 using BootStrap.GameFabric;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 using UnityEngine.AddressableAssets;
+using UnityEngine.SceneManagement;
 
 namespace BootStrap.FSM.States
 {
@@ -17,6 +19,8 @@ namespace BootStrap.FSM.States
         private readonly IPersistentProgressService _progressService;
         private readonly IProgressUsersService _progressUsersService;
         private readonly PlayerProgress _progress;
+        
+        private GameObject _hud;
 
         public LoadLevelState(SceneLoader sceneLoader, IGameFactory gameFactory, IPersistentProgressService progressService, IProgressUsersService progressUsersService)
         {
@@ -34,13 +38,14 @@ namespace BootStrap.FSM.States
 
         private async void OnLoaded()
         {
-            await CreateObjects();
+            _hud = await CreateObjects();
             InformProgressRiders();
+            SceneManager.MoveGameObjectToScene(_hud, SceneManager.GetActiveScene());
         }
 
-        private async Task CreateObjects()
+        private async UniTask<GameObject> CreateObjects()
         {
-            await _gameFactory.CreateHud();
+            GameObject hud = await _gameFactory.CreateHud();
             await _gameFactory.CreateClickSystem();
             
             List<UniTask> tasks = new List<UniTask>
@@ -50,6 +55,7 @@ namespace BootStrap.FSM.States
             };
 
             await UniTask.WhenAll(tasks);
+            return hud;
         }
 
         private void InformProgressRiders()

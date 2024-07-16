@@ -1,5 +1,6 @@
 ﻿using ClickSystem;
 using Hud;
+using UnityEngine;
 using UpgradeSystem;
 using UpgradeSystem.Models;
 
@@ -22,7 +23,6 @@ namespace LevelSystem
             _upgradesMoneyModel = upgradesMoneyModel;
             _levelUpgradesModel = levelUpgradesModel;
             _clickerPresenter = clickerPresenter;
-
             Start();
         }
 
@@ -38,6 +38,7 @@ namespace LevelSystem
         {
             _levelModel.TryUpgradeLevel(_levelModel.CurrentXp, _upgradesMoneyModel.ClickPrice,
                 _levelModel.ClicksForNewLvL, _levelUpgradesModel.ClickXpPrice);
+
         }
 
         private void UpdateUi()

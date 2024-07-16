@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bae1d1b27d2b42ffafd880bf5d4c10db, type: 3}
   m_Name: PlayerSettings
   m_EditorClassIdentifier: 
-  _money: 100
+  _money: 0
   _currentLvl: 1
   _clicksForNewLvl: 100
   _currentXp: 0

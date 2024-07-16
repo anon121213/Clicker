@@ -35,7 +35,6 @@ namespace BootStrap.Data.SavesServices
         public void UpdateProgress(PlayerProgress progress)
         {
             progress.Money = _clickerModel.Money;
-            
             progress.CurrentLvl = _levelModel.CurrentLvL;
             progress.ClicksForNewLvl = _levelModel.ClicksForNewLvL;
             progress.CurrentXp = _levelModel.CurrentXp;
