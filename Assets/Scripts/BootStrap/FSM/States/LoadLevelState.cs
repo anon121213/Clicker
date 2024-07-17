@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Threading.Tasks;
 using BootStrap.Bootstap;
 using BootStrap.Data.DataServices;
 using BootStrap.Data.SavesServices;
@@ -8,7 +7,6 @@ using BootStrap.GameFabric;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
-using UnityEngine.SceneManagement;
 
 namespace BootStrap.FSM.States
 {
@@ -19,10 +17,11 @@ namespace BootStrap.FSM.States
         private readonly IPersistentProgressService _progressService;
         private readonly IProgressUsersService _progressUsersService;
         private readonly PlayerProgress _progress;
-        
-        private GameObject _hud;
 
-        public LoadLevelState(SceneLoader sceneLoader, IGameFactory gameFactory, IPersistentProgressService progressService, IProgressUsersService progressUsersService)
+        public LoadLevelState(SceneLoader sceneLoader,
+            IGameFactory gameFactory,
+            IPersistentProgressService progressService,
+            IProgressUsersService progressUsersService)
         {
             _sceneLoader = sceneLoader;
             _gameFactory = gameFactory;
@@ -38,14 +37,13 @@ namespace BootStrap.FSM.States
 
         private async void OnLoaded()
         {
-            _hud = await CreateObjects();
+            await CreateObjects();
             InformProgressRiders();
-            SceneManager.MoveGameObjectToScene(_hud, SceneManager.GetActiveScene());
         }
 
-        private async UniTask<GameObject> CreateObjects()
+        private async UniTask CreateObjects()
         {
-            GameObject hud = await _gameFactory.CreateHud();
+            await _gameFactory.CreateHud();
             await _gameFactory.CreateClickSystem();
             
             List<UniTask> tasks = new List<UniTask>
@@ -55,7 +53,6 @@ namespace BootStrap.FSM.States
             };
 
             await UniTask.WhenAll(tasks);
-            return hud;
         }
 
         private void InformProgressRiders()
@@ -64,8 +61,6 @@ namespace BootStrap.FSM.States
                 progressReader.LoadProgress(_progressService.Progress);
         }
 
-        public void Exit()
-        {
-        }
+        public void Exit() { }
     }
 }

@@ -19,10 +19,8 @@ namespace PopUp.Animation
             _text = GetComponent<TextMeshProUGUI>();
         }
 
-        private void Start()
-        {
+        private void Start() =>
             _text.DOFade(0, duration);
-        }
 
         private void Update()
         {

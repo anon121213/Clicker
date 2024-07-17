@@ -12,7 +12,7 @@ namespace PopUp.Main
         [SerializeField] private float _timer = 1.5f;
         
         private TextMeshProUGUI _textMeshProUGUI;
-        private CancellationTokenSource _cts = new CancellationTokenSource();
+        private readonly CancellationTokenSource _cts = new CancellationTokenSource();
 
         public event Action<PopUpCountChanger> OnDisabled;
     
@@ -23,10 +23,8 @@ namespace PopUp.Main
             StartTimer().AttachExternalCancellation(_cts.Token);
         }
 
-        private void ChangeCount(int count)
-        {
+        private void ChangeCount(int count) =>
             _textMeshProUGUI.text = $"+{count}";
-        }
 
         private async UniTask StartTimer()
         {
@@ -34,9 +32,7 @@ namespace PopUp.Main
             OnDisabled?.Invoke(this);
         }
 
-        private void OnDestroy()
-        {
+        private void OnDestroy() =>
             _cts?.Dispose();
-        }
     }
 }

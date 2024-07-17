@@ -1,9 +1,9 @@
-﻿using Hud;
+﻿using System;
 
 namespace BootStrap.Data.DataServices
 {
     public interface IDisposeService
     {
-        void AddDisposableObject(IPresentor presentor);
+        void AddDisposableObject(IDisposable presentor);
     }
 }

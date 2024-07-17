@@ -1,15 +1,12 @@
-﻿using ClickSystem;
-using Hud;
-using LevelSystem;
-using UnityEngine;
+﻿using System;
+using ClickSystem;
 using UpgradeSystem.Models;
-using UpgradeSystem.Services;
 using UpgradeSystem.Services.Money;
 using UpgradeSystem.Services.Xp;
 
 namespace UpgradeSystem
 {
-    public class UpgradesPresenter: IPresentor
+    public class UpgradesPresenter: IDisposable
     {
         private readonly IUpgradesMoneyModel _upgradesMoneyModel;
         private readonly IClickerModel _clickerModel;
@@ -17,26 +14,29 @@ namespace UpgradeSystem
         private readonly IUpgradeClickPriceService _upgradeClickPriceService;
         private readonly IUpgradeClickXpService _upgradeClickXpService;
 
-        private readonly UpgradesView _upgradeView;
-        private readonly ClickerView _clickerView;
+        private UpgradesView _upgradeView;
+        private ClickerView _clickerView;
 
-        public UpgradesPresenter(UpgradesView upgradesView, ClickerView clickerView,
-            IUpgradesMoneyModel upgradesMoneyModel, IClickerModel clickerModel,
-            ILevelUpgradesModel levelUpgradesModel, ILevelModel levelModel,
-            IUpgradeClickPriceService upgradeClickPriceService, IUpgradeClickXpService upgradeClickXpService)
+        public UpgradesPresenter(IUpgradesMoneyModel upgradesMoneyModel,
+            IClickerModel clickerModel,
+            ILevelUpgradesModel levelUpgradesModel,
+            IUpgradeClickPriceService upgradeClickPriceService,
+            IUpgradeClickXpService upgradeClickXpService)
         {
-            _upgradeView = upgradesView;
-            _clickerView = clickerView;
             _upgradesMoneyModel = upgradesMoneyModel;
             _clickerModel = clickerModel;
             _levelUpgradesModel = levelUpgradesModel;
             _upgradeClickPriceService = upgradeClickPriceService;
             _upgradeClickXpService = upgradeClickXpService;
-
-            Start();
         }
 
-        private void Start()
+        public void Constructor(UpgradesView upgradesView, ClickerView clickerView)
+        {
+            _upgradeView = upgradesView;
+            _clickerView = clickerView;
+        }
+
+        public void Start()
         {
             _upgradesMoneyModel.OnValueChanged += UpdateUi;
             _levelUpgradesModel.OnValueChanged += UpdateUi;
@@ -47,15 +47,11 @@ namespace UpgradeSystem
             UpdateUi();
         }
 
-        private void UpgradeClickPrice()
-        {
+        private void UpgradeClickPrice() =>
             _upgradeClickPriceService.TryUpgrade();
-        }
 
-        private void UpgradeClickXp()
-        {
+        private void UpgradeClickXp() =>
             _upgradeClickXpService.TryUpgrade();
-        }
 
         private void UpdateUi()
         {
@@ -68,8 +64,11 @@ namespace UpgradeSystem
             _upgradeView.UpdateNeedLvlForUpgradeXpClick(_levelUpgradesModel.LvlForUpgradeClickXpPrice);
         }
 
-        public void Disable()
+        public void Dispose()
         {
+            _upgradeView.UpgradeClickPriceButton.onClick.RemoveAllListeners();
+            _upgradeView.UpgradeXpPriceButton.onClick.RemoveAllListeners();
+            
             _upgradesMoneyModel.OnValueChanged -= UpdateUi;
             _levelUpgradesModel.OnValueChanged -= UpdateUi;
         }

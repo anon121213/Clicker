@@ -6,10 +6,8 @@ namespace BootStrap.Data.DataServices
     {
         private readonly IStaticDataProvider _staticDataProvider;
         
-        public LoadDefaultProgress(IStaticDataProvider staticDataProvider)
-        {
+        public LoadDefaultProgress(IStaticDataProvider staticDataProvider) =>
             _staticDataProvider = staticDataProvider;
-        }
 
         public void SetDefaultSettings(PlayerProgress progress)
         {
@@ -25,6 +23,7 @@ namespace BootStrap.Data.DataServices
             progress.PriceForUpgradeMoneyClick = _staticDataProvider.DefaultPlayerSettings.PriceForUpgradeMoneyClick;
             progress.PriceForUpgradeXpClick = _staticDataProvider.DefaultPlayerSettings.PriceForUpgradeXpClick;
             progress.LvlForUpgradeClickXpPrice = _staticDataProvider.DefaultPlayerSettings.LvlForUpgradeClickXpPrice;
+            progress.AddLvlCount = _staticDataProvider.DefaultPlayerSettings.AddLvlCount;
         }
     }
 }

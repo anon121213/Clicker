@@ -9,10 +9,22 @@ namespace BootStrap.Data.SavesServices
 {
     public class SavesHandler : MonoBehaviour, ISavedProgress
     {
-        [Inject] private IClickerModel _clickerModel;
-        [Inject] private ILevelModel _levelModel;
-        [Inject] private IUpgradesMoneyModel _upgradesMoneyModel;
-        [Inject] private ILevelUpgradesModel _levelUpgradesModel;
+        private IClickerModel _clickerModel;
+        private ILevelModel _levelModel;
+        private IUpgradesMoneyModel _upgradesMoneyModel;
+        private ILevelUpgradesModel _levelUpgradesModel;
+        
+        [Inject]
+        public void Inject(IClickerModel clickerModel,
+            ILevelModel levelModel,
+            IUpgradesMoneyModel upgradesMoneyModel,
+            ILevelUpgradesModel levelUpgradesModel)
+        {
+            _clickerModel = clickerModel;
+            _levelModel = levelModel;
+            _upgradesMoneyModel = upgradesMoneyModel;
+            _levelUpgradesModel = levelUpgradesModel;
+        }
         
         public void LoadProgress(PlayerProgress progress)
         {
@@ -21,6 +33,7 @@ namespace BootStrap.Data.SavesServices
             _levelModel.AddLvL(progress.CurrentLvl);
             _levelModel.AddClicksForNewLvl(progress.ClicksForNewLvl);
             _levelModel.AddXp(progress.CurrentXp);
+            _levelModel.ChangeLvlCount(progress.AddLvlCount);
 
             _upgradesMoneyModel.AddClickPrice(progress.ClickPrice);
             _levelUpgradesModel.AddClickXpPrice(progress.ClickXpPrice);
@@ -35,9 +48,11 @@ namespace BootStrap.Data.SavesServices
         public void UpdateProgress(PlayerProgress progress)
         {
             progress.Money = _clickerModel.Money;
+            
             progress.CurrentLvl = _levelModel.CurrentLvL;
             progress.ClicksForNewLvl = _levelModel.ClicksForNewLvL;
             progress.CurrentXp = _levelModel.CurrentXp;
+            progress.AddLvlCount = _levelModel.AddLvlCount;
             
             progress.ClickPrice = _upgradesMoneyModel.ClickPrice;
             progress.ClickXpPrice = _levelUpgradesModel.ClickXpPrice;

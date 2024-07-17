@@ -2,16 +2,10 @@
 using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
-using UpgradeSystem;
 using UpgradeSystem.Models;
 
 namespace PopUp.Main
 {
-    public interface IPopUpCreateService
-    {
-        void CreatePopUp(Transform popUpRoot);
-    }
-
     public class PopUpCreateService : IPopUpCreateService
     {
         private readonly IPopUpFactory _popUpFactory;

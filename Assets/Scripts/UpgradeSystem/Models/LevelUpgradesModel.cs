@@ -15,14 +15,20 @@ namespace UpgradeSystem.Models
         public int ClickXpPrice =>
             _clickXpPrice;
 
+        public int UpgradeClickXpPrice =>
+            _upgradeClickXpPrice;
+
+        public int PriceForUpgradeXpClick =>
+            _priceForUpgradeXpClick;
+
+        public int LvlForUpgradeClickXpPrice =>
+            _lvlForUpgradeClickXpPrice;
+
         public void AddClickXpPrice(int count)
         {
             _clickXpPrice = Mathf.Clamp(_clickXpPrice + count, 0, Int32.MaxValue);
             OnValueChanged?.Invoke();
         }
-
-        public int UpgradeClickXpPrice =>
-            _upgradeClickXpPrice;
 
         public void AddUpgradeClickXpPrice(int count)
         {
@@ -30,29 +36,22 @@ namespace UpgradeSystem.Models
             OnValueChanged?.Invoke();
         }
 
-        public int PriceForUpgradeXpClick =>
-            _priceForUpgradeXpClick;
-
         public void AddPriceForUpgradeXpClick(int count)
         { 
             _priceForUpgradeXpClick = Mathf.Clamp(_priceForUpgradeXpClick + count, 0, Int32.MaxValue);
             OnValueChanged?.Invoke();
         }
 
-        public int LvlForUpgradeClickXpPrice =>
-            _lvlForUpgradeClickXpPrice;
-        
-        public bool TryAddLvlForUpgradeClickPrice(int LvlForUpgradeClickXpPrice, int currentLevel, int count)
+        public bool TryAddLvlForUpgradeClickPrice(int lvlForUpgradeClickXpPrice, int currentLevel, int count)
         {
-            if (LvlForUpgradeClickXpPrice <= currentLevel)
-            {
-                _lvlForUpgradeClickXpPrice = Mathf.Clamp(_lvlForUpgradeClickXpPrice + count, 0, Int32.MaxValue);
-                OnValueChanged?.Invoke();
+            if (lvlForUpgradeClickXpPrice > currentLevel)
+                return false;
+            
+            _lvlForUpgradeClickXpPrice = Mathf.Clamp(_lvlForUpgradeClickXpPrice + count, 0, Int32.MaxValue);
+            OnValueChanged?.Invoke();
 
-                return true;
-            }
+            return true;
 
-            return false;
         }
 
         public void AddLvlForUpgradeClickXpPrice(int count)

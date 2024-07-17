@@ -21,14 +21,13 @@ namespace UpgradeSystem.Services.Xp
         
         public void TryUpgrade()
         {
-            if (_levelUpgradesModel.TryAddLvlForUpgradeClickPrice(_levelUpgradesModel.LvlForUpgradeClickXpPrice, _levelModel.CurrentLvL, 1)
-                && _clickerModel.TryRemoveMoney(_levelUpgradesModel.PriceForUpgradeXpClick))
-            {
-                _levelUpgradesModel.AddClickXpPrice( _levelUpgradesModel.UpgradeClickXpPrice);
-                _levelUpgradesModel.AddUpgradeClickXpPrice((int)Mathf.Round( _levelUpgradesModel.UpgradeClickXpPrice * 1.5f));
+            if (!_levelUpgradesModel.TryAddLvlForUpgradeClickPrice(_levelUpgradesModel.LvlForUpgradeClickXpPrice, _levelModel.CurrentLvL, 1)
+                || !_clickerModel.TryRemoveMoney(_levelUpgradesModel.PriceForUpgradeXpClick)) return;
+            
+            _levelUpgradesModel.AddClickXpPrice( _levelUpgradesModel.UpgradeClickXpPrice);
+            _levelUpgradesModel.AddUpgradeClickXpPrice((int)Mathf.Round( _levelUpgradesModel.UpgradeClickXpPrice * 1.5f));
                 
-                _levelUpgradesModel.AddPriceForUpgradeXpClick( _levelUpgradesModel.PriceForUpgradeXpClick); 
-            }
+            _levelUpgradesModel.AddPriceForUpgradeXpClick( _levelUpgradesModel.PriceForUpgradeXpClick);
         }
     }
 }

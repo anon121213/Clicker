@@ -18,10 +18,8 @@ namespace PopUp.Pool
                 spawnedGameObject = inactiveInstances.Pop();
                 spawnedGameObject.gameObject.SetActive(true);
             }
-            else
-            {
-                spawnedGameObject = Object.Instantiate(Prefab, position, rotation, root);
-            }
+            
+            spawnedGameObject = Object.Instantiate(Prefab, position, rotation, root);
         
             return spawnedGameObject;
         }

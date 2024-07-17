@@ -17,5 +17,6 @@ namespace BootStrap.Data.StaticData
         public int UpgradeClickPrice = 1;
         public int PriceForUpgradeMoneyClick = 30;
         public int PriceForUpgradeXpClick = 30;
+        public int AddLvlCount = 1;
     }
 }

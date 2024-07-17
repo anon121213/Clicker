@@ -9,35 +9,36 @@ namespace BootStrap.FSM.States
 {
     public class LoadProgressState : IState
     {
-        [Inject] private ILoadAssetService _loadAssetService;
-        
-        private readonly GameStateMachine _gameStateMachine;
+        private readonly ILoadAssetService _loadAssetService;
         private readonly IPersistentProgressService _progressService;
         private readonly ISaveLoadService _saveLoadService;
         private readonly ILoadDefaultProgress _loadDefaultProgress;
 
-        private AssetsReferences _assets;
+        private readonly GameStateMachine _gameStateMachine;
+        private readonly AssetsReferences _assets;
 
-        public LoadProgressState(GameStateMachine gameStateMachine, IPersistentProgressService progressService,
-            ISaveLoadService saveLoadService, IStaticDataProvider dataProvider, ILoadDefaultProgress loadDefaultProgress)
+        public LoadProgressState(GameStateMachine gameStateMachine,
+            IPersistentProgressService progressService,
+            ISaveLoadService saveLoadService,
+            IStaticDataProvider dataProvider,
+            ILoadDefaultProgress loadDefaultProgress,
+            ILoadAssetService loadAssetService)
         {
             _gameStateMachine = gameStateMachine;
             _progressService = progressService;
             _saveLoadService = saveLoadService;
             _loadDefaultProgress = loadDefaultProgress;
+            _loadAssetService = loadAssetService;
             _assets = dataProvider.AssetsReferences;
         }
 
         public void Enter()
         {
             LoadProgressOrInitNew();
-
             _gameStateMachine.Enter<LoadLevelState, AssetReference>(_assets.MainScene);
         }
 
-        public void Exit()
-        {
-        }
+        public void Exit() { }
 
         private async void LoadProgressOrInitNew() =>
             _progressService.Progress = 

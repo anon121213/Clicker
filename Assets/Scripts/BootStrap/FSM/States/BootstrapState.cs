@@ -4,18 +4,12 @@
     {
         private readonly GameStateMachine _gameStateMachine;
 
-        public BootstrapState(GameStateMachine gameStateMachine)
-        {
+        public BootstrapState(GameStateMachine gameStateMachine) =>
             _gameStateMachine = gameStateMachine;
-        }
-        
-        public void Enter()
-        {
-            _gameStateMachine.Enter<LoadProgressState>();
-        }
 
-        public void Exit()
-        {
-        }
+        public void Enter() =>
+            _gameStateMachine.Enter<LoadProgressState>();
+
+        public void Exit() { }
     }
 }

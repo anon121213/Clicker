@@ -1,5 +1,4 @@
-﻿using UpgradeSystem;
-using UpgradeSystem.Models;
+﻿using UpgradeSystem.Models;
 
 namespace ClickSystem
 {
@@ -8,15 +7,14 @@ namespace ClickSystem
         private IClickerModel _clikerModel;
         private IUpgradesMoneyModel _ugradesMoneyModel;
         
-        public ClickService(IClickerModel clickerModel, IUpgradesMoneyModel upgradesMoneyModel)
+        public ClickService(IClickerModel clickerModel,
+            IUpgradesMoneyModel upgradesMoneyModel)
         {
             _clikerModel = clickerModel;
             _ugradesMoneyModel = upgradesMoneyModel;
         }
         
-        public void OnClick()
-        {
+        public void OnClick() =>
             _clikerModel.AddMoney(_ugradesMoneyModel.ClickPrice);
-        }
     }
 }

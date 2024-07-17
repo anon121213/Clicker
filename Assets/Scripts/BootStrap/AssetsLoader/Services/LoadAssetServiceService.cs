@@ -8,9 +8,9 @@ namespace BootStrap.AssetsLoader.Services
 {
     public class LoadAssetServiceService : ILoadAssetService
     {
-        private Dictionary<string, Object> _assets = new();
+        private Dictionary<AssetReference, Object> _assets = new();
 
-        public async UniTask<TObject> GetAsset<TObject>(string path) where TObject : Object
+        public async UniTask<TObject> GetAsset<TObject>(AssetReference path) where TObject : Object
         {
             if (_assets.TryGetValue(path, out Object asset))
             {
@@ -23,7 +23,7 @@ namespace BootStrap.AssetsLoader.Services
             }
         }
 
-        private async UniTask LoadAsset(string path)
+        private async UniTask LoadAsset(AssetReference path)
         {
             UniTaskCompletionSource<bool> utcs = new UniTaskCompletionSource<bool>();
             AsyncOperationHandle<Object> handle = Addressables.LoadAssetAsync<Object>(path);
@@ -37,7 +37,7 @@ namespace BootStrap.AssetsLoader.Services
             await utcs.Task;
         }
 
-        private void OnPrefabLoaded(AsyncOperationHandle<Object> handle, string path)
+        private void OnPrefabLoaded(AsyncOperationHandle<Object> handle, AssetReference path)
         {
             if (handle.Status == AsyncOperationStatus.Succeeded)
             {

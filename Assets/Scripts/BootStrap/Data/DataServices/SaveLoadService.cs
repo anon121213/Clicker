@@ -7,9 +7,10 @@ namespace BootStrap.Data.DataServices
 {
     public class SaveLoadService : ISaveLoadService
     {
+        private const string ProgressKey = "Progress";
+        
         private readonly IPersistentProgressService _progressService;
         private readonly IProgressUsersService _progressUsersService;
-        private const string ProgressKey = "Progress";
         
         public SaveLoadService(IPersistentProgressService progressService, IProgressUsersService progressUsersService)
         {

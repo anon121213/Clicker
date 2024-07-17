@@ -1,32 +1,31 @@
-﻿using ClickSystem;
-using Hud;
-using UnityEngine;
-using UpgradeSystem;
+﻿using System;
+using ClickSystem;
 using UpgradeSystem.Models;
 
 namespace LevelSystem
 {
-    public class LevelPresenter: IPresentor
+    public class LevelPresenter: IDisposable
     {
         private readonly IUpgradesMoneyModel _upgradesMoneyModel;
         private readonly ILevelUpgradesModel _levelUpgradesModel;
         private readonly ILevelModel _levelModel;
         
-        private readonly LevelView _levelView;
+        private LevelView _levelView;
         
         private readonly ClickerPresenter _clickerPresenter;
 
-        public LevelPresenter(LevelView levelView, ILevelModel levelModel, IUpgradesMoneyModel upgradesMoneyModel, ILevelUpgradesModel levelUpgradesModel, ClickerPresenter clickerPresenter)
+        public LevelPresenter(ILevelModel levelModel, IUpgradesMoneyModel upgradesMoneyModel, ILevelUpgradesModel levelUpgradesModel, ClickerPresenter clickerPresenter)
         {
-            _levelView = levelView;
             _levelModel = levelModel;
             _upgradesMoneyModel = upgradesMoneyModel;
             _levelUpgradesModel = levelUpgradesModel;
             _clickerPresenter = clickerPresenter;
-            Start();
         }
 
-        private void Start()
+        public void Constructor(LevelView levelView) =>
+            _levelView = levelView;
+
+        public void Start()
         {
             _levelModel.OnValueChanged += UpdateUi;
             _clickerPresenter.ClickButton.onClick.AddListener(OnClick);
@@ -37,8 +36,7 @@ namespace LevelSystem
         private void OnClick()
         {
             _levelModel.TryUpgradeLevel(_levelModel.CurrentXp, _upgradesMoneyModel.ClickPrice,
-                _levelModel.ClicksForNewLvL, _levelUpgradesModel.ClickXpPrice);
-
+                _levelModel.ClicksForNewLvL, _levelUpgradesModel.ClickXpPrice, _levelModel.AddLvlCount);
         }
 
         private void UpdateUi()
@@ -47,8 +45,9 @@ namespace LevelSystem
             _levelView.UpdateClicksForNewLvlText(_levelModel.ClicksForNewLvL, _levelModel.CurrentLvL);
         }
 
-        public void Disable()
+        public void Dispose()
         {
+            _clickerPresenter.ClickButton.onClick.RemoveAllListeners();
             _levelModel.OnValueChanged -= UpdateUi;
         }
     }

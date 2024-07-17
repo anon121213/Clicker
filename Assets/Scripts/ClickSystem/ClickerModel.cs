@@ -20,14 +20,13 @@ namespace ClickSystem
 
         public bool TryRemoveMoney(int cout)
         {
-            if (cout <= _money)
-            {
-                _money = Mathf.Clamp(_money - cout, 0, Int32.MaxValue);
-                OnValueChanged?.Invoke();
-                return true;
-            }
-
-            return false;
+            if (cout > _money)
+                return false;
+            
+            _money = Mathf.Clamp(_money - cout, 0, Int32.MaxValue);
+            OnValueChanged?.Invoke();
+            
+            return true;
         }
         
         public void RemoveMoney(int cout)

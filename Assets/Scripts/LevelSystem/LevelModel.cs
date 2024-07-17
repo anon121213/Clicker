@@ -8,6 +8,7 @@ namespace LevelSystem
           private int _clicksForNewLvl;
           private int _currentLvl;
           private int _currentXp;
+          private int _addLvlCount;
 
           public event Action OnValueChanged;
           
@@ -19,6 +20,9 @@ namespace LevelSystem
 
           public int CurrentXp =>
                _currentXp;
+
+          public int AddLvlCount =>
+               _addLvlCount;
 
           public void AddLvL(int value)
           {
@@ -38,15 +42,24 @@ namespace LevelSystem
                OnValueChanged?.Invoke();
           }
 
-          public void TryUpgradeLevel(int currentXp, int clickPrice, int clicksForNewLvl, int clickXpPrice)
+          public void TryUpgradeLevel(int currentXp, int clickPrice, int clicksForNewLvl, int clickXpPrice, int addLvl)
           {
-               if (currentXp + clickPrice >= clicksForNewLvl)
+               int newXp = currentXp + clickPrice;
+               
+               if (newXp < clicksForNewLvl)
+                    AddXp(clickXpPrice);
+               else
                {
                     RemoveCurrentClicks();
-                    AddLvL(clickPrice);
+                    AddLvL(addLvl);
                     AddClicksForNewLvl(clicksForNewLvl);
                }
-               AddXp(clickXpPrice);
+          }
+
+          public void ChangeLvlCount(int value)
+          {
+               _addLvlCount = Mathf.Clamp(_addLvlCount + value, 0, Int32.MaxValue);
+               OnValueChanged?.Invoke();
           }
           
           public void RemoveCurrentClicks()
