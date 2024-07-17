@@ -24,3 +24,4 @@ MonoBehaviour:
   _upgradeClickPrice: 1
   _priceForUpgradeMoneyClick: 30
   _priceForUpgradeXpClick: 30
+  _addLvlCount: 1
