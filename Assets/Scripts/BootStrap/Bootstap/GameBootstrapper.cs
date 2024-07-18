@@ -2,13 +2,12 @@
 using BootStrap.Data.DataServices;
 using BootStrap.FSM;
 using BootStrap.FSM.States;
-using Unity.VisualScripting;
-using UnityEngine;
 using VContainer;
+using VContainer.Unity;
 
 namespace BootStrap.Bootstap
 {
-    public class GameBootstrapper : MonoBehaviour, IInitializable, IDisposable
+    public class GameBootstrapper : IDisposable, IStartable
     {
         private ISaveLoadService _saveLoadService;
         private BootstrapState _bootstrapState;
@@ -30,16 +29,7 @@ namespace BootStrap.Bootstap
             _gameStateMachine = gameStateMachine;
         }
 
-        private void Awake()
-        {
-            AddStates(_gameStateMachine);
-            _gameStateMachine.Enter<BootstrapState>();
-        }
-
-        private void OnApplicationQuit() =>
-            _saveLoadService.SaveProgress();
-
-        public void Initialize()
+        public void Start()
         {
             AddStates(_gameStateMachine);
             _gameStateMachine.Enter<BootstrapState>();

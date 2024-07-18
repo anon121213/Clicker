@@ -1,5 +1,6 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceProviders;
@@ -15,6 +16,9 @@ namespace BootStrap.Bootstap
 
         private async UniTask LoadScene(AssetReference nextScene, Action onLoaded = null)
         {
+            if (!nextScene.IsDone)
+                return;
+
             AsyncOperationHandle<SceneInstance> waitNextScene = nextScene.LoadSceneAsync();
             
             await waitNextScene;
